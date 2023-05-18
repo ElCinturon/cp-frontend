@@ -1,0 +1,25 @@
+<div class="d-flex row align-items-center justify-content-center full-height">
+  <div class="col-8 col-sm-3 vertical-centered">
+    <h1>Registrierung</h1>
+    <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+      <div class="mb-3">
+        <label for="email" class="form-label">E-Mail</label>
+        <input required id="email" name="email" ngModel type="email" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">E-Mail</label>
+        <input required id="username" name="username" ngModel type="text" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Passwort</label>
+        <input name="password" ngModel required type="password" class="form-control" id="password">
+      </div>
+      <div class="mb-3">
+        <label for="passwordConfirm" class="form-label">Passwort bestätigen</label>
+        <input name="passwordConfirm" ngModel required type="password" class="form-control" id="passwordConfirm">
+      </div>
+      <button type="submit" class="btn btn-primary">Registrieren</button>
+    </form>
+  </div>
+</div>
+
