@@ -3,12 +3,20 @@
     <h1>Registrierung</h1>
     <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
       <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input required id="username" name="username" ngModel type="text" class="form-control">
+      </div>
+      <div class="mb-3">
         <label for="email" class="form-label">E-Mail</label>
         <input required id="email" name="email" ngModel type="email" class="form-control">
       </div>
       <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input required id="username" name="username" ngModel type="text" class="form-control">
+        <label for="name" class="form-label">Vorname</label>
+        <input required id="name" name="name" ngModel type="text" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="lastname" class="form-label">Nachname</label>
+        <input required id="lastname" name="lastname" ngModel type="text" class="form-control">
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Passwort</label>
