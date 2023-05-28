@@ -1,5 +1,6 @@
 <div class="d-flex row align-items-center justify-content-center full-height">
   <div class="col-8 col-sm-3 vertical-centered">
+    <h1>Login</h1>
     <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
       <div class="mb-3">
         <label for="userIdentifier" class="form-label">E-Mail oder Nutzername</label>
@@ -14,8 +15,8 @@
         <label class="form-check-label" for="stayLoggedIn">Angemeldet bleiben</label>
       </div>
       <button type="submit" class="btn btn-primary">Einloggen</button>
-      <button ariaCurrentWhenActive="page" routerLink="/registration" routerLinkActive="active" type="submit" class="btn btn-primary float-end">Registrieren</button>
+      <button ariaCurrentWhenActive="page" routerLink="../registration"  type="submit" class="btn btn-primary float-end">Registrieren</button>
     </form>
   </div>
 </div>
-<router-outlet></router-outlet>
+
