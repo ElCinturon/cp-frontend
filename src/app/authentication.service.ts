@@ -16,7 +16,7 @@ export class AuthenticationService {
 
   // Authentifiziert App ggü. Backend
   public authenticateApp(): Observable<HttpResponse<Object>> {
-    return this.http.get(this.authUrl, {observe: 'response'});
+    return this.http.get(this.authUrl, {observe: 'response', withCredentials: true});
   }
 
     // User einloggen
