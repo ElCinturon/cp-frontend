@@ -16,6 +16,8 @@ export class LoginComponent {
     console.log(loginData.value);
     console.log(loginData.valid);
 
+
+
     // Cookie wird wohl autom. gesetzt
     this.authService.authenticateApp().subscribe(response => {
       console.log("response", response);
@@ -26,5 +28,17 @@ export class LoginComponent {
           console.log("App authentifizierung fehlgeschlagen.")
       }
     });
+
+        setTimeout(() => {
+        let x = document.cookie;
+        console.log("cookies", x);
+              // Login durchführen
+              this.authService.login(loginData.value).subscribe(response => {
+                console.log("login response", response);
+              });
+              }, 3000);
+
+
+
   }
 }
