@@ -12,13 +12,12 @@ export class RegistrationComponent {
 	constructor(public registerService: RegistrationService) {}
 
 	onSubmit(registerData: NgForm) {
-		// Registrierungs Daten an Server übertragen
-		console.log(registerData.value);
-		console.log(registerData.valid);
 
 		// User registrieren
 		this.registerService.registerUser(registerData.value).subscribe(response => {
-			console.log("register response", response);
+			if (response.status === 200) {
+						this.router.navigate(["../registration-success"]);
+					}
 		});
 	}
 

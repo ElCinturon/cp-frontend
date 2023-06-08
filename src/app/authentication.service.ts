@@ -9,7 +9,7 @@ import { HttpResponse, HttpHeaders } from '@angular/common/http';
 })
 export class AuthenticationService {
 	authUrl = 'http://localhost:8000/sanctum/csrf-cookie';
-	loginUrl = 'http://localhost:8000/login';
+	loginUrl = 'http://localhost:8000/api/login';
 
 	constructor(private http: HttpClient) { }
 

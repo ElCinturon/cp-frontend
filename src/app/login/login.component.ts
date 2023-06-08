@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
-
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-login',
@@ -9,31 +9,23 @@ import { AuthenticationService } from '../authentication.service';
 	styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-	constructor(public authService: AuthenticationService) { };
+	error?: string = "";
+	constructor(public authService: AuthenticationService, private router: Router) { };
 
 	onSubmit(loginData: NgForm) {
-		// Login Daten an Server übertragen
-		console.log(loginData.value);
-		console.log(loginData.valid);
-
 		// XSRF-Token holen
 		this.authService.authenticateApp().subscribe(response => {
-			console.log("response", response);
 			if (response.status === 204) {
-				console.log("App erfolgreich authentifiziert");
-
 				// User einloggen
 				this.authService.login(loginData.value).subscribe(response => {
-					console.log("login response", response);
-				});
-			} else {
-				console.log("App authentifizierung fehlgeschlagen.")
+					// Wenn Login erfolgreich, auf home Seite weiterleiten
+					if (response.status === 200) {
+						this.router.navigate(["../home"]);
+					}
+				},
+					error => { this.error = error.error; console.log("error", error); });
 			}
-		});
-
-
-
-
+		}, response => {console.log("Problem bei App-Auth aufgetreten.")});
 
 	}
 }
