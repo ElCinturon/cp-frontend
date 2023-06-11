@@ -7,7 +7,7 @@ import { Observable, throwError } from 'rxjs';
 })
 export class RegistrationService {
 
-	registerUrl = 'http://localhost:8000/registration';
+	registerUrl = 'http://localhost:8000/api/registration';
 
 	constructor(private http: HttpClient) { }
 

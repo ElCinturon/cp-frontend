@@ -1,10 +1,10 @@
 <div class="d-flex row align-items-center justify-content-center full-height">
   <div class="col-8 col-sm-3 vertical-centered">
     <h1>Registrierung</h1>
-    <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+    <form #registrationForm="ngForm" (ngSubmit)="registerUser(registrationForm)">
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
-        <input required id="username" name="username" ngModel type="text" class="form-control">
+        <input required minlength=3 id="username" name="username" ngModel type="text" class="form-control">
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">E-Mail</label>
@@ -12,15 +12,15 @@
       </div>
       <div class="mb-3">
         <label for="name" class="form-label">Vorname</label>
-        <input required id="name" name="name" ngModel type="text" class="form-control">
+        <input required minlength=2 id="name" name="name" ngModel type="text" class="form-control">
       </div>
       <div class="mb-3">
         <label for="last_name" class="form-label">Nachname</label>
-        <input required id="last_name" name="last_name" ngModel type="text" class="form-control">
+        <input required minlength=2 id="last_name" name="last_name" ngModel type="text" class="form-control">
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Passwort</label>
-        <input name="password" ngModel required type="password" class="form-control" id="password">
+        <input name="password" ngModel (ngModelChange)="test($event)" required type="password" class="form-control" id="password">
       </div>
       <div class="mb-3">
         <label for="passwordConfirm" class="form-label">Passwort bestätigen</label>
