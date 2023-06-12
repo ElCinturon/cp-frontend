@@ -1,5 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { NgForm} from '@angular/forms';
+import { Component } from '@angular/core';
+import { NgForm, FormControl, FormGroup, ValidatorFn, ValidationErrors, AbstractControl, Validators } from '@angular/forms';
 import { RegistrationService } from '../registration.service';
 import { Router } from '@angular/router';
 
@@ -10,21 +10,34 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent {
 
+	registerForm = new FormGroup({
+		username: new FormControl(""),
+		email: new FormControl("", Validators.email),
+		name: new FormControl(""),
+		lastName: new FormControl(""),
+		password: new FormControl("", Validators.pattern(/(?=.*\d)(?=.*\D)(?=.*[a-z])(?=.*[A-Z])(?=.*(\?|@|-|,|\.|\\|_|\*|#|'|!|=|}|{|&|\$|<|>|\(|\)|:|\+|%|§|"|\/|\^)).{8,}/)),
+		passwordConfirm: new FormControl("", this.passwordsEqual())
+	});
+
 	constructor(public registerService: RegistrationService, private router: Router) { }
-	
-	test(e: Event){
-		console.log("change", e);
+
+	passwordsEqual(): ValidatorFn {
+		return (control: AbstractControl): ValidationErrors | null => {
+			const equal: Boolean = control.value === this.registerForm?.value?.password;
+
+			return equal ? null : { notEqual: { value: control.value } }
+		}
 	}
 
-	registerUser(registerData: NgForm) {
-		if (registerData.valid) {
-			
+	registerUser() {
+		if (this.registerForm.valid) {
+			console.log("data", this.registerForm.value);
 			// User registrieren
-			this.registerService.registerUser(registerData.value).subscribe(response => {
+			this.registerService.registerUser(this.registerForm.value).subscribe(response => {
 				if (response.status === 200) {
 					this.router.navigate(["../registrationSuccess"]);
 				}
-			}, error => { console.log("Fehler bei der Registrierung!") });
+			}, error => { console.log("Fehler bei der Registrierung: ", error) });
 		}
 	}
 
