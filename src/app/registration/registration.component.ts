@@ -21,11 +21,14 @@ export class RegistrationComponent {
 
 	constructor(public registerService: RegistrationService, private router: Router) { }
 
+	get username() { return this.registerForm.get('username'); }
+	get passwordConfirm() { return this.registerForm.get('passwordConfirm'); }
+
 	passwordsEqual(): ValidatorFn {
 		return (control: AbstractControl): ValidationErrors | null => {
 			const equal: Boolean = control.value === this.registerForm?.value?.password;
 
-			return equal ? null : { notEqual: { value: control.value } }
+			return equal ? null : { msg: "Die Passwörter müssen übereinstimmen!" }
 		}
 	}
 

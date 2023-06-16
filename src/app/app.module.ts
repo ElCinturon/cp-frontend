@@ -9,6 +9,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { HomeComponent } from './home/home.component';
+import { InvalidInputMsgComponent } from './invalid-input-msg/invalid-input-msg.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     RegistrationComponent,
     RegistrationSuccessComponent,
-    HomeComponent
+    HomeComponent,
+    InvalidInputMsgComponent
   ],
   imports: [
     BrowserModule,

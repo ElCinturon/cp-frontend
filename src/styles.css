@@ -3,7 +3,18 @@
   height: 100%;
 }
 
+/* Gültige Inputs grün markieren */
+input.ng-valid[required], .ng-valid.required   {
+  border-left: 5px solid #42A948;
+}
 
-.ng-valid[required], .ng-valid.required   {
-  border-left: 5px solid #42A948; /* green */
+/* Invalide, bereits besuchte Inputs rot markieren */ 
+input.ng-invalid[required].ng-touched, .ng-invalid.required.ng-touched   {
+  border-left: 5px solid #a94442;
+}
+
+/* Formatiert errors unter inputs */
+.input-error-msg {
+	font-size: 12px;
+	color: #ff0000;
 }
