@@ -15,6 +15,7 @@ input.ng-invalid[required].ng-touched, .ng-invalid.required.ng-touched   {
 
 /* Formatiert errors unter inputs */
 .input-error-msg {
+	padding-top: 4px;
 	font-size: 12px;
 	color: #ff0000;
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm, FormControl, FormGroup, ValidatorFn, ValidationErrors, AbstractControl, Validators } from '@angular/forms';
 import { RegistrationService } from '../registration.service';
 import { Router } from '@angular/router';
+import { passwordStrength, passwordsEqual } from '../utils/validation';
 
 @Component({
 	selector: 'app-registration',
@@ -15,22 +16,18 @@ export class RegistrationComponent {
 		email: new FormControl("", Validators.email),
 		name: new FormControl(""),
 		lastName: new FormControl(""),
-		password: new FormControl("", Validators.pattern(/(?=.*\d)(?=.*\D)(?=.*[a-z])(?=.*[A-Z])(?=.*(\?|@|-|,|\.|\\|_|\*|#|'|!|=|}|{|&|\$|<|>|\(|\)|:|\+|%|§|"|\/|\^)).{8,}/)),
-		passwordConfirm: new FormControl("", this.passwordsEqual())
-	});
+		password: new FormControl("", passwordStrength()),
+		passwordConfirm: new FormControl("")
+	}, { validators: passwordsEqual});
 
 	constructor(public registerService: RegistrationService, private router: Router) { }
 
 	get username() { return this.registerForm.get('username'); }
+	get email() { return this.registerForm.get('email'); }
+	get name() { return this.registerForm.get('name'); }
+	get lastName() { return this.registerForm.get('lastName'); }
+	get password() { return this.registerForm.get('password'); }
 	get passwordConfirm() { return this.registerForm.get('passwordConfirm'); }
-
-	passwordsEqual(): ValidatorFn {
-		return (control: AbstractControl): ValidationErrors | null => {
-			const equal: Boolean = control.value === this.registerForm?.value?.password;
-
-			return equal ? null : { msg: "Die Passwörter müssen übereinstimmen!" }
-		}
-	}
 
 	registerUser() {
 		if (this.registerForm.valid) {
