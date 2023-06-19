@@ -1,4 +1,4 @@
-import { ValidatorFn, ValidationErrors, AbstractControl, Validators } from '@angular/forms';
+import { ValidatorFn, ValidationErrors, AbstractControl, Validators, AsyncValidatorFn } from '@angular/forms';
 
 /**
  *  Validiert das Passwort und gibt eine entsprechende Msg zurück, wenn Strength nicht erfüllt wurde.
@@ -38,4 +38,28 @@ export const passwordsEqual: ValidatorFn = (control: AbstractControl): Validatio
 
 	return equal ? null : { passwordConfirm: { msg: "Das Confirm Passwort muss übereinstimmen!" } };
 }
+
+
+/**
+ *  Validier Emailadresse mit der Standard Angular Function und zusätzlich wird geprüft ob die Adresse mit domain endet.
+ */
+export function email(): ValidatorFn {
+	return (control: AbstractControl): ValidationErrors | null => {
+		// Pattern Validationfunktion mit dem Control als Parameter aufrufen
+		let valid = false;
+		
+		// Email Format checken. Wenn korrekt, prüfen ob mit Domain endet.
+		if(!Validators.email(control.value)) {
+			const regex = /.*[^@]+\.([a-z]|[A-Z]){2,3}$/
+			valid = regex.test(control.value);
+		}
+		
+		return valid ? null : {
+			msg: "Bitte geben Sie eine gültige Email-Adresse ein!"
+		}
+	}
+}
+
+
+
 

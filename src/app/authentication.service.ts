@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { HttpResponse, HttpHeaders } from '@angular/common/http';
+import { BACKEND_API_URL, BACKEND_URL } from './constants';
 
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AuthenticationService {
-	authUrl = 'http://localhost:8000/sanctum/csrf-cookie';
-	loginUrl = 'http://localhost:8000/api/login';
+	authUrl = BACKEND_URL + "/sanctum/csrf-cookie";
+	loginUrl = BACKEND_API_URL + "/login";
 
 	constructor(private http: HttpClient) { }
 

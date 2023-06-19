@@ -5,3 +5,8 @@
 .vertical-centered {
   margin-top: 30vh
 }
+
+.spinner-positioning{
+    top: 45px !important;
+    right: 14px !important;
+}

@@ -2,64 +2,69 @@
 	<div class="col-8 col-sm-3 vertical-centered">
 		<h1>Registrierung</h1>
 		<form [formGroup]="registerForm" (ngSubmit)="registerUser()">
-			<div class="mb-3">
+			<div class="mb-3 position-relative">
 				<label for="username" class="form-label">Username</label>
 				<input required minlength=3 maxlength=32 id="username" name="username"
-					formControlName="username" type="text" class="form-control"
+					formControlName="username" type="text" class="form-control "
 				>
-				<app-invalid-input-msg
-					*ngIf="username?.errors && username?.invalid && username?.touched"
+				<div *ngIf="username?.pending" class="spinner-border spinner-border-sm spinner-positioning position-absolute" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+				<invalid-input-msg *ngIf="username?.errors && username?.invalid && username?.touched"
 					[errorObject]="username?.errors"
-				></app-invalid-input-msg>
+				></invalid-input-msg>
 			</div>
-			<div class="mb-3">
+			<div class="mb-3 position-relative">
 				<label for="email" class="form-label">E-Mail</label>
 				<input required id="email" name="email" type="email" formControlName="email"
 					class="form-control"
 				>
-				<app-invalid-input-msg *ngIf="email?.errors && email?.invalid && email?.touched"
+				<div *ngIf="email?.pending" class="spinner-border spinner-border-sm spinner-positioning position-absolute" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+				<invalid-input-msg *ngIf="email?.errors && email?.invalid && email?.touched"
 					[errorObject]="email?.errors"
-				></app-invalid-input-msg>
+				></invalid-input-msg>
 			</div>
 			<div class="mb-3">
 				<label for="name" class="form-label">Vorname</label>
 				<input required minlength=2 id="name" name="name" formControlName="name" type="text"
 					class="form-control"
 				>
-				<app-invalid-input-msg *ngIf="name?.errors && name?.invalid && name?.touched"
+				<invalid-input-msg *ngIf="name?.errors && name?.invalid && name?.touched"
 					[errorObject]="name?.errors"
-				></app-invalid-input-msg>
+				></invalid-input-msg>
 			</div>
 			<div class="mb-3">
 				<label for="lastName" class="form-label">Nachname</label>
 				<input required minlength=2 id="lastName" name="lastName" formControlName="lastName"
 					type="text" class="form-control"
 				>
-				<app-invalid-input-msg
-					*ngIf="lastName?.errors && lastName?.invalid && lastName?.touched"
+				<invalid-input-msg *ngIf="lastName?.errors && lastName?.invalid && lastName?.touched"
 					[errorObject]="lastName?.errors"
-				></app-invalid-input-msg>
+				></invalid-input-msg>
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Passwort</label>
 				<input name="password" required type="password" formControlName="password"
 					class="form-control" id="password"
 				>
-				<app-invalid-input-msg
-					*ngIf="password?.errors && password?.invalid && password?.touched"
+				<invalid-input-msg *ngIf="password?.errors && password?.invalid && password?.touched"
 					[errorObject]="password?.errors"
-				></app-invalid-input-msg>
+				></invalid-input-msg>
 			</div>
 			<div class="mb-3">
 				<label for="passwordConfirm" class="form-label">Passwort bestätigen</label>
 				<input name="passwordConfirm" formControlName="passwordConfirm" required
 					type="password" class="form-control" id="passwordConfirm"
 				>
-				<app-invalid-input-msg
+				<invalid-input-msg
 					*ngIf="passwordConfirm?.errors && passwordConfirm?.touched && passwordConfirm?.invalid"
 					[errorObject]="passwordConfirm?.errors"
-				></app-invalid-input-msg>
+				></invalid-input-msg>
 			</div>
+			<div *ngIf="formInvalid" class="alert alert-danger" role="alert">Bitte überprüfen
+				Sie Ihre Eingaben!</div>
 			<button [disabled]="!registerForm.valid" type="submit" class="btn btn-primary">Registrieren</button>
 		</form>
 	</div>

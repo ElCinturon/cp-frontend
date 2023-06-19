@@ -19,3 +19,8 @@ input.ng-invalid[required].ng-touched, .ng-invalid.required.ng-touched   {
 	font-size: 12px;
 	color: #ff0000;
 }
+
+/* Verkleinert Danger-Alerts in der Höhe */
+div.alert.alert-danger {
+	line-height: 0px;
+}
