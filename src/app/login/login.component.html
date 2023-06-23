@@ -1,33 +1,28 @@
 <div class="d-flex row align-items-center justify-content-center full-height">
 	<div class="col-8 col-sm-3 vertical-centered">
 		<h1>Login</h1>
-		<form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
+		<form [formGroup]="loginForm" (ngSubmit)="loginUser()">
 			<div class="mb-3">
 				<label for="userIdentifier" class="form-label">E-Mail oder Nutzername</label>
-				<input required id="userIdentifier" name="userIdentifier" ngModel type="text"
-					class="form-control"
-				>
+				<input required id="userIdentifier" name="userIdentifier" type="text" class="form-control"
+					formControlName="userIdentifier">
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Passwort</label>
-				<input name="password" ngModel required type="password" class="form-control"
-					id="password"
-				>
+				<input name="password" required type="password" class="form-control" id="password"
+					formControlName="password">
 			</div>
 			<div class="mb-3 form-check">
-				<input name="stayLoggedIn" ngModel type="checkbox" class="form-check-input"
-					id="stayLoggedIn"
-				>
+				<input name="stayLoggedIn" type="checkbox" class="form-check-input" id="stayLoggedIn"
+					formControlName="stayLoggedIn">
 				<label class="form-check-label" for="stayLoggedIn">Angemeldet bleiben</label>
 			</div>
-			<div>
-				<p *ngIf="errorMessage">{{errorMessage}}</p>
+			<div *ngIf="errorMessage" class="alert alert-danger pt-1 pb-1">
+				{{errorMessage}}
 			</div>
 			<button type="submit" class="btn btn-primary">Einloggen</button>
 			<button ariaCurrentWhenActive="page" routerLink="../registration" type="submit"
-				class="btn btn-primary float-end"
-			>Registrieren</button>
+				class="btn btn-primary float-end">Registrieren</button>
 		</form>
 	</div>
 </div>
-

@@ -1,5 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { NgForm, FormControl, FormGroup, ValidatorFn, ValidationErrors, AbstractControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { RegistrationService } from '../registration.service';
 import { Router } from '@angular/router';
 import { passwordStrength, passwordsEqual, email } from '../validators/validation';
@@ -13,6 +13,8 @@ import { CheckUsernameAvailability } from '../validators/check-username-availabi
 export class RegistrationComponent {
 
 	constructor(public registerService: RegistrationService, private router: Router, private checkUsernameAvailability: CheckUsernameAvailability) { }
+
+	errorMsg?: string = "";
 
 	registerForm = new FormGroup({
 		username: new FormControl("", { asyncValidators: this.checkUsernameAvailability.validateUsername.bind(this.checkUsernameAvailability), updateOn: 'blur' }),
@@ -46,13 +48,19 @@ export class RegistrationComponent {
 
 	registerUser() {
 		if (this.registerForm.valid) {
-			console.log("data", this.registerForm.value);
 			// User registrieren
-			this.registerService.registerUser(this.registerForm.value).subscribe(response => {
-				if (response.status === 200) {
-					this.router.navigate(["../registrationSuccess"]);
+			this.registerService.registerUser(this.registerForm.value).subscribe({
+				next: (response) => {
+					if (response.body?.success) {
+						this.router.navigate(["../registrationSuccess"]);
+					} else {
+						this.errorMsg = response.body?.error;
+					}
+				}, error: (error) => {
+					this.errorMsg = "Bei der Registrierung ist ein unbekannter Fehler aufgetaucht!";
+					console.log("Fehler bei der Registrierung: ", error)
 				}
-			}, error => { console.log("Fehler bei der Registrierung: ", error) });
+			});
 		}
 	}
 

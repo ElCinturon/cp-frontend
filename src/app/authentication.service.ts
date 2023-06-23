@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { HttpResponse, HttpHeaders } from '@angular/common/http';
 import { BACKEND_API_URL, BACKEND_URL } from './constants';
+import { AppResult } from './shared/interfaces/AppResult';
 
 
 @Injectable({
@@ -20,7 +21,7 @@ export class AuthenticationService {
 	}
 
 	// User einloggen
-	public login(credentialObject: Object): Observable<HttpResponse<Object>> {
-		return this.http.post(this.loginUrl, credentialObject, { headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' }), observe: 'response', withCredentials: true });
+	public login(credentialObject: Object): Observable<HttpResponse<AppResult>> {
+		return this.http.post<AppResult>(this.loginUrl, credentialObject, { headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' }), observe: 'response', withCredentials: true });
 	}
 }

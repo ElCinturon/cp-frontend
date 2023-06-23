@@ -4,69 +4,58 @@
 		<form [formGroup]="registerForm" (ngSubmit)="registerUser()">
 			<div class="mb-3 position-relative">
 				<label for="username" class="form-label">Username</label>
-				<input required minlength=3 maxlength=32 id="username" name="username"
-					formControlName="username" type="text" class="form-control "
-				>
-				<div *ngIf="username?.pending" class="spinner-border spinner-border-sm spinner-positioning position-absolute" role="status">
+				<input required minlength=3 maxlength=32 id="username" name="username" formControlName="username"
+					type="text" class="form-control ">
+				<div *ngIf="username?.pending"
+					class="spinner-border spinner-border-sm spinner-positioning position-absolute" role="status">
 					<span class="visually-hidden">Loading...</span>
 				</div>
 				<invalid-input-msg *ngIf="username?.errors && username?.invalid && username?.touched"
-					[errorObject]="username?.errors"
-				></invalid-input-msg>
+					[errorObject]="username?.errors"></invalid-input-msg>
 			</div>
 			<div class="mb-3 position-relative">
 				<label for="email" class="form-label">E-Mail</label>
-				<input required id="email" name="email" type="email" formControlName="email"
-					class="form-control"
-				>
-				<div *ngIf="email?.pending" class="spinner-border spinner-border-sm spinner-positioning position-absolute" role="status">
+				<input required id="email" name="email" type="email" formControlName="email" class="form-control">
+				<div *ngIf="email?.pending"
+					class="spinner-border spinner-border-sm spinner-positioning position-absolute" role="status">
 					<span class="visually-hidden">Loading...</span>
 				</div>
 				<invalid-input-msg *ngIf="email?.errors && email?.invalid && email?.touched"
-					[errorObject]="email?.errors"
-				></invalid-input-msg>
+					[errorObject]="email?.errors"></invalid-input-msg>
 			</div>
 			<div class="mb-3">
 				<label for="name" class="form-label">Vorname</label>
 				<input required minlength=2 id="name" name="name" formControlName="name" type="text"
-					class="form-control"
-				>
+					class="form-control">
 				<invalid-input-msg *ngIf="name?.errors && name?.invalid && name?.touched"
-					[errorObject]="name?.errors"
-				></invalid-input-msg>
+					[errorObject]="name?.errors"></invalid-input-msg>
 			</div>
 			<div class="mb-3">
 				<label for="lastName" class="form-label">Nachname</label>
-				<input required minlength=2 id="lastName" name="lastName" formControlName="lastName"
-					type="text" class="form-control"
-				>
+				<input required minlength=2 id="lastName" name="lastName" formControlName="lastName" type="text"
+					class="form-control">
 				<invalid-input-msg *ngIf="lastName?.errors && lastName?.invalid && lastName?.touched"
-					[errorObject]="lastName?.errors"
-				></invalid-input-msg>
+					[errorObject]="lastName?.errors"></invalid-input-msg>
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Passwort</label>
-				<input name="password" required type="password" formControlName="password"
-					class="form-control" id="password"
-				>
+				<input name="password" required type="password" formControlName="password" class="form-control"
+					id="password">
 				<invalid-input-msg *ngIf="password?.errors && password?.invalid && password?.touched"
-					[errorObject]="password?.errors"
-				></invalid-input-msg>
+					[errorObject]="password?.errors"></invalid-input-msg>
 			</div>
 			<div class="mb-3">
 				<label for="passwordConfirm" class="form-label">Passwort bestätigen</label>
-				<input name="passwordConfirm" formControlName="passwordConfirm" required
-					type="password" class="form-control" id="passwordConfirm"
-				>
+				<input name="passwordConfirm" formControlName="passwordConfirm" required type="password"
+					class="form-control" id="passwordConfirm">
 				<invalid-input-msg
 					*ngIf="passwordConfirm?.errors && passwordConfirm?.touched && passwordConfirm?.invalid"
-					[errorObject]="passwordConfirm?.errors"
-				></invalid-input-msg>
+					[errorObject]="passwordConfirm?.errors"></invalid-input-msg>
 			</div>
-			<div *ngIf="formInvalid" class="alert alert-danger" role="alert">Bitte überprüfen
+			<div *ngIf="formInvalid" class="alert alert-danger pt-1 pb-1" role="alert">Bitte überprüfen
 				Sie Ihre Eingaben!</div>
+			<div class="alert alert-danger pt-1 pb-1" role="alert">{{errorMsg}}</div>
 			<button [disabled]="!registerForm.valid" type="submit" class="btn btn-primary">Registrieren</button>
 		</form>
 	</div>
 </div>
-

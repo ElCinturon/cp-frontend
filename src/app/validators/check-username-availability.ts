@@ -29,8 +29,8 @@ export class CheckUsernameAvailability {
 		// Nur feuern wenn etwas eingegeben. Sonst kommt bei Aufruf Konsolenfehler
 		if (control.value) {
 			return this.userService.existsByEmail(control.value).pipe(
-				map(response => response?.userExists ? { msg: "Es existiert bereits ein Nutzer mit dieser Email!" } : null),
-				catchError(() => of({ msg: "Bei der Validierung der Email ist ein Fehler aufgetreten!" }))
+				map(response => response?.userExists ? { msg: "Es existiert bereits ein Nutzer mit dieser E-mail!" } : null),
+				catchError(() => of({ msg: "Bei der Validierung der E-mail ist ein Fehler aufgetreten!" }))
 			);
 		} else {
 			return of(null);
