@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpResponse, HttpHeaders } from '@angular/common/http';
 import { BACKEND_API_URL, BACKEND_URL } from './constants';
 import { AppResult } from './shared/interfaces/AppResult';

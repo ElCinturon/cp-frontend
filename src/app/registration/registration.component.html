@@ -54,7 +54,7 @@
 			</div>
 			<div *ngIf="formInvalid" class="alert alert-danger pt-1 pb-1" role="alert">Bitte überprüfen
 				Sie Ihre Eingaben!</div>
-			<div class="alert alert-danger pt-1 pb-1" role="alert">{{errorMsg}}</div>
+			<div class="alert alert-danger pt-1 pb-1" role="alert" *ngIf="errorMsg">{{errorMsg}}</div>
 			<button [disabled]="!registerForm.valid" type="submit" class="btn btn-primary">Registrieren</button>
 		</form>
 	</div>

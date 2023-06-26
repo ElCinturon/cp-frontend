@@ -14,14 +14,14 @@ export class CheckUsernameAvailability {
 		// Nur feuern wenn etwas eingegeben. Sonst kommt bei Aufruf Konsolenfehler
 		if (control.value) {
 			return this.userService.existsByUsername(control.value).pipe(
-				map(response => response?.userExists ? { msg: "Dieser Username existiert bereits" } : null),
+				map(response => response?.data?.userExists ? { msg: "Dieser Username existiert bereits" } : null),
 				catchError(() => of({ msg: "Bei der Validierung des Usernames ist ein Fehler aufgetreten!" }))
 			);
 		} else {
 			return of(null);
 		}
 	}
-	
+
 	// Prüft anhand von Anfrage an das Backend, ob Username mit der Email bereits existiert
 	validateEmail(
 		control: AbstractControl
@@ -29,7 +29,7 @@ export class CheckUsernameAvailability {
 		// Nur feuern wenn etwas eingegeben. Sonst kommt bei Aufruf Konsolenfehler
 		if (control.value) {
 			return this.userService.existsByEmail(control.value).pipe(
-				map(response => response?.userExists ? { msg: "Es existiert bereits ein Nutzer mit dieser E-mail!" } : null),
+				map(response => response?.data?.userExists ? { msg: "Es existiert bereits ein Nutzer mit dieser E-mail!" } : null),
 				catchError(() => of({ msg: "Bei der Validierung der E-mail ist ein Fehler aufgetreten!" }))
 			);
 		} else {

@@ -58,7 +58,7 @@ export class RegistrationComponent {
 					}
 				}, error: (error) => {
 					this.errorMsg = "Bei der Registrierung ist ein unbekannter Fehler aufgetaucht!";
-					console.log("Fehler bei der Registrierung: ", error)
+					console.error("Fehler bei der Registrierung: ", error)
 				}
 			});
 		}

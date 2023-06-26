@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BACKEND_API_URL } from './constants';
 import { AppResult } from './shared/interfaces/AppResult';
+import { BACKEND_API_URL } from './constants';
 
 @Injectable({
 	providedIn: 'root'

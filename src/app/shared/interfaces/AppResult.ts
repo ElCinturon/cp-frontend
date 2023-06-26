@@ -1,5 +1,5 @@
 export interface AppResult {
     success: Boolean,
-    data: Object,
+    data: any,
     error: string
 }
