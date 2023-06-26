@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { UserInfoService } from '../services/userInfo.service';
 
 @Component({
 	selector: 'app-login',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 	errorMessage?: string = "";
-	constructor(public authService: AuthenticationService, private router: Router) { };
+	constructor(public authService: AuthenticationService, private router: Router, private cookieService: CookieService, private userInfoService: UserInfoService) { };
 
 	loginForm = new FormGroup({
 		userIdentifier: new FormControl(""),
@@ -33,6 +35,11 @@ export class LoginComponent {
 							next: (response) => {
 								// Wenn Login erfolgreich, auf home Seite weiterleiten
 								if (response.body?.success) {
+									let username = response.body.data?.username;
+									// Setzen des Usernames publishen 
+									this.userInfoService.send(username);
+									// Cookie mit Information setzen (Evtl. in service auslagern)
+									this.cookieService.set("username", username);
 									this.router.navigate(["../home"]);
 								} else {
 									this.errorMessage = response.body?.error
