@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { HomeComponent } from './home/home.component';
 import { InvalidInputMsgComponent } from './invalid-input-msg/invalid-input-msg.component';
+import { PortfoliosComponent } from './components/portfolios/portfolios.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { InvalidInputMsgComponent } from './invalid-input-msg/invalid-input-msg.
     RegistrationComponent,
     RegistrationSuccessComponent,
     HomeComponent,
-    InvalidInputMsgComponent
+    InvalidInputMsgComponent,
+    PortfoliosComponent
   ],
   imports: [
     BrowserModule,
