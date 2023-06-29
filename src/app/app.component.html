@@ -1,2 +1,19 @@
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center d-flex" id="navbarNavAltMarkup">
+            <div class="navbar-nav ">
+                <a class="nav-link" routerLinkActive="active" routerLink="../home">Home</a>
+                <a class="nav-link" routerLinkActive="active" routerLink="../portfolios" href="#">Meine Portfolios</a>
+                <a class="nav-link" routerLinkActive="active" href="#">Profil</a>
+                <a class="nav-link" routerLinkActive="active" routerLink="../login">Einloggen</a>
+                <a class="nav-link" routerLinkActive="active" routerLink="../registration">Registrieren</a>
+            </div>
+        </div>
+    </div>
+</nav>
 <div *ngIf="username">Eingeloggt als {{username}}</div>
 <router-outlet></router-outlet>
