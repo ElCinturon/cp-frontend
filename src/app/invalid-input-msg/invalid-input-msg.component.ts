@@ -20,7 +20,7 @@ export class InvalidInputMsgComponent {
 	// TODO: prüfen was passiert wenn mehrere Messages enthalten sind. Wird Fehler entfernt, sobald behoben?
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes["errorObject"]) {
-			
+
 
 			if (this.errorObject?.["required"]) {
 				this.message = "Dieses Feld darf nicht leer sein."

@@ -1,1 +1,27 @@
-<p>portfolios works!</p>
+<div class="row">
+    <div class="col justify-content-end d-flex">
+        <button (click)="setActive()" type="button" class="btn btn-success">Erstellen <i
+                class="fa-solid fa-plus"></i></button>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 border border-info-subtle p-2" *ngIf="addActive">
+            <h4>Neues Portfolio hinzufügen</h4>
+            <form [formGroup]="addPortfolioForm" (ngSubmit)="addPortfolio()">
+                <div class="mb-3 form-floating">
+                    <input required id="description" maxlength="124" name="description" type="text" class="form-control"
+                        formControlName="description" placeholder="name@example.com">
+                    <label for="description" class="form-label">Bezeichnung</label>
+                    <invalid-input-msg *ngIf="description?.errors && description?.invalid && description?.touched"
+                        [errorObject]="description?.errors"></invalid-input-msg>
+                </div>
+                <div class="form-floating">
+                    <select id="type" class="form-select" required aria-label="Portfoliotyp auswählen"
+                        formControlName="type">
+                        <option *ngFor="let type of portfolioTypes" value="{{type.code}}">{{type.description}}</option>
+                    </select>
+                    <label for="type" class="form-label">Typ</label>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
