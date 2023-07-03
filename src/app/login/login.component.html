@@ -17,8 +17,8 @@
 					formControlName="stayLoggedIn">
 				<label class="form-check-label" for="stayLoggedIn">Angemeldet bleiben</label>
 			</div>
-			<div *ngIf="errorMessage" class="alert alert-danger pt-1 pb-1">
-				{{errorMessage}}
+			<div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1">
+				{{error?.msg}}
 			</div>
 			<button type="submit" class="btn btn-primary">Einloggen</button>
 			<button ariaCurrentWhenActive="page" routerLink="../registration" type="submit"

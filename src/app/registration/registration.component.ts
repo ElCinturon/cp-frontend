@@ -14,7 +14,7 @@ export class RegistrationComponent {
 
 	constructor(public registerService: RegistrationService, private router: Router, private checkUsernameAvailability: CheckUsernameAvailability) { }
 
-	errorMsg?: string = "";
+	error: any = null;
 
 	registerForm = new FormGroup({
 		username: new FormControl("", { asyncValidators: this.checkUsernameAvailability.validateUsername.bind(this.checkUsernameAvailability), updateOn: 'blur' }),
@@ -54,10 +54,10 @@ export class RegistrationComponent {
 					if (response.body?.success) {
 						this.router.navigate(["../registrationSuccess"]);
 					} else {
-						this.errorMsg = response.body?.error;
+						this.error = response.body?.error;
 					}
 				}, error: (error) => {
-					this.errorMsg = "Bei der Registrierung ist ein unbekannter Fehler aufgetaucht!";
+					this.error.msg = "Bei der Registrierung ist ein unbekannter Fehler aufgetaucht!";
 					console.error("Fehler bei der Registrierung: ", error)
 				}
 			});

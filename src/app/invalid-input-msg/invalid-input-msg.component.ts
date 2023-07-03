@@ -11,17 +11,18 @@ import { ValidationErrors } from '@angular/forms';
 export class InvalidInputMsgComponent {
 	// Objekt, dass den Invalid-Error enthält
 	@Input() errorObject!: ValidationErrors | null | undefined;
+	@Input() errorText!: string | null | undefined;
 
 	// Message, die angezeigt wird
-	message: String = "";
-
+	message: string | undefined | null = "";
 
 	// Wenn das Errorobjekt sich verändert, die message richtig setzen
-	// TODO: prüfen was passiert wenn mehrere Messages enthalten sind. Wird Fehler entfernt, sobald behoben?
 	ngOnChanges(changes: SimpleChanges) {
+		if (changes["errorText"]) {
+			this.message = this.errorText;
+		}
+
 		if (changes["errorObject"]) {
-
-
 			if (this.errorObject?.["required"]) {
 				this.message = "Dieses Feld darf nicht leer sein."
 			}
@@ -38,6 +39,4 @@ export class InvalidInputMsgComponent {
 			}
 		}
 	}
-
-
 }

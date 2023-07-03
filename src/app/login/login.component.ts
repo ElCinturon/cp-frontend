@@ -11,7 +11,7 @@ import { UserInfoService } from '../services/userInfo.service';
 	styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-	errorMessage?: string = "";
+	error?: any = null;
 	constructor(public authService: AuthenticationService, private router: Router, private cookieService: CookieService, private userInfoService: UserInfoService) { };
 
 	loginForm = new FormGroup({
@@ -42,11 +42,11 @@ export class LoginComponent {
 									this.cookieService.set("username", username);
 									this.router.navigate(["../home"]);
 								} else {
-									this.errorMessage = response.body?.error
+									this.error = response.body?.error
 								}
 							},
 							error: (error) => {
-								this.errorMessage = "Der Login konnte wegen eines unbekannten Problems nicht durchgeführt werden."
+								this.error.msg = "Der Login konnte wegen eines unbekannten Problems nicht durchgeführt werden."
 								console.error("Login konnte wegen folgendem Problem nicht ausgeführt werden: ", error);
 							}
 						});
@@ -54,7 +54,7 @@ export class LoginComponent {
 				}
 				,
 				error: (error) => {
-					this.errorMessage = "Es liegt ein schwerwiegender Fehler vor!"
+					this.error.msg = "Es liegt ein schwerwiegender Fehler vor!"
 					console.error("Es ist ein schwerwiegendes App-Authentifikationsproblem aufgetreten!", error);
 				}
 			});

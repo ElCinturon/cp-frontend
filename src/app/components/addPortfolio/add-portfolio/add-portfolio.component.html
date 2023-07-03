@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-3 border border-dark p-2">
+        <h6>Neues Portfolio hinzufügen</h6>
+        <form [formGroup]="addPortfolioForm" (ngSubmit)="addPortfolio()">
+            <div class="mb-3 form-floating">
+                <input required id="description" maxlength="124" name="description" type="text" class="form-control"
+                    formControlName="description" placeholder="name@example.com">
+                <label for="description" class="form-label">Bezeichnung</label>
+                <invalid-input-msg
+                    *ngIf="(description?.errors && description?.invalid && description?.touched) || error?.description"
+                    [errorObject]="description?.errors" [errorText]="error?.description"></invalid-input-msg>
+            </div>
+            <div class="form-floating">
+                <select id="type" class="form-select" required aria-label="Portfoliotyp auswählen"
+                    formControlName="typeCode">
+                    <option *ngFor="let type of portfolioTypes" value="{{type.code}}">{{type.description}}</option>
+                </select>
+                <label for="type" class="form-label">Typ</label>
+                <invalid-input-msg
+                    *ngIf="(typeCode?.errors && typeCode?.invalid && typeCode?.touched) || error?.typeCode"
+                    [errorObject]="typeCode?.errors" [errorText]="error?.typeCode"></invalid-input-msg>
+            </div>
+            <div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 mt-2">
+                {{error?.msg}}
+            </div>
+            <div *ngIf="successMsg" class="alert alert-success pt-1 pb-1 mt-2">
+                {{successMsg}}
+            </div>
+            <div class="row mt-2">
+                <div class="col justify-content-end d-flex">
+                    <div class="alert alert-danger pt-1 pb-1" role="alert" *ngIf="error?.msg">{{error?.msg}}</div>
+                    <button [disabled]="!addPortfolioForm.valid" type="submit"
+                        class="btn btn-sm btn-primary ">Speichern</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

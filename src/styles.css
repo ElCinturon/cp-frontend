@@ -5,13 +5,17 @@
 
 /* Gültige Inputs grün markieren */
 input.ng-valid[required],
-.ng-valid.required {
+input.ng-valid.required,
+select.ng-valid[required],
+select.ng-valid.required {
 	border-left: 5px solid #42A948;
 }
 
 /* Invalide, bereits besuchte Inputs rot markieren */
 input.ng-invalid[required].ng-touched,
-.ng-invalid.required.ng-touched {
+input.ng-invalid.required.ng-touched,
+select.ng-invalid[required].ng-touched,
+select.ng-invalid.required.ng-touched {
 	border-left: 5px solid #a94442;
 }
 

@@ -12,6 +12,7 @@ import { RegistrationSuccessComponent } from './registration-success/registratio
 import { HomeComponent } from './home/home.component';
 import { InvalidInputMsgComponent } from './invalid-input-msg/invalid-input-msg.component';
 import { PortfoliosComponent } from './components/portfolios/portfolios.component';
+import { AddPortfolioComponent } from './components/addPortfolio/add-portfolio/add-portfolio.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PortfoliosComponent } from './components/portfolios/portfolios.componen
     RegistrationSuccessComponent,
     HomeComponent,
     InvalidInputMsgComponent,
-    PortfoliosComponent
+    PortfoliosComponent,
+    AddPortfolioComponent
   ],
   imports: [
     BrowserModule,
