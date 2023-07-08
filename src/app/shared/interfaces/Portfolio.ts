@@ -1,9 +1,11 @@
 import { FormControl } from "@angular/forms"
+import { PortfolioType } from "./PortfolioType"
 
 export interface Portfolio {
     description: string,
     createdAt?: Date,
-    typeCode: string
+    typeCode: string,
+    portfolioType?: PortfolioType
 }
 
 export interface PortfolioForm {

@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { InvalidInputMsgComponent } from './invalid-input-msg/invalid-input-msg.component';
 import { PortfoliosComponent } from './components/portfolios/portfolios.component';
 import { AddPortfolioComponent } from './components/addPortfolio/add-portfolio/add-portfolio.component';
+import { PortfolioListComponent } from './components/portfolioList/portfolio-list/portfolio-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AddPortfolioComponent } from './components/addPortfolio/add-portfolio/a
     HomeComponent,
     InvalidInputMsgComponent,
     PortfoliosComponent,
-    AddPortfolioComponent
+    AddPortfolioComponent,
+    PortfolioListComponent
   ],
   imports: [
     BrowserModule,

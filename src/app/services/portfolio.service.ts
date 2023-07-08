@@ -25,4 +25,9 @@ export class PortfolioService {
     return this.http.post<AppResult>(this.basePortfolioUrl, portfolio);
   }
 
+  // Holt alle Portfolios des Users
+  public getPortfolios(): Observable<Portfolio[]> {
+    return this.http.get<Portfolio[]>(this.basePortfolioUrl);
+  }
+
 }
