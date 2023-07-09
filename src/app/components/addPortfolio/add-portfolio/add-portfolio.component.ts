@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { PortfolioForm } from 'src/app/shared/interfaces/Portfolio';
@@ -13,6 +13,8 @@ export class AddPortfolioComponent {
   constructor(private portfolioService: PortfolioService) { }
   error: any = null;
   successMsg: string = "";
+  @Output() portfolioAdded = new EventEmitter<boolean>();
+  @Output() closeComponent = new EventEmitter<boolean>();
 
   // Enthält alle Portfoliotypen
   portfolioTypes: PortfolioType[] = [];
@@ -51,6 +53,8 @@ export class AddPortfolioComponent {
         if (!response.success) {
           this.error = response.error;
         } else {
+          // Aktualisierung der Portfolioliste emiten
+          this.portfolioAdded.emit(true);
           this.successMsg = "Das Portfolio wurde erfolgreich angelegt!"
         }
       },

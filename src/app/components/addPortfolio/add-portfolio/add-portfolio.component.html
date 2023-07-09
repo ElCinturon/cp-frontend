@@ -26,14 +26,12 @@
             <div *ngIf="successMsg" class="alert alert-success pt-1 pb-1 mt-2">
                 {{successMsg}}
             </div>
-            <div class="row mt-2">
-                <div class="col justify-content-end d-flex">
-                    <div class="alert alert-danger pt-1 pb-1" role="alert" *ngIf="error?.msg">{{error?.msg}}</div>
-                    <button [disabled]="!addPortfolioForm.valid" type="submit"
-                        class="btn btn-sm btn-primary ">Speichern</button>
-                </div>
+            <div class="justify-content-end d-flex mt-3">
+                <button type="button" (click)="this.closeComponent.emit(true)"
+                    class="btn btn-sm btn-primary me-3">Schließen</button>
+                <button [disabled]="!addPortfolioForm.valid" type="submit"
+                    class="btn btn-sm btn-primary">Speichern</button>
             </div>
-
         </form>
     </div>
 </div>
