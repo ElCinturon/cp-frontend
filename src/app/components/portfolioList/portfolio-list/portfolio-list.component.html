@@ -1,4 +1,4 @@
-<div class="row justify-content-center m-2" *ngIf="!portfoliosExist">
+<div class="row justify-content-center m-2" *ngIf="portfolios.length === 0 && portfoliosSet">
     <div class="col-4">
         <div class="alert alert-warning"><b>Es wurden noch keine Portfolios angelegt!</b>
         </div>

@@ -13,7 +13,7 @@ export class PortfolioListComponent {
   constructor(private portfolioService: PortfolioService) { };
 
   portfolios: Portfolio[] = [];
-  portfoliosExist: Boolean = true;
+  portfoliosSet: Boolean = false;
 
   ngOnInit() {
     this.updatePortfolios();
@@ -24,12 +24,7 @@ export class PortfolioListComponent {
     this.portfolioService.getPortfolios().subscribe({
       next: (response => {
         this.portfolios = response;
-        if (this.portfolios.length > 0) {
-          this.portfoliosExist = true;
-        } else {
-          this.portfoliosExist = false;
-        }
-
+        this.portfoliosSet = true;
       }),
       error: (error => {
         console.error(error);
