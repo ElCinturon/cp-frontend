@@ -11,7 +11,7 @@ import { UserInfoService } from '../services/userInfo.service';
 	styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-	error?: any = null;
+	error?: any = {};
 	constructor(public authService: AuthenticationService, private router: Router, private cookieService: CookieService, private userInfoService: UserInfoService) { };
 
 	loginForm = new FormGroup({

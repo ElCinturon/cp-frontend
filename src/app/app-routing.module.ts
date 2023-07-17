@@ -7,6 +7,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { PortfoliosComponent } from './components/portfolios/portfolios.component';
+import { PortfolioComponent } from './components/portfolio/portfolio.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, title: 'Login' },
@@ -14,7 +15,12 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent, title: 'Registrierung' },
   { path: 'home', component: HomeComponent, title: 'Home' },
   { path: 'registrationSuccess', component: RegistrationSuccessComponent, title: 'Registrierung abgeschlossen' },
-  { path: 'portfolios', component: PortfoliosComponent, title: 'Meine Portfolios' },
+  {
+    path: 'portfolios', children: [
+      { path: "", component: PortfoliosComponent, title: 'Meine Portfolios' },
+      { path: ":id", component: PortfolioComponent }
+    ]
+  },
 ];
 
 @NgModule({

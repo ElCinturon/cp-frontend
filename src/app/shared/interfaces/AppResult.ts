@@ -1,5 +1,7 @@
-export interface AppResult {
+export interface AppResult extends AppResultGeneric<any> { }
+
+export interface AppResultGeneric<T> {
     success: Boolean,
-    data?: any,
+    data?: T,
     error: any
 }

@@ -1,0 +1,5 @@
+<h1>{{portfolio?.description}}</h1>
+<h5>{{portfolio?.portfolioType?.description}}</h5>
+<div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1">
+    {{error?.msg}}
+</div>

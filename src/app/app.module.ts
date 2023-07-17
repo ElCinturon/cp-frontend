@@ -14,6 +14,7 @@ import { InvalidInputMsgComponent } from './invalid-input-msg/invalid-input-msg.
 import { PortfoliosComponent } from './components/portfolios/portfolios.component';
 import { AddPortfolioComponent } from './components/addPortfolio/add-portfolio/add-portfolio.component';
 import { PortfolioListComponent } from './components/portfolioList/portfolio-list/portfolio-list.component';
+import { PortfolioComponent } from './components/portfolio/portfolio.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PortfolioListComponent } from './components/portfolioList/portfolio-lis
     InvalidInputMsgComponent,
     PortfoliosComponent,
     AddPortfolioComponent,
-    PortfolioListComponent
+    PortfolioListComponent,
+    PortfolioComponent
   ],
   imports: [
     BrowserModule,
