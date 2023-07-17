@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PortfolioService } from 'src/app/services/portfolio.service';
+import { formatDbDateTime } from 'src/app/shared/helper/dates';
 import { Portfolio } from 'src/app/shared/interfaces/Portfolio';
 
 @Component({
@@ -14,6 +15,8 @@ export class PortfolioComponent {
   error: any = null;
 
   constructor(private route: ActivatedRoute, private portfolioService: PortfolioService) { }
+
+  get creationDateTime() { return this.portfolio?.createdAt ? formatDbDateTime(this.portfolio?.createdAt) : "" }
 
   ngOnInit() {
     // übergebene Id auslesen

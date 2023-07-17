@@ -15,6 +15,7 @@ import { PortfoliosComponent } from './components/portfolios/portfolios.componen
 import { AddPortfolioComponent } from './components/addPortfolio/add-portfolio/add-portfolio.component';
 import { PortfolioListComponent } from './components/portfolioList/portfolio-list/portfolio-list.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
+import { AddPortfolioEntryComponent } from './components/add-portfolio-entry/add-portfolio-entry.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PortfolioComponent } from './components/portfolio/portfolio.component';
     PortfoliosComponent,
     AddPortfolioComponent,
     PortfolioListComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    AddPortfolioEntryComponent
   ],
   imports: [
     BrowserModule,

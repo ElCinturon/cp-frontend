@@ -1,5 +1,8 @@
-<h1>{{portfolio?.description}}</h1>
+<h2>{{portfolio?.description}}</h2>
 <h5>{{portfolio?.portfolioType?.description}}</h5>
+<p>Erstellt {{creationDateTime}}</p>
+<p>Gesamtwert XX €</p>
+
 <div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1">
     {{error?.msg}}
 </div>

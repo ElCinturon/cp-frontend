@@ -4,8 +4,8 @@
         </div>
     </div>
 </div>
-<div class="row justify-content-center m-2" *ngFor="let p of portfolios">
-    <button [routerLink]="['/portfolios', p.id]" type="button" class="btn btn-sm btn-light col-2 border border-1"
+<div class="row justify-content-center mt-2 mb-2" *ngFor="let p of portfolios">
+    <button [routerLink]="['/portfolios', p.id]" type="button" class="btn btn-sm btn-light col-4 border border-1"
         title="Portfolio anzeigen">
         <p class="mb-1 text-break"><b>{{p.description}}</b></p>
         <p class="mb-1 text-break">{{p.portfolioType?.description}}</p>

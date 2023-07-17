@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PortfolioType } from '../shared/interfaces/PortfolioType';
 import { Portfolio } from '../shared/interfaces/Portfolio';
-import { AppResultGeneric } from '../shared/interfaces/AppResult';
+import { PortfolioEntry } from '../shared/interfaces/PortfolioEntry';
+import { AppResult, AppResultGeneric } from '../shared/interfaces/AppResult';
 
 
 
@@ -33,10 +34,14 @@ export class PortfolioService {
     return this.http.get<Portfolio[]>(this.basePortfolioUrl);
   }
 
-
   // Holt bestimmtes Portfolio des Users anhand von id
   public getPortfolio(id: Number): Observable<AppResultGeneric<Portfolio>> {
     return this.http.get<AppResultGeneric<Portfolio>>(this.basePortfolioUrl + `/${id}`);
+  }
+
+  // Speichert Portfolioentry
+  public postPortfolioEntry(portfolioEntry: PortfolioEntry): Observable<AppResult> {
+    return this.http.post<AppResult>(this.basePortfolioUrl, portfolioEntry);
   }
 
 }

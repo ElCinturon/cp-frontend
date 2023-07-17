@@ -1,14 +1,13 @@
-<div class="row">
-    <div class="row justify-content-center">
-        <div class="col-4">
-            <h6>Portfolios</h6>
-        </div>
+<div class="row text-center">
+    <div class="col">
+        <h4>Meine Portfolios</h4>
     </div>
-    <div class="col justify-content-end d-flex">
-        <button (click)="setActive()" type="button" class="btn btn-sm btn-success">Erstellen <i
-                class="fa-solid fa-plus"></i></button>
-    </div>
-    <add-portfolio (portfolioAdded)="portfolioList.updatePortfolios()" (closeComponent)="setActive()" class="mb-5"
-        *ngIf="addActive"></add-portfolio>
-    <portfolio-list #portfolioList></portfolio-list>
 </div>
+<div class="col justify-content-end d-flex">
+    <button (click)="setActive()" type="button" class="btn btn-sm btn-success">Erstellen <i
+            class="fa-solid fa-plus"></i></button>
+</div>
+<div class="mb-5" *ngIf="addActive">
+    <add-portfolio (portfolioAdded)="portfolioList.updatePortfolios()" (closeComponent)="setActive()"></add-portfolio>
+</div>
+<portfolio-list #portfolioList></portfolio-list>

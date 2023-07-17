@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-4 border border-dark p-2">
-        <h6>Neues Portfolio hinzufügen</h6>
-        <form [formGroup]="addPortfolioForm" (ngSubmit)="addPortfolio()">
+        <h6>Neuen Eintrag hinzufügen</h6>
+        <form [formGroup]="addPortfolioEntryForm" (ngSubmit)="addPortfolioEntry()">
             <div class="mb-3 form-floating">
                 <input required id="description" maxlength="124" name="description" type="text" class="form-control"
                     formControlName="description" placeholder="name@example.com">
@@ -10,15 +10,20 @@
                     *ngIf="(description?.errors && description?.invalid && description?.touched) || error?.description"
                     [errorObject]="description?.errors" [errorText]="error?.description"></invalid-input-msg>
             </div>
-            <div class="form-floating">
-                <select id="type" class="form-select" required aria-label="Portfoliotyp auswählen"
-                    formControlName="typeCode">
-                    <option *ngFor="let type of portfolioTypes" value="{{type.code}}">{{type.description}}</option>
-                </select>
-                <label for="type" class="form-label">Typ</label>
+            <div class="mb-3 form-floating">
+                <input required id="value" maxlength="124" name="value" type="number" class="form-control"
+                    formControlName="value" placeholder="0">
+                <label for="value" class="form-label">Wert in €</label>
+                <invalid-input-msg *ngIf="(value?.errors && value?.invalid && value?.touched) || error?.value"
+                    [errorObject]="value?.errors" [errorText]="error?.value"></invalid-input-msg>
+            </div>
+            <div class="mb-3 form-floating">
+                <input required id="datetime" maxlength="124" name="datetime" type="datetime" class="form-control"
+                    formControlName="datetime" placeholder="0">
+                <label for="value" class="form-label">Wertstellungsdatum</label>
                 <invalid-input-msg
-                    *ngIf="(typeCode?.errors && typeCode?.invalid && typeCode?.touched) || error?.typeCode"
-                    [errorObject]="typeCode?.errors" [errorText]="error?.typeCode"></invalid-input-msg>
+                    *ngIf="(datetime?.errors && datetime?.invalid && datetime?.touched) || error?.datetime"
+                    [errorObject]="datetime?.errors" [errorText]="error?.datetime"></invalid-input-msg>
             </div>
             <div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 mt-2">
                 {{error?.msg}}
@@ -29,7 +34,7 @@
             <div class="justify-content-end d-flex mt-3">
                 <button type="button" (click)="this.closeComponent.emit(true)"
                     class="btn btn-sm btn-primary me-3">Schließen</button>
-                <button [disabled]="!addPortfolioForm.valid" type="submit"
+                <button [disabled]="!addPortfolioEntryForm.valid" type="submit"
                     class="btn btn-sm btn-primary">Speichern</button>
             </div>
         </form>
