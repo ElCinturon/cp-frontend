@@ -8,8 +8,6 @@ import { PortfolioEntry } from '../shared/interfaces/PortfolioEntry';
 import { AppResult, AppResultGeneric } from '../shared/interfaces/AppResult';
 
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -41,7 +39,7 @@ export class PortfolioService {
 
   // Speichert Portfolioentry
   public postPortfolioEntry(portfolioEntry: PortfolioEntry): Observable<AppResult> {
-    return this.http.post<AppResult>(this.basePortfolioUrl, portfolioEntry);
+    return this.http.post<AppResult>(this.basePortfolioUrl + "/entry", portfolioEntry);
   }
 
 }

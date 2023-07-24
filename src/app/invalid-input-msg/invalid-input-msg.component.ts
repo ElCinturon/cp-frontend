@@ -24,16 +24,16 @@ export class InvalidInputMsgComponent {
 
 		if (changes["errorObject"]) {
 			if (this.errorObject?.["required"]) {
-				this.message = "Dieses Feld darf nicht leer sein."
+				this.message = "Dieses Feld darf nicht leer sein.";
 			}
 			else if (this.errorObject?.["minlength"]) {
-				this.message = `Es müssen mindestens ${this.errorObject?.['minlength']?.['requiredLength']} Zeichen angegeben werden.`
+				this.message = `Es müssen mindestens ${this.errorObject?.['minlength']?.['requiredLength']} Zeichen angegeben werden.`;
 			}
 			else if (this.errorObject?.["maxlength"]) {
-				this.message = "Es dürfen maximal X Zeichen angegeben werden."
+				this.message = `Es dürfen maximal ${this.errorObject?.['maxlength']?.['requiredLength']} Zeichen angegeben werden.`;
 			}
 			else if (this.errorObject?.["email"]) {
-				this.message = "Es wurde keine gültige E-Mail Adresse angegeben."
+				this.message = "Es wurde keine gültige E-Mail Adresse angegeben.";
 			} else if (this.errorObject?.["msg"]) {
 				this.message = this.errorObject["msg"];
 			}
