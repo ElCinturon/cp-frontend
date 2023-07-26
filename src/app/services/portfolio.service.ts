@@ -42,4 +42,9 @@ export class PortfolioService {
     return this.http.post<AppResult>(this.basePortfolioUrl + "/entry", portfolioEntry);
   }
 
+  // Ruft alle Portfolioentries zu einem Portfolio ab
+  public getPortfolioEntries(portfolioId: number): Observable<PortfolioEntry[]> {
+    return this.http.get<PortfolioEntry[]>(this.basePortfolioUrl + `/${portfolioId}/entries`);
+  }
+
 }

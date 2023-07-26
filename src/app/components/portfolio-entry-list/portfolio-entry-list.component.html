@@ -1,0 +1,13 @@
+<div class="row justify-content-center m-2" *ngIf="portfolioEntries.length === 0 && portfolioEntriesSet">
+    <div class="col-4">
+        <div class="alert alert-warning"><b>Es wurden noch keine Portfolioeinträge angelegt!</b>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center mt-2 mb-2" *ngFor="let pe of portfolioEntries">
+    <button [routerLink]="['/portfolios', pe.id]" type="button" class="btn btn-sm btn-light col-4 border border-1"
+        title="Portfolioeintrag anzeigen">
+        <p class="mb-1 text-break"><b>{{pe.description}}</b></p>
+        <p *ngIf="pe.portfolioEntryValues?.[0]" class="mb-1 text-break">{{pe.portfolioEntryValues?.[0]?.value}} €</p>
+    </button>
+</div>

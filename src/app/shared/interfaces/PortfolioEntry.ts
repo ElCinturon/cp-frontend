@@ -1,10 +1,13 @@
 import { FormControl } from "@angular/forms"
+import { PortfolioEntryValue } from "./PortfolioEntryValue"
+
 
 export interface PortfolioEntry {
+    id: number,
     description: string,
-    value: number,
-    datetime: string,
-    portfolioId: number
+    createdAt: string,
+    portfolioId: number,
+    portfolioEntryValues?: PortfolioEntryValue[]
 }
 
 export interface PortfolioEntryForm {

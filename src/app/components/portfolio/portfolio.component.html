@@ -9,10 +9,11 @@
         <button (click)="activateAddEntry()" class="btn btn-sm btn-success">Eintrag hinzufügen</button>
     </div>
 </div>
-<div>
-    <add-portfolio-entry [portfolioId]="portfolioId" (closeComponent)="activateAddEntry()"
-        *ngIf="addEntryActive"></add-portfolio-entry>
+<div *ngIf="addEntryActive" class="mb-5">
+    <add-portfolio-entry (portfolioEntryAdded)="portfolioEntryList.updatePortfolioEntries()" [portfolioId]="portfolioId"
+        (closeComponent)="activateAddEntry()"></add-portfolio-entry>
 </div>
 <div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1">
     {{error?.msg}}
 </div>
+<portfolio-entry-list #portfolioEntryList [portfolioId]="portfolioId"></portfolio-entry-list>

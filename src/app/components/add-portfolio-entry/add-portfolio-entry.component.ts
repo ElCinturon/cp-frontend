@@ -67,10 +67,13 @@ export class AddPortfolioEntryComponent {
     let keyPressed = event.key;
     if (!["ArrowLeft", "ArrowRight", "Tab"].includes(keyPressed)) {
       // Wird Format erfüllt? (10000; 10.000; 10.000,00)
-      let validInput = /^\d+((\.(?!\.)|\d*)*(,(?!\.)\d{0,2})?)$/g.test(this.value?.value!);
+      let validInput = /^\d+((\.(?!\.|,)|\d*)*(,(?!\.)\d{0,2})?)$/g.test(this.value?.value!);
+
+      // Reine Anzahl von Zahlen vor Komma ermitteln
+      let valueLength = this.value?.value.split(',')[0].replaceAll(/\D/g, "").length;
 
       // Wenn Format nicht erfüllt wird, vorherigen Wert setzen, außer wenn inhalt gelöscht wird
-      if (!validInput && keyPressed !== "Delete" && keyPressed !== "Backspace") {
+      if ((!validInput && keyPressed !== "Delete" && keyPressed !== "Backspace") || valueLength! > 10) {
         // Vorherigen Wert setzen
         this.value?.setValue((event.target as HTMLInputElement).getAttribute("previousValue")!);
         event.preventDefault();
