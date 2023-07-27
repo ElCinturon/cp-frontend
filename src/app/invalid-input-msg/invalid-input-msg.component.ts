@@ -1,14 +1,14 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { ValidationErrors } from '@angular/forms';
+import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { ValidationErrors } from "@angular/forms";
 
 /* Diese Komponente wertet ValidationErrors aus und zeigt
    eine entsprechende Meldung in einem Div an. Wird für Inputs genutzt. */
 @Component({
-	selector: 'invalid-input-msg',
-	templateUrl: './invalid-input-msg.component.html',
-	styleUrls: ['./invalid-input-msg.component.css']
+	selector: "invalid-input-msg",
+	templateUrl: "./invalid-input-msg.component.html",
+	styleUrls: ["./invalid-input-msg.component.css"]
 })
-export class InvalidInputMsgComponent {
+export class InvalidInputMsgComponent implements OnChanges {
 	// Objekt, dass den Invalid-Error enthält
 	@Input() errorObject!: ValidationErrors | null | undefined;
 	@Input() errorText!: string | null | undefined;
@@ -27,10 +27,10 @@ export class InvalidInputMsgComponent {
 				this.message = "Dieses Feld darf nicht leer sein.";
 			}
 			else if (this.errorObject?.["minlength"]) {
-				this.message = `Es müssen mindestens ${this.errorObject?.['minlength']?.['requiredLength']} Zeichen angegeben werden.`;
+				this.message = `Es müssen mindestens ${this.errorObject?.["minlength"]?.["requiredLength"]} Zeichen angegeben werden.`;
 			}
 			else if (this.errorObject?.["maxlength"]) {
-				this.message = `Es dürfen maximal ${this.errorObject?.['maxlength']?.['requiredLength']} Zeichen angegeben werden.`;
+				this.message = `Es dürfen maximal ${this.errorObject?.["maxlength"]?.["requiredLength"]} Zeichen angegeben werden.`;
 			}
 			else if (this.errorObject?.["email"]) {
 				this.message = "Es wurde keine gültige E-Mail Adresse angegeben.";
