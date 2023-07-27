@@ -1,20 +1,20 @@
-import { Component, Input } from '@angular/core';
-import { PortfolioService } from 'src/app/services/portfolio.service';
-import { PortfolioEntry } from 'src/app/shared/interfaces/PortfolioEntry';
+import { Component, Input, OnInit, } from "@angular/core";
+import { PortfolioService } from "src/app/services/portfolio.service";
+import { PortfolioEntry } from "src/app/shared/interfaces/PortfolioEntry";
 
 @Component({
-  selector: 'portfolio-entry-list',
-  templateUrl: './portfolio-entry-list.component.html',
-  styleUrls: ['./portfolio-entry-list.component.css']
+  selector: "portfolio-entry-list",
+  templateUrl: "./portfolio-entry-list.component.html",
+  styleUrls: ["./portfolio-entry-list.component.css"]
 })
-export class PortfolioEntryListComponent {
+export class PortfolioEntryListComponent implements OnInit {
 
-  constructor(private portfolioService: PortfolioService) { };
+  constructor(private portfolioService: PortfolioService) { }
 
   @Input() portfolioId: number | null = null;
   portfolioEntries: PortfolioEntry[] = [];
-  portfolioEntriesSet: Boolean = false;
-  error: any = "";
+  portfolioEntriesSet = false;
+  error: any = {};
 
   ngOnInit() {
     this.updatePortfolioEntries();
@@ -28,8 +28,8 @@ export class PortfolioEntryListComponent {
         this.portfolioEntriesSet = true;
       }),
       error: (error => {
-        console.error(error);
-        this.error = error.msg;
+        console.error("Beim Abruf der Portfolioeinträge zu Portoflio mit id " + this.portfolioId + " ist ein Fehler aufgetreten", error);
+        this.error.msg = "Bei der Anzeige der Portfolioeinträge ist ein Fehler aufgetreten!";
       })
     })
   }

@@ -1,18 +1,18 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { PortfolioService } from 'src/app/services/portfolio.service';
-import { PortfolioForm } from 'src/app/shared/interfaces/Portfolio';
-import { PortfolioType } from 'src/app/shared/interfaces/PortfolioType';
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
+import { PortfolioService } from "src/app/services/portfolio.service";
+import { PortfolioForm } from "src/app/shared/interfaces/Portfolio";
+import { PortfolioType } from "src/app/shared/interfaces/PortfolioType";
 
 @Component({
-  selector: 'add-portfolio',
-  templateUrl: './add-portfolio.component.html',
-  styleUrls: ['./add-portfolio.component.css']
+  selector: "add-portfolio",
+  templateUrl: "./add-portfolio.component.html",
+  styleUrls: ["./add-portfolio.component.css"]
 })
-export class AddPortfolioComponent {
+export class AddPortfolioComponent implements OnInit {
   constructor(private portfolioService: PortfolioService) { }
-  error: any = null;
-  successMsg: string = "";
+  error: any = {};
+  successMsg = "";
   @Output() portfolioAdded = new EventEmitter<boolean>();
   @Output() closeComponent = new EventEmitter<boolean>();
 
@@ -38,14 +38,15 @@ export class AddPortfolioComponent {
         this.portfolioTypes = response;
       }, error: (error) => {
         this.error = { ...this.error, ...{ "typeCode": "Beim Abruf der Typen ist ein Fehler aufgetreten!" } };
-        console.error("Fehler beim Abruf der Portfoliotypen: ", error)
+        console.log("error", this.error);
+        console.error("Fehler beim Abruf der Portfoliotypen: ", error);
       }
     });
   }
 
   // Speichert das eingegebene Portfolio
   addPortfolio() {
-    this.error = null;
+    this.error = {};
     this.successMsg = "";
 
     this.portfolioService.postPortfolio(this.addPortfolioForm.getRawValue()).subscribe({

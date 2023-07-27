@@ -3,7 +3,7 @@ import { PortfolioEntryValue } from "./PortfolioEntryValue"
 
 
 export interface PortfolioEntry {
-    id: number,
+    id?: number,
     description: string,
     createdAt: string,
     portfolioId: number,

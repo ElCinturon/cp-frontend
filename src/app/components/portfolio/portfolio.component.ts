@@ -1,20 +1,21 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PortfolioService } from 'src/app/services/portfolio.service';
-import { formatDbDateTime } from 'src/app/shared/helper/dates';
-import { Portfolio } from 'src/app/shared/interfaces/Portfolio';
+import { Component, EventEmitter, Output, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { PortfolioService } from "src/app/services/portfolio.service";
+import { formatDbDateTime } from "src/app/shared/helper/dates";
+import { Portfolio } from "src/app/shared/interfaces/Portfolio";
 
 @Component({
-  selector: 'app-portfolio',
-  templateUrl: './portfolio.component.html',
-  styleUrls: ['./portfolio.component.css']
+  selector: "app-portfolio",
+  templateUrl: "./portfolio.component.html",
+  styleUrls: ["./portfolio.component.css"]
 })
-export class PortfolioComponent {
+export class PortfolioComponent implements OnInit {
 
   portfolio?: Portfolio | null = null;
-  error: any = null;
+  error: any = {};
   addEntryActive = false;
   portfolioId: number | null = null;
+  portfolioSet = false;
   @Output() closeComponent = new EventEmitter<boolean>();
 
   constructor(private route: ActivatedRoute, private portfolioService: PortfolioService) { }
@@ -23,7 +24,7 @@ export class PortfolioComponent {
 
   ngOnInit() {
     // übergebene Id auslesen
-    this.portfolioId = Number(this.route.snapshot.paramMap.get('id'));
+    this.portfolioId = Number(this.route.snapshot.paramMap.get("id"));
 
     // Portfolio anhand von Id abrufen
     this.portfolioService.getPortfolio(this.portfolioId).subscribe({
@@ -32,11 +33,12 @@ export class PortfolioComponent {
           this.error = response?.error;
         } else {
           this.portfolio = response?.data;
+          this.portfolioSet = true;
         }
       },
       error: (error) => {
+        this.error.msg = "Bei Abruf des Portfolios ist ein Fehler aufgetreten";
         console.error(`Bei Abruf des Portfolios mit Id ${this.portfolioId} ist ein Fehler aufgetreten`, error);
-        this.error = error;
       }
     })
 

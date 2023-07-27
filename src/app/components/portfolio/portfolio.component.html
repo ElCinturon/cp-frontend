@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="portfolioSet">
     <div class="col">
         <h2>{{portfolio?.description}}</h2>
         <h5>{{portfolio?.portfolioType?.description}}</h5>
@@ -9,11 +9,11 @@
         <button (click)="activateAddEntry()" class="btn btn-sm btn-success">Eintrag hinzufügen</button>
     </div>
 </div>
+<div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 text-center">
+    {{error?.msg}}
+</div>
 <div *ngIf="addEntryActive" class="mb-5">
     <add-portfolio-entry (portfolioEntryAdded)="portfolioEntryList.updatePortfolioEntries()" [portfolioId]="portfolioId"
         (closeComponent)="activateAddEntry()"></add-portfolio-entry>
-</div>
-<div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1">
-    {{error?.msg}}
 </div>
 <portfolio-entry-list #portfolioEntryList [portfolioId]="portfolioId"></portfolio-entry-list>

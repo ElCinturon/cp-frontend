@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { PortfolioService } from 'src/app/services/portfolio.service';
-import { PortfolioEntry, PortfolioEntryForm } from 'src/app/shared/interfaces/PortfolioEntry';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
+import { PortfolioService } from "src/app/services/portfolio.service";
+import { PortfolioEntry, PortfolioEntryForm } from "src/app/shared/interfaces/PortfolioEntry";
 
 @Component({
-  selector: 'add-portfolio-entry',
-  templateUrl: './add-portfolio-entry.component.html',
-  styleUrls: ['./add-portfolio-entry.component.css']
+  selector: "add-portfolio-entry",
+  templateUrl: "./add-portfolio-entry.component.html",
+  styleUrls: ["./add-portfolio-entry.component.css"]
 })
 export class AddPortfolioEntryComponent {
   constructor(private portfolioService: PortfolioService) { }
@@ -15,10 +15,10 @@ export class AddPortfolioEntryComponent {
   @Output() closeComponent = new EventEmitter<boolean>();
   @Input() portfolioId: number | null = null;
   error: any = null;
-  successMsg: string = "";
+  successMsg = "";
 
-  // Checked ob im Input Feld eine Taste gedrückt wird
-  keyDowned: Boolean = false;
+  // Checkt ob im Input Feld eine Taste gedrückt wird
+  keyDowned = false;
 
   addPortfolioEntryForm = new FormGroup<PortfolioEntryForm>({
     description: new FormControl("", { nonNullable: true }),
@@ -53,7 +53,7 @@ export class AddPortfolioEntryComponent {
 
   // Verhindert, für das Input "Value", dass Key gedrückt gehalten werden kann
   onkeydown(e: KeyboardEvent) {
-    let keyPressed = e.key;
+    const keyPressed = e.key;
     if (this.keyDowned && keyPressed !== "Delete" && keyPressed !== "Backspace") {
       e.preventDefault();
     } else {
@@ -64,13 +64,13 @@ export class AddPortfolioEntryComponent {
   // Bei Keyup von Value wird hier der neu gesetzte Wert geprüft. Wenn ungültig, wird der ursprüngliche Wert gesetzt
   checkCurrencyInput(event: KeyboardEvent) {
     this.keyDowned = false;
-    let keyPressed = event.key;
+    const keyPressed = event.key;
     if (!["ArrowLeft", "ArrowRight", "Tab"].includes(keyPressed)) {
       // Wird Format erfüllt? (10000; 10.000; 10.000,00)
-      let validInput = /^\d+((\.(?!\.|,)|\d*)*(,(?!\.)\d{0,2})?)$/g.test(this.value?.value!);
+      const validInput = /^\d+((\.(?!\.|,)|\d*)*(,(?!\.)\d{0,2})?)$/g.test(this.value?.value!);
 
       // Reine Anzahl von Zahlen vor Komma ermitteln
-      let valueLength = this.value?.value.split(',')[0].replaceAll(/\D/g, "").length;
+      const valueLength = this.value?.value.split(",")[0].replaceAll(/\D/g, "").length;
 
       // Wenn Format nicht erfüllt wird, vorherigen Wert setzen, außer wenn inhalt gelöscht wird
       if ((!validInput && keyPressed !== "Delete" && keyPressed !== "Backspace") || valueLength! > 10) {
@@ -87,17 +87,17 @@ export class AddPortfolioEntryComponent {
 
   // Speichert den eingegebenen Portfolioentry
   addPortfolioEntry() {
-    this.error = null;
+    this.error = {};
     this.successMsg = "";
 
     // Attribute "value" in number umwandeln
-    let formValues: any = this.addPortfolioEntryForm.getRawValue();
+    const formValues: any = this.addPortfolioEntryForm.getRawValue();
 
     // Punkte entfernen und Dezimalkomma durch Punkt ersetzen und zu Number casten
     formValues.value = Number(formValues.value.replaceAll(".", "").replace(",", "."));
 
     // Wert zu korrektem Typen Casten
-    let portfolioEntry: PortfolioEntry = <PortfolioEntry>formValues;
+    const portfolioEntry: PortfolioEntry = <PortfolioEntry>formValues;
     // Portfolio-Id hinzufügen
     portfolioEntry.portfolioId = this.portfolioId!;
 
@@ -113,7 +113,7 @@ export class AddPortfolioEntryComponent {
       },
       error: (error) => {
         this.error.msg = "Es ist ein Fehler bei der Anlage des Eintrags aufgetreten!"
-        console.error("error", error);
+        console.error("Es ist ein Fehler bei der Anlage des Eintrags aufgetreten", error);
       }
     })
 

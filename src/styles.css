@@ -24,4 +24,6 @@ select.ng-invalid.required.ng-touched {
 	padding-top: 4px;
 	font-size: 12px;
 	color: #ff0000;
+	/* sorgt für Beachtung von linebreaks per /n */
+	white-space: pre;
 }
