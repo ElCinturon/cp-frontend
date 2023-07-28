@@ -1,19 +1,22 @@
+<div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 text-center">
+    {{error?.msg}}
+</div>
 <div class="row" *ngIf="portfolioSet">
-    <div class="col">
+    <div class="col-md-2 order-first">
         <h2>{{portfolio?.description}}</h2>
         <h5>{{portfolio?.portfolioType?.description}}</h5>
         <p>Erstellt {{creationDateTime}}</p>
         <p>Gesamtwert XX €</p>
     </div>
-    <div class="col text-end">
+    <div class="col-md-8 col-12 order-md-2 order-last">
+        <div *ngIf="addEntryActive" class="mb-5">
+            <add-portfolio-entry (portfolioEntryAdded)="portfolioEntryList.updatePortfolioEntries()"
+                [portfolioId]="portfolioId" (closeComponent)="activateAddEntry()"></add-portfolio-entry>
+        </div>
+
+        <portfolio-entry-list #portfolioEntryList [portfolioId]="portfolioId"></portfolio-entry-list>
+    </div>
+    <div class="col-md-2 text-end order-md-3 order-2 pe-0">
         <button (click)="activateAddEntry()" class="btn btn-sm btn-success">Eintrag hinzufügen</button>
     </div>
 </div>
-<div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 text-center">
-    {{error?.msg}}
-</div>
-<div *ngIf="addEntryActive" class="mb-5">
-    <add-portfolio-entry (portfolioEntryAdded)="portfolioEntryList.updatePortfolioEntries()" [portfolioId]="portfolioId"
-        (closeComponent)="activateAddEntry()"></add-portfolio-entry>
-</div>
-<portfolio-entry-list #portfolioEntryList [portfolioId]="portfolioId"></portfolio-entry-list>

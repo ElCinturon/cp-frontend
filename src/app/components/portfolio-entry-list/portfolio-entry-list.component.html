@@ -8,11 +8,12 @@
     {{error?.msg}}
 </div>
 <div class="row justify-content-center mt-2 mb-2" *ngFor="let pe of portfolioEntries">
-    <button [routerLink]="['/portfolios', pe.id]" type="button" class="btn btn-sm btn-light col-4 border border-1"
-        title="Portfolioeintrag anzeigen">
+    <button [routerLink]="['/portfolios', pe.id]" type="button"
+        class="btn btn-sm btn-light col-12 col-md-7 border border-1" title="Portfolioeintrag anzeigen">
         <p class="mb-1 text-break"><b>{{pe.description}}</b></p>
-        <p *ngIf="pe.portfolioEntryValues?.[0]" class="mb-1 text-break">{{pe.portfolioEntryValues?.[0]?.value}} €
+        <p *ngIf="pe.latestValue" class="mb-1 text-break">{{pe.latestValue.value |
+            currency:'EUR':true:'1.2-2':"de-DE"}}
         </p>
-        <small>({{pe.portfolioEntryValues?.[0]?.time}})</small>
+        <small>({{pe.latestValue?.time}})</small>
     </button>
 </div>

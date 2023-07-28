@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { PortfolioService } from "src/app/services/portfolio.service";
 import { PortfolioEntry, PortfolioEntryForm } from "src/app/shared/interfaces/PortfolioEntry";
+import { PortfolioEntryValue } from "src/app/shared/interfaces/PortfolioEntryValue";
 
 @Component({
   selector: "add-portfolio-entry",
@@ -93,11 +94,17 @@ export class AddPortfolioEntryComponent {
     // Attribute "value" in number umwandeln
     const formValues: any = this.addPortfolioEntryForm.getRawValue();
 
-    // Punkte entfernen und Dezimalkomma durch Punkt ersetzen und zu Number casten
-    formValues.value = Number(formValues.value.replaceAll(".", "").replace(",", "."));
+    // Portfoliovalue Objekt erzeugen
+    // Aus Value Punkte entfernen und Dezimalkomma durch Punkt ersetzen und zu Number casten
+    const value: PortfolioEntryValue = { time: formValues.datetime, value: Number(formValues.value.replaceAll(".", "").replace(",", ".")) }
 
-    // Wert zu korrektem Typen Casten
+    delete formValues.value;
+    delete formValues.datetime;
+
+    // Portfolioentry erzeugen und Values anfügen
     const portfolioEntry: PortfolioEntry = <PortfolioEntry>formValues;
+    portfolioEntry.latestValue = value;
+
     // Portfolio-Id hinzufügen
     portfolioEntry.portfolioId = this.portfolioId!;
 

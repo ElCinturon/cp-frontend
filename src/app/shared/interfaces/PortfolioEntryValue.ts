@@ -1,5 +1,5 @@
 export interface PortfolioEntryValue {
-    id: number,
+    id?: number,
     time: string,
-    value: string
+    value: number
 }
