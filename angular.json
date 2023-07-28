@@ -4,6 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "capitalPortal": {
+      "i18n": {
+        "sourceLocale": "de"
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
