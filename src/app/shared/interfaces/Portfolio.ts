@@ -6,7 +6,8 @@ export interface Portfolio {
     description: string,
     createdAt?: Date,
     typeCode: string,
-    portfolioType?: PortfolioType
+    portfolioType?: PortfolioType,
+    totalValue?: number
 }
 
 export interface PortfolioForm {

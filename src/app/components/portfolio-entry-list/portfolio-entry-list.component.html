@@ -9,11 +9,20 @@
 </div>
 <div class="row justify-content-center mt-2 mb-2" *ngFor="let pe of portfolioEntries">
     <button [routerLink]="['/portfolios', pe.id]" type="button"
-        class="btn btn-sm btn-light col-12 col-md-7 border border-1" title="Portfolioeintrag anzeigen">
-        <p class="mb-1 text-break"><b>{{pe.description}}</b></p>
-        <p *ngIf="pe.latestValue" class="mb-1 text-break">{{pe.latestValue.value |
-            currency:'EUR':true:'1.2-2':"de-DE"}}
-        </p>
-        <small>({{pe.latestValue?.time}})</small>
+        class="btn btn-sm btn-light col-lg-10 col-12 col-sm-12 col-md-12 border border-1"
+        title="Portfolioeintrag anzeigen">
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-5 text-start">
+                <span class="mb-1 text-break"><b>{{pe.description}}</b></span>
+            </div>
+            <div class="text-end col-md-5 col-lg-4 col-sm-5">
+                <span *ngIf="pe.latestValue" class="text-break">{{pe.latestValue.value |
+                    currency:'EUR':true:'1.2-2':"de-DE"}}
+                </span>
+            </div>
+            <div class="text-end col-md-4 col-lg-3 col-sm-4">
+                <span class="ms-2">{{pe.latestValue?.time | date:'dd.MM.Y, HH.mm'}} Uhr</span>
+            </div>
+        </div>
     </button>
 </div>

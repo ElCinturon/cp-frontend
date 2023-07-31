@@ -2,21 +2,22 @@
     {{error?.msg}}
 </div>
 <div class="row" *ngIf="portfolioSet">
-    <div class="col-md-2 order-first">
-        <h2>{{portfolio?.description}}</h2>
-        <h5>{{portfolio?.portfolioType?.description}}</h5>
-        <p>Erstellt {{creationDateTime}}</p>
-        <p>Gesamtwert XX €</p>
+    <div class="col-md-12 col-lg-2 order-first pe-0 ps-0">
+        <div class="portfolio">
+            <h2>{{portfolio?.description}}</h2>
+            <h5 class="text-break">{{portfolio?.portfolioType?.description}}</h5>
+            <p>Erstellt {{portfolio?.createdAt | date:'dd.MM.Y, HH.mm'}} Uhr</p>
+            <p>Gesamtwert {{portfolio?.totalValue | currency:'EUR'}}</p>
+        </div>
     </div>
-    <div class="col-md-8 col-12 order-md-2 order-last">
+    <div class="pt-2 col-lg-8 col-md-12 order-md-3 order-lg-2 order-last">
         <div *ngIf="addEntryActive" class="mb-5">
             <add-portfolio-entry (portfolioEntryAdded)="portfolioEntryList.updatePortfolioEntries()"
                 [portfolioId]="portfolioId" (closeComponent)="activateAddEntry()"></add-portfolio-entry>
         </div>
-
         <portfolio-entry-list #portfolioEntryList [portfolioId]="portfolioId"></portfolio-entry-list>
     </div>
-    <div class="col-md-2 text-end order-md-3 order-2 pe-0">
+    <div class="col-md-12 col-lg-2 text-end order-md-2 order-lg-3 order-2 pe-0">
         <button (click)="activateAddEntry()" class="btn btn-sm btn-success">Eintrag hinzufügen</button>
     </div>
 </div>

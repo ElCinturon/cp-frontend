@@ -1,9 +1,9 @@
 <div class="row justify-content-center">
-    <div class="col-7 border border-dark p-2">
+    <div class="col-12 col-md-12 col-lg-7 border border-dark p-2">
         <h6>Neuen Eintrag hinzufügen</h6>
         <form [formGroup]="addPortfolioEntryForm" (ngSubmit)="addPortfolioEntry()">
             <div class="mb-3 form-floating">
-                <input required id="description" maxlength="124" name="description" type="text" class="form-control"
+                <input required id="description" maxlength="32" name="description" type="text" class="form-control"
                     formControlName="description" placeholder="name@example.com">
                 <label for="description" class="form-label">Bezeichnung</label>
                 <invalid-input-msg
