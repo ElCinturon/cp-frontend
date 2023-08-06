@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { AuthenticationService } from '../authentication.service';
-import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { UserInfoService } from '../services/userInfo.service';
+import { Component } from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
+import { AuthenticationService } from "../authentication.service";
+import { Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
+import { UserInfoService } from "../services/userInfo.service";
 
 @Component({
-	selector: 'app-login',
-	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.css']
+	selector: "app-login",
+	templateUrl: "./login.component.html",
+	styleUrls: ["./login.component.css"]
 })
 export class LoginComponent {
 	error?: any = {};
-	constructor(public authService: AuthenticationService, private router: Router, private cookieService: CookieService, private userInfoService: UserInfoService) { };
+	constructor(public authService: AuthenticationService, private router: Router, private cookieService: CookieService, private userInfoService: UserInfoService) { }
 
 	loginForm = new FormGroup({
 		userIdentifier: new FormControl(""),
@@ -26,6 +26,7 @@ export class LoginComponent {
 	 */
 	loginUser() {
 		if (this.loginForm.valid) {
+			this.error = {};
 			// XSRF-Token holen
 			this.authService.authenticateApp().subscribe({
 				next: (response) => {
@@ -35,7 +36,7 @@ export class LoginComponent {
 							next: (response) => {
 								// Wenn Login erfolgreich, auf home Seite weiterleiten
 								if (response.body?.success) {
-									let username = response.body.data?.username;
+									const username = response.body.data?.username;
 									// Setzen des Usernames publishen 
 									this.userInfoService.send(username);
 									// Cookie mit Information setzen (Evtl. in service auslagern)

@@ -23,11 +23,14 @@ export class PortfolioComponent implements OnInit {
   get creationDateTime() { return this.portfolio?.createdAt ? formatDbDateTime(this.portfolio?.createdAt) : "" }
 
   ngOnInit() {
-    // übergebene Id auslesen
+    // übergebene Id auslesen und Portfolio abrufen
     this.portfolioId = Number(this.route.snapshot.paramMap.get("id"));
+    this.getPortfolio();
+  }
 
+  getPortfolio() {
     // Portfolio anhand von Id abrufen
-    this.portfolioService.getPortfolio(this.portfolioId).subscribe({
+    this.portfolioService.getPortfolio(this.portfolioId!).subscribe({
       next: (response) => {
         if (!response?.success) {
           this.error = response?.error;
@@ -41,7 +44,6 @@ export class PortfolioComponent implements OnInit {
         console.error(`Bei Abruf des Portfolios mit Id ${this.portfolioId} ist ein Fehler aufgetreten`, error);
       }
     })
-
   }
 
   /**
