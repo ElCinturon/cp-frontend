@@ -19,6 +19,7 @@ import { PortfolioListComponent } from "./components/portfolioList/portfolio-lis
 import { PortfolioComponent } from "./components/portfolio/portfolio.component";
 import { AddPortfolioEntryComponent } from "./components/add-portfolio-entry/add-portfolio-entry.component";
 import { PortfolioEntryListComponent } from "./components/portfolio-entry-list/portfolio-entry-list.component";
+import { ValueModalComponent } from "./components/value-modal/value-modal.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PortfolioEntryListComponent } from "./components/portfolio-entry-list/p
     PortfolioListComponent,
     PortfolioComponent,
     AddPortfolioEntryComponent,
-    PortfolioEntryListComponent
+    PortfolioEntryListComponent,
+    ValueModalComponent
   ],
   imports: [
     BrowserModule,

@@ -33,7 +33,7 @@ export class PortfolioService {
   }
 
   // Holt bestimmtes Portfolio des Users anhand von id
-  public getPortfolio(id: Number): Observable<AppResultGeneric<Portfolio>> {
+  public getPortfolio(id: number): Observable<AppResultGeneric<Portfolio>> {
     return this.http.get<AppResultGeneric<Portfolio>>(this.basePortfolioUrl + `/${id}`);
   }
 
@@ -45,6 +45,11 @@ export class PortfolioService {
   // Ruft alle Portfolioentries zu einem Portfolio ab
   public getPortfolioEntries(portfolioId: number): Observable<PortfolioEntry[]> {
     return this.http.get<PortfolioEntry[]>(this.basePortfolioUrl + `/${portfolioId}/entries`);
+  }
+
+  // Ruft einen Portfolio Entry mit allen Values ab
+  public getPortfolioEntry(portfolioId: number, entryId: number): Observable<PortfolioEntry> {
+    return this.http.get<PortfolioEntry>(this.basePortfolioUrl + `/${portfolioId}/entries/${entryId}`);
   }
 
 }

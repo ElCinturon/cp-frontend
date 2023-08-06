@@ -14,6 +14,8 @@ export class PortfolioEntryListComponent implements OnInit {
   @Input() portfolioId: number | null = null;
   portfolioEntries: PortfolioEntry[] = [];
   portfolioEntriesSet = false;
+  entryId: number | null = null;
+  showModal = false;
   error: any = {};
 
   ngOnInit() {

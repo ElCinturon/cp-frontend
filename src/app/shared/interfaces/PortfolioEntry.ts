@@ -7,7 +7,8 @@ export interface PortfolioEntry {
     description: string,
     createdAt: string,
     portfolioId: number,
-    latestValue?: PortfolioEntryValue
+    latestValue?: PortfolioEntryValue,
+    portfolioEntryValues: PortfolioEntryValue[]
 }
 
 export interface PortfolioEntryForm {
