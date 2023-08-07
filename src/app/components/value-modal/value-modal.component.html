@@ -6,13 +6,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>{{portfolioId}}</p>
-                <p>{{entryId}}</p>
+                <div class="row">
+                    <div class="col text-end mb-2">
+                        <button (click)="addValue()" class="btn btn-sm btn-success">Hinzufügen</button>
+                    </div>
+                </div>
+                <div class="mb-2" *ngIf="addValueActive">
+                    <add-entry-value [portfolioId]="portfolioId" [portfolioEntryId]="entryId"></add-entry-value>
+                </div>
 
                 <div class="row">
-                    <div class="col">
-                        <button class="btn btn-sm btn-danger w-100" *ngFor="let value of entry.portfolioEntryValues">
-                            {{value.value | currency:'EUR'}}
+                    <div class="d-grid col-10 gap-2 mx-auto">
+                        <button class="btn btn-sm btn-light mb-1 no-hover"
+                            *ngFor="let value of entry.portfolioEntryValues">
+                            <div class="row">
+                                <div class="col">{{value.value | currency:'EUR'}}</div>
+                                <div class="col">{{value.time | date:'dd.MM.Y, HH:mm'}} Uhr</div>
+                            </div>
                         </button>
                     </div>
                 </div>

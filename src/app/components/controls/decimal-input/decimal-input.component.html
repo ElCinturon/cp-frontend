@@ -1,0 +1,5 @@
+<div class="form-floating">
+    <input (blur)="formatCurrency()" (keyup)="onkeydown($event, value.value)" lange="de" #value id="value" name="value"
+        type="number" class="form-control" placeholder="0">
+    <label for="value" class="form-label">{{label}}</label>
+</div>

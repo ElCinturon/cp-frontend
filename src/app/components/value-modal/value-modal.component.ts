@@ -14,6 +14,7 @@ export class ValueModalComponent implements OnChanges {
   @Input() portfolioId: number | null = null;
   @Input() entryId: number | null = null;
   entry: PortfolioEntry | null = null;
+  addValueActive = false;
   error = {};
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,6 +40,10 @@ export class ValueModalComponent implements OnChanges {
       })
 
     }
+  }
+
+  addValue() {
+    this.addValueActive = !this.addValueActive;
   }
 
 }

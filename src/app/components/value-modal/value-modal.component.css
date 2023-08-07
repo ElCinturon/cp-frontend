@@ -1,0 +1,4 @@
+.no-hover,
+no-hover:hover {
+    pointer-events: none;
+}

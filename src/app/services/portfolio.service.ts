@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
-import { BACKEND_API_URL } from '../constants';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { PortfolioType } from '../shared/interfaces/PortfolioType';
-import { Portfolio } from '../shared/interfaces/Portfolio';
-import { PortfolioEntry } from '../shared/interfaces/PortfolioEntry';
-import { AppResult, AppResultGeneric } from '../shared/interfaces/AppResult';
+import { Injectable } from "@angular/core";
+import { BACKEND_API_URL } from "../constants";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { PortfolioType } from "../shared/interfaces/PortfolioType";
+import { Portfolio } from "../shared/interfaces/Portfolio";
+import { PortfolioEntry } from "../shared/interfaces/PortfolioEntry";
+import { AppResult, AppResultGeneric } from "../shared/interfaces/AppResult";
+import { PortfolioEntryValue } from "../shared/interfaces/PortfolioEntryValue";
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class PortfolioService {
 
@@ -50,6 +51,11 @@ export class PortfolioService {
   // Ruft einen Portfolio Entry mit allen Values ab
   public getPortfolioEntry(portfolioId: number, entryId: number): Observable<PortfolioEntry> {
     return this.http.get<PortfolioEntry>(this.basePortfolioUrl + `/${portfolioId}/entries/${entryId}`);
+  }
+
+  // Legt einen neuen Value zu einem Entry an
+  public setPortfolioEntryValue(portfolioId: number, entryId: number, entryValue: PortfolioEntryValue): Observable<AppResult> {
+    return this.http.post<AppResult>(this.basePortfolioUrl + `/${portfolioId}/entries/${entryId}`, entryValue);
   }
 
 }
