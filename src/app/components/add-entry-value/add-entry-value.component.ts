@@ -20,20 +20,15 @@ export class AddEntryValueComponent {
   successMsg = "";
 
   addValueForm = new FormGroup<PortfolioEntryValueForm>({
-    value: new FormControl(0, { nonNullable: true }),
+    value: new FormControl("", { nonNullable: true }),
     time: new FormControl(todayAsString(), { nonNullable: true })
   });
 
   get value() { return this.addValueForm.get("value"); }
   get time() { return this.addValueForm.get("time"); }
 
-
   addValue() {
-    console.log("pid", this.portfolioId);
-    console.log("eid", this.portfolioEntryId);
-    console.log("val", this.value?.value);
     if (this.portfolioId && this.portfolioEntryId) {
-
       const valueForm: any = this.addValueForm.getRawValue();
       const value: PortfolioEntryValue = { time: valueForm.time, value: Number(valueForm.value.replaceAll(".", "").replace(",", ".")) };
 

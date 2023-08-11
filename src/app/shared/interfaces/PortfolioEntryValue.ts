@@ -7,6 +7,6 @@ export interface PortfolioEntryValue {
 }
 
 export interface PortfolioEntryValueForm {
-    value: FormControl<number>,
+    value: FormControl<string>,
     time: FormControl<string>
 }

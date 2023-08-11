@@ -1,4 +1,5 @@
-import { Component, Input } from "@angular/core";
+import { formatNumber } from "@angular/common";
+import { Component, Input, Renderer2, ElementRef, ViewChild } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
@@ -15,37 +16,44 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/f
 })
 export class DecimalInputComponent implements ControlValueAccessor {
 
+  constructor(private renderer: Renderer2) { }
+
+  // Labelbezeichnung des Inputs
   @Input() label = "";
+  // Hält immer den aktuellen Wert des Inputs
   value = "";
+  // Hält immer den vorherigen Wert nach Änderung
+  previousValue = "";
+  // Zeigt an, ob gerade ein Key gedrückt gehalten wird
+  keyDowned = false;
+
   disabled = false;
   onTouched = () => null;
   formControl: FormControl = new FormControl<number>(0);
-  keyDowned = false;
-
-  onChange = (val: number) => null;
+  onChange = (val: string) => null;
   touched = false;
 
+  // Hält das DOM des Inputfeldes
+  @ViewChild("value", { static: false }) domInput: ElementRef | undefined;
 
   // Wandelt eingegebenen value in Format 10.000,00 um
   formatCurrency() {
-    console.log("blur");
     if (this.value) {
       // evtl. Punkte entfernen und Kommas in Punkte umwandeln
       let formattedValue: string | number = Number(this.value.replaceAll(".", "").replaceAll(",", "."));
 
       // Nummer formatieren
-      formattedValue = new Intl.NumberFormat("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(formattedValue).toString();
+      formattedValue = formatNumber(formattedValue, "de", "1.2-2");
+      this.renderer.setProperty(this.domInput?.nativeElement, "value", formattedValue);
 
       this.value = formattedValue;
+      this.onChange(this.value);
     }
   }
 
   // Verhindert, dass Key gedrückt gehalten werden kann
-  onkeydown(e: KeyboardEvent, value: any) {
-    console.log("val", JSON.stringify(value));
+  keydown(e: KeyboardEvent) {
     const keyPressed = e.key;
-    this.value = value;
-    this.onChange(Number(this.value));
     if (this.keyDowned && keyPressed !== "Delete" && keyPressed !== "Backspace") {
       e.preventDefault();
     } else {
@@ -53,43 +61,44 @@ export class DecimalInputComponent implements ControlValueAccessor {
     }
   }
 
-  checkCurrencyInput(event: KeyboardEvent) {
+  keyup(event: KeyboardEvent, value: any) {
     this.keyDowned = false;
     const keyPressed = event.key;
-    console.log("v", this.value);
+
     if (!["ArrowLeft", "ArrowRight", "Tab"].includes(keyPressed)) {
       // Wird Format erfüllt? (10000; 10.000; 10.000,00)
-      const validInput = /^\d+((\.(?!\.|,)|\d*)*(,(?!\.)\d{0,2})?)$/g.test(this.value);
+      const validInput = /^\d+((\.(?!\.|,)|\d*)*(,(?!\.)\d{0,2})?)$/g.test(value);
 
       // Reine Anzahl von Zahlen vor Komma ermitteln
-      const valueLength = this.value.split(",")[0].replaceAll(/\D/g, "").length;
+      const valueLength = value.split(",")[0].replaceAll(/\D/g, "").length;
 
       // Wenn Format nicht erfüllt wird, vorherigen Wert setzen, außer wenn inhalt gelöscht wird
       if ((!validInput && keyPressed !== "Delete" && keyPressed !== "Backspace") || valueLength > 10) {
         // Vorherigen Wert setzen
-        this.value = (event.target as HTMLInputElement).getAttribute("previousValue")!;
-        this.onChange(Number(this.value));
+        this.value = this.previousValue;
+        // Änderung in Input wiederspiegeln
+        this.renderer.setProperty(this.domInput?.nativeElement, "value", this.previousValue);
+        this.onChange(this.value);
         event.preventDefault();
       } else {
-        // Vorherigen Wert im Domelement als Attribute hinterlegen
-        (event.target as HTMLInputElement).setAttribute("previousValue", this.value);
-        console.log("value this", this.value);
-        this.onChange(Number(this.value));
+        this.value = value;
+        // Vorherigen Wert speichern
+        this.previousValue = value;
+        // Änderung in Parent pushen
+        this.onChange(this.value);
       }
     }
   }
 
-  // checkInput(event: any) {
-  //   console.log("input", event);
-  //   //this.value = 2222;
-  //   this.onChange(this.value);
-  //   this.formControl.setValue(3333, { emitEvent: false });
-  // }
-
+  // Setzt Wert in den lokalen Variablen, wenn aus Parent Value geändert wird
   writeValue(value: string) {
-    console.log("value", value);
-    this.formControl.setValue(value, { emitEvent: false });
+    this.previousValue = this.value;
+    this.value = value;
+    if (value) {
+      this.renderer.setProperty(this.domInput?.nativeElement, "value", value);
+    }
   }
+
 
   registerOnChange(onChange: any) {
     this.onChange = onChange;
