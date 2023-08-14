@@ -17,6 +17,7 @@ export class AddEntryValueComponent {
   @Input() portfolioId: number | null = null;
   @Input() portfolioEntryId: number | null = null;
   @Output() closeComponent = new EventEmitter<boolean>();
+  @Output() valueAdded = new EventEmitter<boolean>();
   successMsg = "";
 
   addValueForm = new FormGroup<PortfolioEntryValueForm>({
@@ -28,6 +29,8 @@ export class AddEntryValueComponent {
   get time() { return this.addValueForm.get("time"); }
 
   addValue() {
+    this.successMsg = "";
+    this.error = {};
     if (this.portfolioId && this.portfolioEntryId) {
       const valueForm: any = this.addValueForm.getRawValue();
       const value: PortfolioEntryValue = { time: valueForm.time, value: Number(valueForm.value.replaceAll(".", "").replace(",", ".")) };
@@ -35,8 +38,18 @@ export class AddEntryValueComponent {
       this.portfolioService
         .setPortfolioEntryValue(this.portfolioId, this.portfolioEntryId, value)
         .subscribe({
-          next: (response) => { console.log("response", response); },
-          error: (error) => { console.error("error", error); }
+          next: (response) => {
+            if (!response.success) {
+              this.error = response.error;
+            } else {
+              this.valueAdded.emit(true);
+              this.successMsg = "Der Wert wurde erfolgreich hinzugefügt!";
+            }
+          },
+          error: (error) => {
+            this.error.msg = "Beim Hinzufügen des Portfoliowertes ist ein Fehler aufgetreten!";
+            console.error("error", error);
+          }
         })
     }
 

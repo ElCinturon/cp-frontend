@@ -55,7 +55,13 @@ export class PortfolioService {
 
   // Legt einen neuen Value zu einem Entry an
   public setPortfolioEntryValue(portfolioId: number, entryId: number, entryValue: PortfolioEntryValue): Observable<AppResult> {
-    return this.http.post<AppResult>(this.basePortfolioUrl + `/${portfolioId}/entries/${entryId}`, entryValue);
+    return this.http.post<AppResult>(this.basePortfolioUrl + `/${portfolioId}/entries/${entryId}/values`, entryValue);
   }
+
+  // Löscht Value zu einem Entry
+  public deletePortfolioEntryValue(portfolioId: number, entryId: number, id: number): Observable<AppResult> {
+    return this.http.delete<AppResult>(this.basePortfolioUrl + `/${portfolioId}/entries/${entryId}/values/${id}`);
+  }
+
 
 }

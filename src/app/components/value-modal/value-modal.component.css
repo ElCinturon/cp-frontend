@@ -1,4 +1,10 @@
 .no-hover,
-no-hover:hover {
+.no-hover:hover,
+.no-hover:active {
     pointer-events: none;
+    background-color: #f8f9fa;
+}
+
+.pointer {
+    pointer-events: auto;
 }

@@ -1,5 +1,5 @@
 <div id="valueModal" class="modal fade" tabindex="-1" data-bs-backdrop="static">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered">
         <div *ngIf="entry" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-break">{{entry.description}}</h5>
@@ -12,24 +12,29 @@
                     </div>
                 </div>
                 <div class="mb-2" *ngIf="addValueActive">
-                    <add-entry-value [portfolioId]="portfolioId" [portfolioEntryId]="entryId"></add-entry-value>
+                    <add-entry-value (closeComponent)="addValue()" (valueAdded)="getEntry()" [portfolioId]="portfolioId"
+                        [portfolioEntryId]="entryId"></add-entry-value>
                 </div>
-
                 <div class="row">
                     <div class="d-grid col-10 gap-2 mx-auto">
-                        <button class="btn btn-sm btn-light mb-1 no-hover"
+                        <div *ngIf="error.msg" class="alert alert-danger pt-1 pb-1 text-center">
+                            {{error.msg}}
+                        </div>
+                        <button type="button" class="btn btn-sm btn-light mb-1 no-hover border border-1"
                             *ngFor="let value of entry.portfolioEntryValues">
                             <div class="row">
                                 <div class="col">{{value.value | currency:'EUR'}}</div>
-                                <div class="col">{{value.time | date:'dd.MM.Y, HH:mm'}} Uhr</div>
+                                <div class="col">{{value.time | date:'dd.MM.Y, HH:mm:ss'}} Uhr</div>
+                                <div class="col text-end"><button title="Wert entfernen"
+                                        class="btn btn-sm pointer pt-0 pb-0" (click)="deleteValue(value.id!)"><i
+                                            class="fa-solid fa-x text-danger"></i></button></div>
                             </div>
                         </button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
             </div>
         </div>
     </div>

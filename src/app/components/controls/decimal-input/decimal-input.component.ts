@@ -38,6 +38,7 @@ export class DecimalInputComponent implements ControlValueAccessor {
 
   // Wandelt eingegebenen value in Format 10.000,00 um
   formatCurrency() {
+    this.markAsTouched();
     if (this.value) {
       // evtl. Punkte entfernen und Kommas in Punkte umwandeln
       let formattedValue: string | number = Number(this.value.replaceAll(".", "").replaceAll(",", "."));
