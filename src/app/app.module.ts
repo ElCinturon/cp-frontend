@@ -4,6 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { CookieService } from "ngx-cookie-service";
+import { ToastService, AngularToastifyModule } from "angular-toastify";
 
 
 import { AppComponent } from "./app.component";
@@ -46,9 +47,10 @@ import { DecimalInputComponent } from "./components/controls/decimal-input/decim
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularToastifyModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
