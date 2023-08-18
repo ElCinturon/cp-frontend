@@ -43,6 +43,11 @@ export class PortfolioService {
     return this.http.post<AppResult>(this.basePortfolioUrl + "/entry", portfolioEntry);
   }
 
+  // Löscht Portfolioentry
+  public deletePortfolioEntry(portfolioId: number, portfolioEntryId: number): Observable<AppResult> {
+    return this.http.delete<AppResult>(this.basePortfolioUrl + `/${portfolioId}/entries/${portfolioEntryId}`);
+  }
+
   // Ruft alle Portfolioentries zu einem Portfolio ab
   public getPortfolioEntries(portfolioId: number): Observable<PortfolioEntry[]> {
     return this.http.get<PortfolioEntry[]>(this.basePortfolioUrl + `/${portfolioId}/entries`);

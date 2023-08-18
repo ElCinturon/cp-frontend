@@ -1,6 +1,6 @@
 <div class="row justify-content-center m-2" *ngIf="portfolioEntries.length === 0 && portfolioEntriesSet">
-    <div class="col-4">
-        <div class="alert alert-warning"><b>Es wurden noch keine Portfolioeinträge angelegt!</b>
+    <div class="col">
+        <div class="alert alert-warning text-center pt-0 pb-0"><b>Es wurden noch keine Portfolioeinträge angelegt!</b>
         </div>
     </div>
 </div>
@@ -8,24 +8,33 @@
     {{error?.msg}}
 </div>
 <div class="row justify-content-center mt-2 mb-2" *ngFor="let pe of portfolioEntries">
-    <button type="button" (click)="entryId = pe.id!" data-bs-toggle="modal" data-bs-target="#valueModal"
-        class=" btn btn-sm btn-light col-lg-10 col-12 col-sm-12 col-md-12 border border-1"
+    <button type="button" (click)="clickEntry($event, pe.id!)"
+        class=" btn btn-sm btn-light col-lg-10 col-12 col-sm-12 col-md-12 border border-1 ps-3 pe-3"
         title="Portfolioeintrag anzeigen">
         <div class="row">
-            <div class="col-sm-3 col-md-3 col-lg-5 text-start">
+            <div class="col-sm-3 col-md-3 col-lg-4 text-start">
                 <span class="mb-1 text-break"><b>{{pe.description}}</b></span>
             </div>
-            <div class="text-end col-md-5 col-lg-4 col-sm-5">
+            <div class="text-end col-md-5 col-lg-3 col-sm-4">
                 <span *ngIf="pe.latestValue" class="text-break">{{pe.latestValue.value |
                     currency:'EUR':true:'1.2-2':"de-DE"}}
                 </span>
+                <span *ngIf="!pe.latestValue" class="text-break">{{ 0 |
+                    currency:'EUR':true:'1.2-2':"de-DE"}}
+                </span>
             </div>
-            <div class="text-end col-md-4 col-lg-3 col-sm-4">
-                <span class="ms-2">{{pe.latestValue?.time | date:'dd.MM.Y, HH:mm'}} Uhr</span>
+            <div class="text-end col-md-3 col-lg-4 col-sm-4">
+                <span *ngIf="pe.latestValue" class="ms-2">{{pe.latestValue.time | date:'dd.MM.Y, HH:mm'}} Uhr</span>
+            </div>
+            <div class="col-1 text-end">
+                <button id=`deleteButton${pe.id}` title="Eintrag entfernen" class="btn btn-sm pointer pt-0 pb-0"
+                    (click)="deletePortfolioEntry(pe.id!)"><i class="fa-solid fa-x text-danger">
+                    </i></button>
             </div>
         </div>
     </button>
 </div>
 
 <!-- Modal für Eintrag details -->
-<value-modal [portfolioId]="portfolioId" [entryId]="entryId!"></value-modal>
+<value-modal [portfolioId]="portfolioId" [entryId]="entryId!"
+    (valueChanged)="updatePortfolioEntries(); emitChange();"></value-modal>

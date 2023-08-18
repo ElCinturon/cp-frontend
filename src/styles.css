@@ -32,3 +32,14 @@ select.ng-invalid.required.ng-touched {
 	/* sorgt für Beachtung von linebreaks per /n */
 	white-space: pre;
 }
+
+
+/* Inhalt von Toasts wird nicht richtig positioniert evtl. wg. Bootstrap */
+.toast-body {
+	display: flex !important;
+	align-items: center;
+}
+
+.toast-container span {
+	font-size: initial;
+}

@@ -12,8 +12,15 @@
                     </div>
                 </div>
                 <div class="mb-2" *ngIf="addValueActive">
-                    <add-entry-value (closeComponent)="addValue()" (valueAdded)="getEntry()" [portfolioId]="portfolioId"
+                    <add-entry-value (closeComponent)="addValue()"
+                        (valueAdded)="getEntry(); this.valueChanged.emit(true);" [portfolioId]="portfolioId"
                         [portfolioEntryId]="entryId"></add-entry-value>
+                </div>
+                <div class="row justify-content-center m-2" *ngIf="entry.portfolioEntryValues.length === 0">
+                    <div class="col">
+                        <div class="alert alert-warning text-center pb-0 pt-0"><b>Es wurden keine Werte angelegt!</b>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="d-grid col-10 gap-2 mx-auto">
@@ -34,7 +41,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                <button type="button" (click)="this.addValueActive = false" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Schließen</button>
             </div>
         </div>
     </div>

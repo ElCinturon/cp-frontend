@@ -15,7 +15,8 @@
             <add-portfolio-entry (portfolioEntryAdded)="portfolioEntryList.updatePortfolioEntries(); getPortfolio()"
                 [portfolioId]="portfolioId" (closeComponent)="activateAddEntry()"></add-portfolio-entry>
         </div>
-        <portfolio-entry-list #portfolioEntryList [portfolioId]="portfolioId"></portfolio-entry-list>
+        <portfolio-entry-list (listChanged)="getPortfolio()" #portfolioEntryList
+            [portfolioId]="portfolioId"></portfolio-entry-list>
     </div>
     <div class="col-md-12 col-lg-2 text-end order-md-2 order-lg-3 order-2 pe-0">
         <button (click)="activateAddEntry()" class="btn btn-sm btn-success">Eintrag hinzufügen</button>
