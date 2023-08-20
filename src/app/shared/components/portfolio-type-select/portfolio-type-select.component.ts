@@ -12,7 +12,7 @@ export class PortfolioTypeSelectComponent implements OnInit {
   constructor(private portfolioService: PortfolioService) { }
   portfolioTypes: PortfolioType[] = [];
   error = { typeCode: "" };
-  @Input() type!: PortfolioType | null;
+  @Input() type!: string | null;
   @Output() typeCodeChange = new EventEmitter<string>();
   selectValue = "";
 
@@ -31,7 +31,7 @@ export class PortfolioTypeSelectComponent implements OnInit {
         this.portfolioTypes = response;
 
         // Sobald Werte abgerufen wurden, den korrekten Typ setzen
-        setTimeout(() => this.selectValue = this.type!.code!, 5);
+        setTimeout(() => this.selectValue = this.type!, 5);
       }, error: (error) => {
         this.error = { ...this.error, ...{ "typeCode": "Beim Abruf der Typen ist ein Fehler aufgetreten!" } };
         console.log("error", this.error);
