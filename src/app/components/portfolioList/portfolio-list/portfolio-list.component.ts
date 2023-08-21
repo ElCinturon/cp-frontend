@@ -91,6 +91,11 @@ export class PortfolioListComponent implements OnInit {
     console.log("neue description", this.editingValues.description);
     console.log("neuer type", this.editingValues.typeCode);
     console.log("id des Portfolios", id);
+    const portfolio: Portfolio = { id: id, description: this.editingValues.description, typeCode: this.editingValues.typeCode }
+    this.portfolioService.putPortfolio(portfolio).subscribe({
+      next: (response) => console.log("resp", response),
+      error: (error) => console.log("error", error)
+    })
 
   }
 

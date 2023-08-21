@@ -28,6 +28,11 @@ export class PortfolioService {
     return this.http.post<AppResultGeneric<Portfolio>>(this.basePortfolioUrl, portfolio);
   }
 
+  // Updated Portfolio
+  public putPortfolio(portfolio: Portfolio): Observable<AppResult> {
+    return this.http.put<AppResult>(this.basePortfolioUrl + `/${portfolio.id}`, portfolio);
+  }
+
   // Löscht Portfolio
   public deletePortfolio(id: number): Observable<AppResult> {
     return this.http.delete<AppResult>(this.basePortfolioUrl + `/${id}`);
