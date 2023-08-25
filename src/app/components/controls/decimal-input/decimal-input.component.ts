@@ -1,6 +1,7 @@
 import { formatNumber } from "@angular/common";
 import { Component, Input, Renderer2, ElementRef, ViewChild } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { NumberTostringDecimal } from "src/app/shared/helper/decimal";
 
 @Component({
   selector: "decimal-input",
@@ -42,7 +43,6 @@ export class DecimalInputComponent implements ControlValueAccessor {
     if (this.value) {
       // evtl. Punkte entfernen und Kommas in Punkte umwandeln
       let formattedValue: string | number = Number(this.value.replaceAll(".", "").replaceAll(",", "."));
-
       // Nummer formatieren
       formattedValue = formatNumber(formattedValue, "de", "1.2-2");
       this.renderer.setProperty(this.domInput?.nativeElement, "value", formattedValue);
@@ -92,11 +92,15 @@ export class DecimalInputComponent implements ControlValueAccessor {
   }
 
   // Setzt Wert in den lokalen Variablen, wenn aus Parent Value geändert wird
-  writeValue(value: string) {
+  writeValue(value: number) {
+    /* Eingehender Wert wird im Number-Typ angenommen, aber Umwandlung geht von formatierten Wert aus
+       Also 5000.00 => 5000,00 damit Formatierung funktioniert */
+    const newValue = NumberTostringDecimal(value);
     this.previousValue = this.value;
-    this.value = value;
-    if (value) {
-      this.renderer.setProperty(this.domInput?.nativeElement, "value", value);
+    this.value = newValue;
+    if (newValue) {
+      // Timeout nötig wegen Bug, da viewchild vor der View ausgeführt wird und somit noch nicht verfügbar ist
+      setTimeout(() => this.formatCurrency(), this.domInput ? 0 : 5);
     }
   }
 

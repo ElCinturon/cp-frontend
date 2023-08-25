@@ -28,13 +28,54 @@
                             {{error.msg}}
                         </div>
                         <button type="button" class="btn btn-sm btn-light mb-1 no-hover border border-1"
-                            *ngFor="let value of entry.portfolioEntryValues">
+                            *ngFor="let value of entry.portfolioEntryValues; let i = index">
                             <div class="row">
-                                <div class="col">{{value.value | currency:'EUR'}}</div>
-                                <div class="col">{{value.time | date:'dd.MM.Y, HH:mm:ss'}} Uhr</div>
-                                <div class="col text-end"><button title="Wert entfernen"
+                                <div class="col-10" *ngIf="editingEntryValueId === value.id!">
+
+                                    <form [formGroup]="groups[i]" class="pointer row justify-content-center">
+                                        <div class="col-4">
+                                            <decimal-input required [label]="'Wert in €'"
+                                                formControlName="value"></decimal-input>
+                                        </div>
+                                        <div class="col-5">
+                                            <input required id="time" maxlength="124" name="time" type="datetime-local"
+                                                class="form-control form-control-sm col-4" formControlName="time"
+                                                placeholder="0">
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <div *ngIf="editingEntryValueId !== value.id!" class="col-4">{{value.value |
+                                    currency:'EUR'}}</div>
+                                <div *ngIf="editingEntryValueId !== value.id!" class="col-5">{{value.time |
+                                    date:'dd.MM.Y,
+                                    HH:mm:ss'}} Uhr</div>
+
+                                <div class="col text-end">
+                                    <button *ngIf="editingEntryValueId === value.id!" title="Änderungen speichern"
+                                        class="btn btn-sm pointer pt-0 pb-0" (click)="saveValue(i, value.id)"><i
+                                            class="fa-regular fa-floppy-disk fa-lg"></i>
+                                    </button>
+
+                                    <button *ngIf="editingEntryValueId === value.id!" title="Bearbeitung verlassen"
+                                        class="btn btn-sm pointer pt-0 pb-0" (click)="leaveEditMode(i, true)"><i
+                                            class="fa-solid fa-x text-danger"></i>
+                                    </button>
+
+                                    <button *ngIf="editingEntryValueId !== value.id!"
+                                        (click)="editingEntryValueId = value.id!" title="Wert bearbeiten"
+                                        class="btn btn-sm pointer pt-0 pb-0"><i
+                                            class="fa-solid fa-pen-to-square fa-lg"></i>
+                                    </button>
+
+                                    <button *ngIf="editingEntryValueId !== value.id!" title="Wert entfernen"
                                         class="btn btn-sm pointer pt-0 pb-0" (click)="deleteValue(value.id!)"><i
-                                            class="fa-solid fa-x text-danger"></i></button></div>
+                                            class="fa-regular fa-trash-can fa-lg"></i>
+                                    </button>
+
+
+                                </div>
                             </div>
                         </button>
                     </div>

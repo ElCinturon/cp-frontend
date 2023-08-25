@@ -78,5 +78,10 @@ export class PortfolioService {
     return this.http.delete<AppResult>(this.basePortfolioUrl + `/${portfolioId}/entries/${entryId}/values/${id}`);
   }
 
+  // Updatet Value
+  public putPortfolioEntryValue(portfolioId: number, entryId: number, id: number, entryValue: PortfolioEntryValue): Observable<AppResult> {
+    return this.http.put<AppResult>(this.basePortfolioUrl + `/${portfolioId}/entries/${entryId}/values/${id}`, entryValue);
+  }
+
 
 }
