@@ -11,7 +11,7 @@
     <button type="button" (click)="clickEntry($event, pe.id!)"
         class=" btn btn-sm btn-light col-lg-10 col-12 col-sm-12 col-md-12 border border-1 ps-3 pe-3"
         title="Portfolioeintrag anzeigen">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-sm-3 col-md-3 col-lg-4 text-start">
                 <span class="mb-1 text-break"><b>{{pe.description}}</b></span>
             </div>
@@ -28,7 +28,7 @@
             </div>
             <div class="col-1 text-end">
                 <button id="deleteButton{{pe.id}}" title="Eintrag entfernen" class="btn btn-sm pointer pt-0 pb-0"
-                    (click)="deletePortfolioEntry(pe.id!)"><i class="fa-solid fa-x text-danger">
+                    (click)="deletePortfolioEntry(pe.id!)"><i class="fa-regular fa-trash-can">
                     </i></button>
             </div>
         </div>

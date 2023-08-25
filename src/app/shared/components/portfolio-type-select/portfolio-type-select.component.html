@@ -1,5 +1,5 @@
-<select id="type" class="form-select" required aria-label="Portfoliotyp auswählen" [(ngModel)]="selectValue"
-    name="portfolioTypSelect" (ngModelChange)="change()">
+<select id="type" class="form-select form-select-sm" required aria-label="Portfoliotyp auswählen"
+    [(ngModel)]="selectValue" name="portfolioTypSelect" (ngModelChange)="change()">
     <option *ngFor="let pType of portfolioTypes" [ngValue]="pType.code">
         {{pType.description}}</option>
 </select>

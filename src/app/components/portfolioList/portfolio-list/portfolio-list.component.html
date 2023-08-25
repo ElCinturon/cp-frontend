@@ -10,22 +10,30 @@
 <div class="row justify-content-center mt-2 mb-2" *ngFor="let p of portfolios; let i = index">
     <button [disabled]="editingPortfolio && p.id !== editingPortfolio" (click)="clickPortfolio($event, p.id!)"
         type="button" class="btn btn-sm btn-light col-6 border border-1 position-relative" title="Portfolio anzeigen">
-        <button id="deleteButton{{p.id}}" title="Portfolio entfernen" (click)="deletePortfolio(p.id!)"
-            class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0"><i class="fa-solid fa-x text-danger">
+
+        <button *ngIf="editingPortfolio !== p.id" id="deleteButton{{p.id}}" title="Portfolio entfernen"
+            (click)="deletePortfolio(p.id!)" class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0"><i
+                class="fa-regular fa-trash-can fa-lg"></i></button>
+
+        <button *ngIf="editingPortfolio === p.id" id="leaveButton{{p.id}}" title="Bearbeitung verlassen"
+            (click)="editPortfolio()" class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0"><i
+                class="fa-solid fa-x text-danger fa-lg">
             </i></button>
-        <button id="editButton{{p.id}}" title="Portfolio bearbeiten" (click)="editPortfolio(p.id!, i)"
-            class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0 me-4"><i
+
+        <button *ngIf="editingPortfolio !== p.id" id="editButton{{p.id}}" title="Portfolio bearbeiten"
+            (click)="editPortfolio(p.id, i)" class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0 me-4"><i
                 class="fa-solid fa-pen-to-square fa-lg">
             </i></button>
+
         <button *ngIf="editingPortfolio === p.id" id="saveButton{{p.id}}" title="Änderungen speichern"
-            (click)="savePortfolio(p.id!)"
-            class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0 margin-wide-end"><i
+            (click)="savePortfolio(p.id!)" class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0 me-4"><i
                 class="fa-regular fa-floppy-disk fa-lg"></i></button>
+
         <div class="row justify-content-center">
             <div class="col-4">
                 <span *ngIf="editingPortfolio !== p.id" class="mb-1 text-break"><b>{{p.description}}</b></span>
                 <input required *ngIf="editingPortfolio === p.id" [(ngModel)]="editingValues.description" type="text"
-                    class="form-control-sm mb-1">
+                    class="form-control form-control-sm mb-1">
             </div>
         </div>
         <div class="row justify-content-center">
