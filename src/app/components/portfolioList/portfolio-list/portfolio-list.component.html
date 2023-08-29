@@ -1,12 +1,14 @@
-<div class="row justify-content-center m-2" *ngIf="portfolios.length === 0 && portfoliosSet">
-    <div class="col-8">
-        <div class="alert alert-warning pb-1 pt-1 text-center"><b>Es wurden noch keine Portfolios angelegt!</b>
+<div class="row justify-content-center m-2">
+    <div class="col-12 col-xxl-8">
+        <div *ngIf="portfolios.length === 0 && portfoliosSet" class="alert alert-warning pb-1 pt-1 text-center"><b>Es
+                wurden noch keine Portfolios angelegt!</b>
+        </div>
+        <div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 mt-2 text-center">
+            {{error?.msg}}
         </div>
     </div>
 </div>
-<div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 mt-2 text-center">
-    {{error?.msg}}
-</div>
+
 <div class="row justify-content-center mt-2 mb-2" *ngFor="let p of portfolios; let i = index">
     <button [disabled]="editingPortfolio && p.id !== editingPortfolio" (click)="clickPortfolio($event, p.id!)"
         type="button" class="btn btn-sm btn-light col-6 border border-1 position-relative" title="Portfolio anzeigen">

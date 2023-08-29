@@ -1,8 +1,8 @@
 <div class="d-flex row align-items-center justify-content-center full-height">
-	<div class="col-8 col-sm-3 mt-5">
-		<h1>Login</h1>
+	<div class="col col-sm-9 col-md-7 col-lg-8 col-xl-6 col-xxl-4 mt-5">
+		<h1 class="mb-3">Login</h1>
 		<form [formGroup]="loginForm" (ngSubmit)="loginUser()">
-			<div class="mb-3">
+			<div class="mb-4">
 				<label for="userIdentifier" class="form-label">E-Mail oder Nutzername</label>
 				<input required id="userIdentifier" name="userIdentifier" type="text" class="form-control"
 					formControlName="userIdentifier">

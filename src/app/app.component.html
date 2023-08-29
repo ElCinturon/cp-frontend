@@ -1,24 +1,26 @@
-<nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
+<nav class="navbar navbar-expand-sm bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center d-flex" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
             <div class="navbar-nav ">
                 <a class="nav-link" routerLinkActive="active" routerLink="../home">Home</a>
                 <a class="nav-link" routerLinkActive="active" routerLink="../portfolios" href="#">Meine Portfolios</a>
                 <a class="nav-link" routerLinkActive="active" href="#">Profil</a>
-                <a class="nav-link" routerLinkActive="active" routerLink="../login">Einloggen</a>
-                <a class="nav-link" routerLinkActive="active" routerLink="../registration">Registrieren</a>
+                <a *ngIf="!username" class="nav-link" routerLinkActive="active" routerLink="../login">Einloggen</a>
+                <a *ngIf="!username" class="nav-link" routerLinkActive="active"
+                    routerLink="../registration">Registrieren</a>
+                <a *ngIf="username" class="nav-link" routerLinkActive="active">Ausloggen</a>
             </div>
         </div>
     </div>
 </nav>
 <div *ngIf="username">Eingeloggt als {{username}}</div>
-<div class="m-5">
+<div class="m-3 m-sm-3">
     <div class="row justify-content-center">
-        <div class="col-9">
+        <div class="col-12 col-lg-8 col-xl-9 col-xxl-10">
             <lib-toastify-toast-container></lib-toastify-toast-container>
             <router-outlet></router-outlet>
         </div>

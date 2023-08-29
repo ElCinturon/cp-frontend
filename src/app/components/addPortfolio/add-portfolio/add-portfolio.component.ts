@@ -36,6 +36,7 @@ export class AddPortfolioComponent implements OnInit {
     this.portfolioService.getAllPortfolioTypes().subscribe({
       next: (response) => {
         this.portfolioTypes = response;
+        this.portfolioTypes.unshift({ description: "Portfoliotyp wählen", code: "" });
       }, error: (error) => {
         this.error = { ...this.error, ...{ "typeCode": "Beim Abruf der Typen ist ein Fehler aufgetreten!" } };
         console.log("error", this.error);
