@@ -7,15 +7,23 @@
 <div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 text-center">
     {{error?.msg}}
 </div>
-<div class="row justify-content-center mt-2 mb-2" *ngFor="let pe of portfolioEntries">
+<div class="row justify-content-center mt-2 mb-2" *ngFor="let pe of portfolioEntries; let i = index;">
     <button type="button" (click)="clickEntry($event, pe.id!)"
         class=" btn btn-sm btn-light col-lg-10 col-12 col-sm-12 col-md-12 border border-1 ps-3 pe-3"
         title="Portfolioeintrag anzeigen">
         <div class="row align-items-center">
-            <div class="col-sm-3 col-md-3 col-lg-4 text-start">
+            <div *ngIf="editingEntryId !== pe.id!" class="col-sm-3 col-md-3 col-lg-4 text-start">
                 <span class="mb-1 text-break"><b>{{pe.description}}</b></span>
             </div>
-            <div class="text-end col-md-5 col-lg-3 col-sm-4">
+
+            <div class="col-lg-4" *ngIf="editingEntryId === pe.id!">
+                <form [formGroup]="formGroups[i]" class="pointer justify-content-start">
+                    <input required id="description" maxlength="124" name="description" type="text"
+                        class="form-control form-control-sm pe-0" formControlName="description">
+                </form>
+            </div>
+
+            <div class="text-end col-md-5 col-lg-2 col-sm-4">
                 <span *ngIf="pe.latestValue" class="text-break">{{pe.latestValue.value |
                     currency:'EUR':true:'1.2-2':"de-DE"}}
                 </span>
@@ -26,9 +34,25 @@
             <div class="text-end col-md-3 col-lg-4 col-sm-4">
                 <span *ngIf="pe.latestValue" class="ms-2">{{pe.latestValue.time | date:'dd.MM.Y, HH:mm'}} Uhr</span>
             </div>
-            <div class="col-1 text-end">
-                <button id="deleteButton{{pe.id}}" title="Eintrag entfernen" class="btn btn-sm pointer pt-0 pb-0"
-                    (click)="deletePortfolioEntry(pe.id!)"><i class="fa-regular fa-trash-can">
+            <div class="col-lg-2 text-end">
+                <button *ngIf="editingEntryId === pe.id!" id="saveButton" title="Änderungen speichern"
+                    class="btn btn-sm pointer pt-0 pb-0" (click)="saveEntry(i)"><i
+                        class="fa-regular fa-floppy-disk fa-lg"></i>
+                </button>
+
+                <button *ngIf="editingEntryId === pe.id!" id="leaveButton{{pe.id}}" title="Bearbeitung verlassen"
+                    class="btn btn-sm pointer pt-0 pb-0" (click)="leaveEditMode(i, true)"><i
+                        class="fa-solid fa-x text-danger fa-lg"></i>
+                </button>
+
+                <button *ngIf="editingEntryId !== pe.id!" (click)="editingEntryId = pe.id!" title="Eintrag bearbeiten"
+                    id="editButton{{pe.id}}" class="btn btn-sm pointer pt-0 pb-0"><i
+                        class="fa-solid fa-pen-to-square fa-lg"></i>
+                </button>
+
+                <button *ngIf="editingEntryId !== pe.id!" id="deleteButton{{pe.id}}" title="Eintrag entfernen"
+                    class="btn btn-sm pointer pt-0 pb-0" (click)="deletePortfolioEntry(pe.id!)"><i
+                        class="fa-regular fa-trash-can fa-lg">
                     </i></button>
             </div>
         </div>

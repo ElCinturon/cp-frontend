@@ -21,6 +21,9 @@ export class DecimalInputComponent implements ControlValueAccessor {
 
   // Labelbezeichnung des Inputs
   @Input() label = "";
+  // Input als small anzeigen?
+  @Input() small = false;
+
   // Hält immer den aktuellen Wert des Inputs
   value = "";
   // Hält immer den vorherigen Wert nach Änderung

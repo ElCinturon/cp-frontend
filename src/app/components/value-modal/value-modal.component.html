@@ -33,11 +33,11 @@
                                 <div class="col-10" *ngIf="editingEntryValueId === value.id!">
 
                                     <form [formGroup]="groups[i]" class="pointer row justify-content-center">
-                                        <div class="col-4">
-                                            <decimal-input required [label]="'Wert in €'"
+                                        <div class="col-4 ps-0">
+                                            <decimal-input [small]="true" required
                                                 formControlName="value"></decimal-input>
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-5 ps-4">
                                             <input required id="time" maxlength="124" name="time" type="datetime-local"
                                                 class="form-control form-control-sm col-4" formControlName="time"
                                                 placeholder="0">
@@ -60,7 +60,7 @@
 
                                     <button *ngIf="editingEntryValueId === value.id!" title="Bearbeitung verlassen"
                                         class="btn btn-sm pointer pt-0 pb-0" (click)="leaveEditMode(i, true)"><i
-                                            class="fa-solid fa-x text-danger"></i>
+                                            class="fa-solid fa-x text-danger fa-lg"></i>
                                     </button>
 
                                     <button *ngIf="editingEntryValueId !== value.id!"

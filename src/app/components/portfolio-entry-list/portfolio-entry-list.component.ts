@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, } from "@angular/core";
 import { PortfolioService } from "src/app/services/portfolio.service";
-import { PortfolioEntry } from "src/app/shared/interfaces/PortfolioEntry";
+import { PortfolioEntry, PortfolioEntryForm } from "src/app/shared/interfaces/PortfolioEntry";
 import { ToastService } from "angular-toastify";
 import { ValueModalComponent } from "../value-modal/value-modal.component";
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
   selector: "portfolio-entry-list",
@@ -23,6 +24,8 @@ export class PortfolioEntryListComponent implements OnInit {
   entryId: number | null = null;
   showModal = false;
   error: any = {};
+  editingEntryId: number | null = null;
+  formGroups: FormGroup<PortfolioEntryForm>[] = [];
 
   ngOnInit() {
     this.updatePortfolioEntries();
@@ -30,10 +33,25 @@ export class PortfolioEntryListComponent implements OnInit {
 
   // Ruft die aktuellen Einträge des aktuellen Portfolios ab
   updatePortfolioEntries() {
+    this.formGroups = [];
     this.portfolioService.getPortfolioEntries(this.portfolioId!).subscribe({
       next: (response => {
         this.portfolioEntries = response;
         this.portfolioEntriesSet = true;
+
+        if (response.length > 0) {
+          for (let i = 0; i < response.length; i++) {
+            const entry = response[i];
+            this.formGroups.push(
+              new FormGroup<PortfolioEntryForm>({
+                description: new FormControl(entry.description, { nonNullable: true }),
+                value: new FormControl(entry.latestValue?.value.toString()!, { nonNullable: true }),
+                datetime: new FormControl(entry.createdAt, { nonNullable: true }),
+              })
+            );
+          }
+        }
+
       }),
       error: (error => {
         console.error("Beim Abruf der Portfolioeinträge zu Portoflio mit id " + this.portfolioId + " ist ein Fehler aufgetreten", error);
@@ -55,20 +73,46 @@ export class PortfolioEntryListComponent implements OnInit {
               // Liste aktualisieren
               this.updatePortfolioEntries();
             } else {
-              this.errorToast();
+              this.deleteErrorToast();
             }
           }),
           error: ((error) => {
             console.error(`Beim Löschen des Eintrags mit id ${id} ist ein Fehler aufgetreten`, error);
-            this.errorToast();
+            this.deleteErrorToast();
           })
         })
       }
 
   }
 
-  errorToast() {
+  saveEntry(index: number) {
+    const entryFormGroup: FormGroup<PortfolioEntryForm> = this.formGroups[index];
+
+    const newEntry: PortfolioEntry = Object.assign(this.portfolioEntries[index], entryFormGroup.getRawValue());
+
+    this.portfolioService.putPortfolioEntry(this.portfolioId!, this.portfolioEntries[index].id!, newEntry).subscribe({
+      next: (response => {
+        if (response.success) {
+          this.leaveEditMode();
+          this._toastService.success("Eintrag erfolgreich geändert!");
+          this.updatePortfolioEntries();
+        } else {
+          this.editErrorToast();
+        }
+      }),
+      error: (error) => {
+        console.error("Beim Ändern des Eintrages mit ID " + this.portfolioEntries[index].id! + " ist ein Fehler aufgetreten:", error);
+        this.editErrorToast();
+      }
+    })
+  }
+
+  deleteErrorToast() {
     this._toastService.error("Beim Löschen des Eintrags ist ein Fehler aufgetreten!");
+  }
+
+  editErrorToast() {
+    this._toastService.error("Beim Ändern des Eintrags ist ein Fehler aufgetreten!");
   }
 
   emitChange() {
@@ -79,10 +123,24 @@ export class PortfolioEntryListComponent implements OnInit {
   clickEntry(event: Event, entryId: number) {
     const target = event.target as HTMLElement;
 
-    // Wurde delete Button geklickt? Dann Modal nicht öffnen (Kann Icon sein oder wrapped DIV)
-    if (!target.id.includes("deleteButton") && !target.parentElement!.id.includes("deleteButton")) {
+    // Wurde ein anderer Button geklickt? Dann Modal nicht öffnen (Kann Icon sein oder wrapped DIV)
+    if (!this.editingEntryId && !target.id.includes("deleteButton") && !target.parentElement!.id.includes("deleteButton") &&
+      !target.id.includes("editButton") && !target.parentElement!.id.includes("editButton") &&
+      !target.id.includes("leaveButton") && !target.parentElement!.id.includes("leaveButton") &&
+      !target.id.includes("saveButton") && !target.parentElement!.id.includes("saveButton")) {
       this.entryId = entryId
       this.modalComponent.show();
+    }
+  }
+
+  leaveEditMode(index: number | null = null, reset = false) {
+    this.editingEntryId = null;
+
+    if (reset && typeof index == "number") {
+      // In dem Formgroup den ursprünglichen Wert setzen
+      this.formGroups[index].patchValue({
+        description: this.portfolioEntries[index].description
+      })
     }
   }
 
