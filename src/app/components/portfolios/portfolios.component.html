@@ -3,9 +3,11 @@
         <h4>Meine Portfolios</h4>
     </div>
 </div>
-<div *ngIf="!error" class="col-12 justify-content-end d-flex">
-    <button (click)="setActive()" type="button" class="btn btn-sm btn-success flex-grow-1 flex-md-grow-0">Erstellen <i
-            class="fa-solid fa-plus"></i></button>
+<div class="row">
+    <div *ngIf="!error" class="col-12 justify-content-end d-flex">
+        <button (click)="setActive()" type="button" class="btn btn-sm btn-success flex-grow-1 flex-md-grow-0">Erstellen
+            <i class="fa-solid fa-plus"></i></button>
+    </div>
 </div>
 <div class="mb-3 mt-3" *ngIf="addActive">
     <add-portfolio (portfolioAdded)="portfolioList.updatePortfolios()" (closeComponent)="setActive()"></add-portfolio>

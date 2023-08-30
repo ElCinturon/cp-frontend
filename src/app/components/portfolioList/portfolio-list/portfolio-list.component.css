@@ -1,3 +1,7 @@
 .margin-wide-end {
     margin-right: 55px;
 }
+
+.max-width-portfolio-btn {
+    max-width: 690px;
+}

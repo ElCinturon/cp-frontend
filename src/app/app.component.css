@@ -1,3 +1,7 @@
 .pointer {
     pointer-events: auto;
 }
+
+.max-width-main {
+    max-width: 1300px;
+}

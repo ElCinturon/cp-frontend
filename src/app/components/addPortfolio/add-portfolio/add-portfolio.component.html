@@ -1,6 +1,6 @@
-<div class="row justify-content-center">
-    <div class="col border border-dark p-2">
-        <span class="fs-6 fw-semibold">Neues Portfolio erstellen</span>
+<div class="row justify-content-center p-3">
+    <div class="col col-md-6 col-xl-5 col-xxl-4 border border-dark p-2">
+        <span class="fs-6 fw-semibold mb-2 d-inline-block">Neues Portfolio erstellen</span>
         <form [formGroup]="addPortfolioForm" (ngSubmit)="addPortfolio()">
             <div class="mb-3">
                 <input required id="description" maxlength="124" name="description" type="text"

@@ -11,7 +11,9 @@
 
 <div class="row justify-content-center mt-2 mb-2" *ngFor="let p of portfolios; let i = index">
     <button [disabled]="editingPortfolio && p.id !== editingPortfolio" (click)="clickPortfolio($event, p.id!)"
-        type="button" class="btn btn-sm btn-light col-6 border border-1 position-relative" title="Portfolio anzeigen">
+        type="button"
+        class="btn btn-sm btn-light col col-md-9 col-lg-11 col-xl-10 max-width-portfolio-btn border border-1 position-relative"
+        title="Portfolio anzeigen">
 
         <button *ngIf="editingPortfolio !== p.id" id="deleteButton{{p.id}}" title="Portfolio entfernen"
             (click)="deletePortfolio(p.id!)" class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0"><i
@@ -32,14 +34,14 @@
                 class="fa-regular fa-floppy-disk fa-lg"></i></button>
 
         <div class="row justify-content-center">
-            <div class="col-4">
+            <div class="col-9 col-md-7">
                 <span *ngIf="editingPortfolio !== p.id" class="mb-1 text-break"><b>{{p.description}}</b></span>
                 <input required *ngIf="editingPortfolio === p.id" [(ngModel)]="editingValues.description" type="text"
                     class="form-control form-control-sm mb-1">
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-4">
+            <div class="col-9 col-md-7">
                 <span *ngIf="editingPortfolio !== p.id" class="mb-1 text-break">{{p.portfolioType?.description}}</span>
                 <portfolio-type-select [type]="editingValues.typeCode" *ngIf="editingPortfolio === p.id"
                     (typeCodeChange)="editingValues.typeCode = $event">
