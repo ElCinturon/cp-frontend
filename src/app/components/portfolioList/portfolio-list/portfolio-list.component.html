@@ -1,4 +1,4 @@
-<div class="row justify-content-center m-2">
+<div class="row justify-content-center m-2" *ngIf="(portfolios.length === 0 && portfoliosSet) || error?.msg">
     <div class="col-12 col-xxl-8">
         <div *ngIf="portfolios.length === 0 && portfoliosSet" class="alert alert-warning pb-1 pt-1 text-center"><b>Es
                 wurden noch keine Portfolios angelegt!</b>
@@ -15,39 +15,43 @@
         class="btn btn-sm btn-light col col-md-9 col-lg-11 col-xl-10 max-width-portfolio-btn border border-1 position-relative"
         title="Portfolio anzeigen">
 
-        <button *ngIf="editingPortfolio !== p.id" id="deleteButton{{p.id}}" title="Portfolio entfernen"
-            (click)="deletePortfolio(p.id!)" class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0"><i
-                class="fa-regular fa-trash-can fa-lg"></i></button>
-
-        <button *ngIf="editingPortfolio === p.id" id="leaveButton{{p.id}}" title="Bearbeitung verlassen"
-            (click)="editPortfolio()" class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0"><i
-                class="fa-solid fa-x text-danger fa-lg">
-            </i></button>
-
-        <button *ngIf="editingPortfolio !== p.id" id="editButton{{p.id}}" title="Portfolio bearbeiten"
-            (click)="editPortfolio(p.id, i)" class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0 me-4"><i
-                class="fa-solid fa-pen-to-square fa-lg">
-            </i></button>
-
-        <button *ngIf="editingPortfolio === p.id" id="saveButton{{p.id}}" title="Änderungen speichern"
-            (click)="savePortfolio(p.id!)" class="btn btn-sm pointer pt-0 pb-0 position-absolute end-0 me-4"><i
-                class="fa-regular fa-floppy-disk fa-lg"></i></button>
-
-        <div class="row justify-content-center">
-            <div class="col-9 col-md-7">
+        <div class="row">
+            <div class="col-2 col-md-3"></div>
+            <div class="col-8 col-md-6 justify-content-center d-flex">
                 <span *ngIf="editingPortfolio !== p.id" class="mb-1 text-break"><b>{{p.description}}</b></span>
                 <input required *ngIf="editingPortfolio === p.id" [(ngModel)]="editingValues.description" type="text"
                     class="form-control form-control-sm mb-1">
             </div>
+
+            <div class="col-2 col-md-3 justify-content-end d-flex align-items-start">
+                <button *ngIf="editingPortfolio !== p.id" id="editButton{{p.id}}" title="Portfolio bearbeiten"
+                    (click)="editPortfolio(p.id, i)" class="btn btn-sm pointer p-0 ps-1 pe-2"><i
+                        class="fa-solid fa-pen-to-square fa-lg">
+                    </i></button>
+                <button *ngIf="editingPortfolio !== p.id" id="deleteButton{{p.id}}" title="Portfolio entfernen"
+                    (click)="deletePortfolio(p.id!)" class="btn btn-sm pointer p-0"><i
+                        class="fa-regular fa-trash-can fa-lg"></i></button>
+
+
+                <button *ngIf="editingPortfolio === p.id" id="saveButton{{p.id}}" title="Änderungen speichern"
+                    (click)="savePortfolio(p.id!)" class="btn btn-sm pointer p-0 ps-1 pe-2"><i
+                        class="fa-regular fa-floppy-disk fa-lg"></i></button>
+                <button *ngIf="editingPortfolio === p.id" id="leaveButton{{p.id}}" title="Bearbeitung verlassen"
+                    (click)="editPortfolio()" class="btn btn-sm pointer p-0"><i class="fa-solid fa-x text-danger fa-lg">
+                    </i></button>
+
+            </div>
         </div>
+
         <div class="row justify-content-center">
-            <div class="col-9 col-md-7">
+            <div class="col-8 col-md-6">
                 <span *ngIf="editingPortfolio !== p.id" class="mb-1 text-break">{{p.portfolioType?.description}}</span>
                 <portfolio-type-select [type]="editingValues.typeCode" *ngIf="editingPortfolio === p.id"
                     (typeCodeChange)="editingValues.typeCode = $event">
                 </portfolio-type-select>
             </div>
         </div>
+
 
     </button>
 </div>
