@@ -2,23 +2,25 @@
     {{error?.msg}}
 </div>
 <div class="row" *ngIf="portfolioSet">
-    <div class="col-md-12 col-lg-2 order-first pe-0 ps-0">
-        <div class="portfolio">
-            <h2>{{portfolio?.description}}</h2>
-            <h5 class="text-break">{{portfolio?.portfolioType?.description}}</h5>
-            <p>Erstellt {{portfolio?.createdAt | date:'dd.MM.Y, HH.mm'}} Uhr</p>
-            <p>Gesamtwert {{portfolio?.totalValue | currency:'EUR'}}</p>
+    <div class="col-12 col-md-6 col-xl-2 order-first pe-0 ps-0 pe-md-2 mt-xl-0">
+        <div class="portfolio p-1">
+            <span class="fw-bold text-break">{{portfolio?.description}}</span>
+            <p class="text-break fw-semibold mt-0 mb-2">{{portfolio?.portfolioType?.description}}</p>
+            <p class="mb-1">Erstellt {{portfolio?.createdAt | date:'dd.MM.Y, HH:mm'}} Uhr</p>
+            <p class="mb-0">Gesamtwert {{portfolio?.totalValue | currency:'EUR'}}</p>
         </div>
     </div>
-    <div class="pt-2 col-lg-8 col-md-12 order-md-3 order-lg-2 order-last">
-        <div *ngIf="addEntryActive" class="mb-5">
+    <div class="pt-2 col-xl-8 col-md-12 order-md-3 order-xl-2 pt-xl-0 order-last">
+        <div *ngIf="addEntryActive" class="mb-2">
             <add-portfolio-entry (portfolioEntryAdded)="portfolioEntryList.updatePortfolioEntries(); getPortfolio()"
                 [portfolioId]="portfolioId" (closeComponent)="activateAddEntry()"></add-portfolio-entry>
         </div>
         <portfolio-entry-list (listChanged)="getPortfolio()" #portfolioEntryList
             [portfolioId]="portfolioId"></portfolio-entry-list>
     </div>
-    <div class="col-md-12 col-lg-2 text-end order-md-2 order-lg-3 order-2 pe-0">
-        <button (click)="activateAddEntry()" class="btn btn-sm btn-success">Eintrag hinzufügen</button>
+    <div
+        class="col-12 col-md-6 col-xl-2 justify-content-md-end align-items-start justify-content-xl-start order-md-2 order-xl-3 order-2 ps-xl-2 pe-0 ps-0 mt-2 mt-md-0 d-flex">
+        <button (click)=" activateAddEntry()" class="btn btn-sm btn-success flex-grow-1 flex-md-grow-0">Eintrag
+            hinzufügen</button>
     </div>
 </div>

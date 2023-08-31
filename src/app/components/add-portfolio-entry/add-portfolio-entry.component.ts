@@ -24,7 +24,7 @@ export class AddPortfolioEntryComponent {
   addPortfolioEntryForm = new FormGroup<PortfolioEntryForm>({
     description: new FormControl("", { nonNullable: true }),
     value: new FormControl("", { nonNullable: true }),
-    datetime: new FormControl(this.todayAsString(), { nonNullable: true })
+    datetime: new FormControl("", { nonNullable: true })
   });
 
   get description() { return this.addPortfolioEntryForm.get("description"); }

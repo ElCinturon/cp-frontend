@@ -1,6 +1,6 @@
 <div [class.form-floating]="label">
     <input (blur)="formatCurrency()" (keyup)="keyup($event, value.value)" (keydown)="keydown($event)" lange="de" #value
-        id="value" name="value" type="string" [class.form-control-sm]="small" class="form-control" placeholder="0"
-        value="">
+        id="value" name="value" type="string" [class.form-control-sm]="small" class="form-control"
+        placeholder="{{placeholder}}" value="">
     <label *ngIf="label" for="value" class="form-label">{{label}}</label>
 </div>

@@ -7,34 +7,18 @@
 <div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 text-center">
     {{error?.msg}}
 </div>
-<div class="row justify-content-center mt-2 mb-2" *ngFor="let pe of portfolioEntries; let i = index;">
+<div class="row justify-content-center mt-2 mb-2 mt-lg-0" *ngFor="let pe of portfolioEntries; let i = index;">
     <button type="button" (click)="clickEntry($event, pe.id!)"
-        class=" btn btn-sm btn-light col-lg-10 col-12 col-sm-12 col-md-12 border border-1 ps-3 pe-3"
+        class=" btn btn-sm btn-light col-12 col-sm-12 col-md-12 border border-1 ps-3 pe-3"
         title="Portfolioeintrag anzeigen">
-        <div class="row align-items-center">
-            <div *ngIf="editingEntryId !== pe.id!" class="col-sm-3 col-md-3 col-lg-4 text-start">
+        <div class="row">
+
+            <div *ngIf="editingEntryId !== pe.id!"
+                class="col-8 col-md-4 offset-2 offset-md-0 justify-content-center col-md-3 text-md-start">
                 <span class="mb-1 text-break"><b>{{pe.description}}</b></span>
             </div>
 
-            <div class="col-lg-4" *ngIf="editingEntryId === pe.id!">
-                <form [formGroup]="formGroups[i]" class="pointer justify-content-start">
-                    <input required id="description" maxlength="124" name="description" type="text"
-                        class="form-control form-control-sm pe-0" formControlName="description">
-                </form>
-            </div>
-
-            <div class="text-end col-md-5 col-lg-2 col-sm-4">
-                <span *ngIf="pe.latestValue" class="text-break">{{pe.latestValue.value |
-                    currency:'EUR':true:'1.2-2':"de-DE"}}
-                </span>
-                <span *ngIf="!pe.latestValue" class="text-break">{{ 0 |
-                    currency:'EUR':true:'1.2-2':"de-DE"}}
-                </span>
-            </div>
-            <div class="text-end col-md-3 col-lg-4 col-sm-4">
-                <span *ngIf="pe.latestValue" class="ms-2">{{pe.latestValue.time | date:'dd.MM.Y, HH:mm'}} Uhr</span>
-            </div>
-            <div class="col-lg-2 text-end">
+            <div class="ps-1 pe-0 col-2 col-md-1 d-flex align-items-start justify-content-end order-md-last">
                 <button *ngIf="editingEntryId === pe.id!" id="saveButton" title="Änderungen speichern"
                     class="btn btn-sm pointer pt-0 pb-0" (click)="saveEntry(i)"><i
                         class="fa-regular fa-floppy-disk fa-lg"></i>
@@ -46,14 +30,33 @@
                 </button>
 
                 <button *ngIf="editingEntryId !== pe.id!" (click)="editingEntryId = pe.id!" title="Eintrag bearbeiten"
-                    id="editButton{{pe.id}}" class="btn btn-sm pointer pt-0 pb-0"><i
+                    id="editButton{{pe.id}}" class="btn btn-sm pointer p-0"><i
                         class="fa-solid fa-pen-to-square fa-lg"></i>
                 </button>
 
                 <button *ngIf="editingEntryId !== pe.id!" id="deleteButton{{pe.id}}" title="Eintrag entfernen"
-                    class="btn btn-sm pointer pt-0 pb-0" (click)="deletePortfolioEntry(pe.id!)"><i
+                    class="btn btn-sm pointer pt-0 pb-0 ps-2" (click)="deletePortfolioEntry(pe.id!)"><i
                         class="fa-regular fa-trash-can fa-lg">
                     </i></button>
+            </div>
+
+            <div class="col-12" *ngIf="editingEntryId === pe.id!">
+                <form [formGroup]="formGroups[i]" class="pointer justify-content-start">
+                    <input required id="description" maxlength="124" name="description" type="text"
+                        class="form-control form-control-sm pe-0" formControlName="description">
+                </form>
+            </div>
+
+            <div class="col-12 col-md-3 justify-content-center justify-content-md-end d-flex">
+                <span *ngIf="pe.latestValue" class="text-break">{{pe.latestValue.value |
+                    currency:'EUR':true:'1.2-2':"de-DE"}}
+                </span>
+                <span *ngIf="!pe.latestValue" class="text-break">{{ 0 |
+                    currency:'EUR':true:'1.2-2':"de-DE"}}
+                </span>
+            </div>
+            <div class="col-12 col-md-4 justify-content-center">
+                <span *ngIf="pe.latestValue" class="ms-2">{{pe.latestValue.time | date:'dd.MM.Y, HH:mm'}} Uhr</span>
             </div>
         </div>
     </button>

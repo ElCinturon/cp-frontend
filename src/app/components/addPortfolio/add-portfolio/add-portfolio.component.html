@@ -3,7 +3,7 @@
         <span class="fs-6 fw-semibold mb-2 d-inline-block">Neues Portfolio erstellen</span>
         <form [formGroup]="addPortfolioForm" (ngSubmit)="addPortfolio()">
             <div class="mb-3">
-                <input required id="description" maxlength="124" name="description" type="text"
+                <input required id="description" maxlength="32" name="description" type="text"
                     class="form-control form-control-sm" formControlName="description" placeholder="Bezeichnung">
                 <invalid-input-msg
                     *ngIf="(description?.errors && description?.invalid && description?.touched) || error?.description"
