@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
-import { UserInfoService } from './services/userInfo.service';
-import { CookieService } from 'ngx-cookie-service';
+import { Component } from "@angular/core";
+import { UserInfoService } from "./services/userInfo.service";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = 'capitalPortal';
-  username: string = "";
+  title = "capitalPortal";
+  username = "";
 
   constructor(private userInfoService: UserInfoService, private cookieService: CookieService) { }
 

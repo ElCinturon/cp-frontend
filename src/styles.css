@@ -43,3 +43,7 @@ select.ng-invalid.required.ng-touched {
 .toast-container span {
 	font-size: initial;
 }
+
+.pointer {
+	pointer-events: auto;
+}

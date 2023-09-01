@@ -22,7 +22,7 @@ export class AddEntryValueComponent {
 
   addValueForm = new FormGroup<PortfolioEntryValueForm>({
     value: new FormControl("", { nonNullable: true }),
-    time: new FormControl(todayAsString(), { nonNullable: true })
+    time: new FormControl("", { nonNullable: true })
   });
 
   get value() { return this.addValueForm.get("value"); }
