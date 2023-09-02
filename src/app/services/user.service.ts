@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { BACKEND_API_URL } from '../constants';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { AppResult } from '../shared/interfaces/AppResult';
+import { Injectable } from "@angular/core";
+import { BACKEND_API_URL } from "../constants";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { AppResult } from "../shared/interfaces/AppResult";
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: "root"
 })
 export class UserService {
 
@@ -23,6 +23,9 @@ export class UserService {
 		return this.http.get<AppResult>(this.baseUserUrl + `/email/exists/${email}`);
 	}
 
-
+	// Löscht User
+	public delete(id: number): Observable<AppResult> {
+		return this.http.delete<AppResult>(this.baseUserUrl + `/${id}`);
+	}
 
 }

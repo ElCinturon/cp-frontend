@@ -24,6 +24,7 @@ import { ValueModalComponent } from "./components/value-modal/value-modal.compon
 import { AddEntryValueComponent } from "./components/add-entry-value/add-entry-value.component";
 import { DecimalInputComponent } from "./components/controls/decimal-input/decimal-input.component";
 import { PortfolioTypeSelectComponent } from "./shared/components/portfolio-type-select/portfolio-type-select.component";
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PortfolioTypeSelectComponent } from "./shared/components/portfolio-type
     ValueModalComponent,
     AddEntryValueComponent,
     DecimalInputComponent,
-    PortfolioTypeSelectComponent
+    PortfolioTypeSelectComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

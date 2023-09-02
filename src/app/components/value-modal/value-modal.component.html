@@ -29,10 +29,9 @@
                             {{error.msg}}
                         </div>
                         <button type="button" class="btn btn-sm btn-light mb-1 no-hover border border-1"
-                            *ngFor="let value of entry.portfolioEntryValues; let i = index">
+                            *ngFor="let value of entry.portfolioEntryValues; let i = index"
+                            [disabled]="editingEntryValueId && value.id !== editingEntryValueId">
                             <div class="row">
-
-
                                 <div class="col-9 col-sm-10" *ngIf="editingEntryValueId === value.id!">
                                     <form [formGroup]="groups[i]"
                                         class="pointer justify-content-end justify-content-md-start justify-content-sm-center row">
@@ -55,7 +54,7 @@
                                     currency:'EUR'}}</div>
 
                                 <div *ngIf="editingEntryValueId !== value.id!"
-                                    class="col-12 col-sm-6 col-lg-7 order-last">
+                                    class="col-12 col-sm-6 col-lg-7">
                                     {{value.time |
                                     date:'dd.MM.Y,
                                     HH:mm:ss'}} Uhr</div>

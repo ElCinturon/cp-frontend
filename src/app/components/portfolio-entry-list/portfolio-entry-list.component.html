@@ -10,9 +10,8 @@
 <div class="row justify-content-center mt-2 mb-2 mt-lg-0" *ngFor="let pe of portfolioEntries; let i = index;">
     <button type="button" (click)="clickEntry($event, pe.id!)"
         class=" btn btn-sm btn-light col-12 col-sm-12 col-md-12 border border-1 ps-3 pe-3"
-        title="Portfolioeintrag anzeigen">
+        title="Portfolioeintrag anzeigen" [disabled]="editingEntryId && pe.id !== editingEntryId">
         <div class="row">
-
             <div
                 class="col-8 col-md-4 offset-2 offset-md-0 justify-content-center align-items-md-center col-md-3 text-md-start">
                 <span *ngIf="editingEntryId !== pe.id!" class="mb-1 text-break"><b>{{pe.description}}</b></span>
@@ -23,7 +22,6 @@
                         class="form-control form-control-sm pe-0" formControlName="description">
                 </form>
             </div>
-
             <div
                 class="ps-1 pe-0 col-2 col-md-1 d-flex align-items-start align-items-md-center justify-content-end order-md-last">
                 <button *ngIf="editingEntryId === pe.id!" id="saveButton" title="Änderungen speichern"

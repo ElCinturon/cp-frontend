@@ -37,10 +37,12 @@ export class LoginComponent {
 								// Wenn Login erfolgreich, auf home Seite weiterleiten
 								if (response.body?.success) {
 									const username = response.body.data?.username;
+									const userId = response.body.data?.id;
 									// Setzen des Usernames publishen 
 									this.userInfoService.send(username);
 									// Cookie mit Information setzen (Evtl. in service auslagern)
 									this.cookieService.set("username", username);
+									this.cookieService.set("userId", userId);
 									this.router.navigate(["../home"]);
 								} else {
 									this.error = response.body?.error

@@ -24,19 +24,17 @@
 
             <div class="col-2 col-md-3 justify-content-end d-flex align-items-start">
                 <button *ngIf="editingPortfolio !== p.id" id="editButton{{p.id}}" title="Portfolio bearbeiten"
-                    (click)="editPortfolio(p.id, i)" class="btn btn-sm pointer p-0 ps-1 pe-2"><i
+                    (click)="editPortfolio(p.id, i)" class="btn btn-sm p-0 ps-1 pe-2"><i
                         class="fa-solid fa-pen-to-square fa-lg">
                     </i></button>
                 <button *ngIf="editingPortfolio !== p.id" id="deleteButton{{p.id}}" title="Portfolio entfernen"
-                    (click)="deletePortfolio(p.id!)" class="btn btn-sm pointer p-0"><i
+                    (click)="deletePortfolio(p.id!)" class="btn btn-sm p-0"><i
                         class="fa-regular fa-trash-can fa-lg"></i></button>
-
-
                 <button *ngIf="editingPortfolio === p.id" id="saveButton{{p.id}}" title="Änderungen speichern"
-                    (click)="savePortfolio(p.id!)" class="btn btn-sm pointer p-0 ps-1 pe-2"><i
+                    (click)="savePortfolio(p.id!)" class="btn btn-sm p-0 ps-1 pe-2"><i
                         class="fa-regular fa-floppy-disk fa-lg"></i></button>
                 <button *ngIf="editingPortfolio === p.id" id="leaveButton{{p.id}}" title="Bearbeitung verlassen"
-                    (click)="editPortfolio()" class="btn btn-sm pointer p-0"><i class="fa-solid fa-x text-danger fa-lg">
+                    (click)="editPortfolio()" class="btn btn-sm p-0"><i class="fa-solid fa-x text-danger fa-lg">
                     </i></button>
 
             </div>
