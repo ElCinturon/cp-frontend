@@ -22,9 +22,7 @@ export class AppComponent {
     // Änderungen des Usernames beobachten (benötigt um Änderung nach Login zu erhalten)
     this.userInfoService.get().subscribe({
       next: (value) => {
-        if (value) {
-          this.username = value;
-        }
+        this.username = value;
       },
       error: (error) => { console.error("error bei Abruf von Userinfos:", error); }
     });

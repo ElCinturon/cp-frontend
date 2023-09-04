@@ -24,4 +24,9 @@ export class AuthenticationService {
 	public login(credentialObject: Object): Observable<HttpResponse<AppResult>> {
 		return this.http.post<AppResult>(this.loginUrl, credentialObject, { headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' }), observe: 'response', withCredentials: true });
 	}
+
+	// Loggt User aus
+	public logout(): Observable<AppResult> {
+		return this.http.post<AppResult>(BACKEND_API_URL + "/logout", "");
+	}
 }
