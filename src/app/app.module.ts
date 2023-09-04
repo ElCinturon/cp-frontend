@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { CookieService } from "ngx-cookie-service";
 import { ToastService, AngularToastifyModule } from "angular-toastify";
 
@@ -24,7 +24,8 @@ import { ValueModalComponent } from "./components/value-modal/value-modal.compon
 import { AddEntryValueComponent } from "./components/add-entry-value/add-entry-value.component";
 import { DecimalInputComponent } from "./components/controls/decimal-input/decimal-input.component";
 import { PortfolioTypeSelectComponent } from "./shared/components/portfolio-type-select/portfolio-type-select.component";
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent } from "./components/profile/profile.component";
+import { UnauthorizedInterceptor } from "./interceptors/unauthorized.interceptor";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     ReactiveFormsModule,
     AngularToastifyModule
   ],
-  providers: [CookieService, ToastService],
+  providers: [CookieService, ToastService, { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
