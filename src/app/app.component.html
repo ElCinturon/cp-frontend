@@ -7,17 +7,17 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
             <div class="navbar-nav ">
                 <a class="nav-link" routerLinkActive="active" routerLink="../home">Home</a>
-                <a class="nav-link" routerLinkActive="active" routerLink="../portfolios" href="#">Meine Portfolios</a>
-                <a class="nav-link" routerLinkActive="active" routerLink="../profile">Profil</a>
+                <a *ngIf="username" class="nav-link" routerLinkActive="active" routerLink="../portfolios" href="#">Meine
+                    Portfolios</a>
                 <a *ngIf="!username" class="nav-link" routerLinkActive="active" routerLink="../login">Einloggen</a>
                 <a *ngIf="!username" class="nav-link" routerLinkActive="active"
                     routerLink="../registration">Registrieren</a>
-                <a *ngIf="username" class="nav-link" routerLinkActive="active">Ausloggen</a>
+                <a *ngIf="username" class="nav-link profile-nav-link fw-semibold" routerLinkActive="active"
+                    routerLink="../profile">{{username}}</a>
             </div>
         </div>
     </div>
 </nav>
-<div *ngIf="username">Eingeloggt als {{username}}</div>
 <div class="m-3 m-sm-3">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10 col-xl-12 col-xxl-11 max-width-main">
