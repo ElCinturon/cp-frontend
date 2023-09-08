@@ -11,8 +11,8 @@ import { PortfolioComponent } from "./components/portfolio/portfolio.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 
 const routes: Routes = [
+  { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "login", component: LoginComponent, title: "Login" },
-  { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "registration", component: RegistrationComponent, title: "Registrierung" },
   { path: "home", component: HomeComponent, title: "Home" },
   { path: "registrationSuccess", component: RegistrationSuccessComponent, title: "Registrierung abgeschlossen" },
