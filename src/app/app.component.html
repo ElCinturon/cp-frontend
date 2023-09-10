@@ -12,15 +12,13 @@
                 <a *ngIf="!username" class="nav-link" routerLinkActive="active" routerLink="../login">Einloggen</a>
                 <a *ngIf="!username" class="nav-link" routerLinkActive="active"
                     routerLink="../registration">Registrieren</a>
-                <a class="nav-link" routerLinkActive="active" routerLink="../impressum">Impressum</a>
-                <a class="nav-link" routerLinkActive="active" routerLink="../datenschutzerklaerung">Datenschutz</a>
                 <a *ngIf="username" class="nav-link profile-nav-link fw-semibold" routerLinkActive="active"
                     routerLink="../profile">{{username}}</a>
             </div>
         </div>
     </div>
 </nav>
-<div class="m-3 m-sm-3">
+<div class="m-3 m-sm-3 h-100">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10 col-xl-12 col-xxl-11 max-width-main overflow-hidden">
             <lib-toastify-toast-container></lib-toastify-toast-container>
@@ -28,3 +26,15 @@
         </div>
     </div>
 </div>
+<footer class=" row w-100 bg-dark m-0 ">
+    <div class="row justify-content-center align-items-center small">
+        <div class="col-auto">
+            <a class="link-light link-underline-opacity-25 link-underline-opacity-100-hover"
+                routerLink="../impressum">Impressum</a>
+        </div>
+        <div class="col-auto">
+            <a class="link-light link-underline-opacity-25 link-underline-opacity-100-hover"
+                routerLink="../datenschutzerklaerung">Datenschutzerklärung</a>
+        </div>
+    </div>
+</footer>
