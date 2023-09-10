@@ -10,6 +10,19 @@
     }
 }
 
+.body {
+    min-height: 100vh;
+}
+
+.wrapper {
+    min-height: 100vh;
+}
+
+/* sorgt dafür, dass Footer immer unten angezeigt wird */
+.flex-fill {
+    flex: 1 1 auto;
+}
+
 footer {
     height: 50px;
 }

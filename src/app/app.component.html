@@ -1,40 +1,43 @@
-<nav class="navbar navbar-expand-sm bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
-            <div class="navbar-nav ">
-                <a class="nav-link" routerLinkActive="active" routerLink="../home">Home</a>
-                <a *ngIf="username" class="nav-link" routerLinkActive="active" routerLink="../portfolios" href="#">Meine
-                    Portfolios</a>
-                <a *ngIf="!username" class="nav-link" routerLinkActive="active" routerLink="../login">Einloggen</a>
-                <a *ngIf="!username" class="nav-link" routerLinkActive="active"
-                    routerLink="../registration">Registrieren</a>
-                <a *ngIf="username" class="nav-link profile-nav-link fw-semibold" routerLinkActive="active"
-                    routerLink="../profile">{{username}}</a>
+<div class="d-flex flex-column wrapper">
+    <nav class="navbar navbar-expand-sm bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+                <div class="navbar-nav ">
+                    <a class="nav-link" routerLinkActive="active" routerLink="../home">Home</a>
+                    <a *ngIf="username" class="nav-link" routerLinkActive="active" routerLink="../portfolios"
+                        href="#">Meine
+                        Portfolios</a>
+                    <a *ngIf="!username" class="nav-link" routerLinkActive="active" routerLink="../login">Einloggen</a>
+                    <a *ngIf="!username" class="nav-link" routerLinkActive="active"
+                        routerLink="../registration">Registrieren</a>
+                    <a *ngIf="username" class="nav-link profile-nav-link fw-semibold" routerLinkActive="active"
+                        routerLink="../profile">{{username}}</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="m-3 m-sm-3 flex-fill">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-12 col-xxl-11 max-width-main overflow-hidden">
+                <lib-toastify-toast-container></lib-toastify-toast-container>
+                <router-outlet></router-outlet>
             </div>
         </div>
     </div>
-</nav>
-<div class="m-3 m-sm-3 h-100">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-10 col-xl-12 col-xxl-11 max-width-main overflow-hidden">
-            <lib-toastify-toast-container></lib-toastify-toast-container>
-            <router-outlet></router-outlet>
+    <footer class=" row w-100 bg-dark m-0 ">
+        <div class="row justify-content-center align-items-center small">
+            <div class="col-auto">
+                <a class="link-light link-underline-opacity-25 link-underline-opacity-100-hover"
+                    routerLink="../impressum">Impressum</a>
+            </div>
+            <div class="col-auto">
+                <a class="link-light link-underline-opacity-25 link-underline-opacity-100-hover"
+                    routerLink="../datenschutzerklaerung">Datenschutzerklärung</a>
+            </div>
         </div>
-    </div>
+    </footer>
 </div>
-<footer class=" row w-100 bg-dark m-0 ">
-    <div class="row justify-content-center align-items-center small">
-        <div class="col-auto">
-            <a class="link-light link-underline-opacity-25 link-underline-opacity-100-hover"
-                routerLink="../impressum">Impressum</a>
-        </div>
-        <div class="col-auto">
-            <a class="link-light link-underline-opacity-25 link-underline-opacity-100-hover"
-                routerLink="../datenschutzerklaerung">Datenschutzerklärung</a>
-        </div>
-    </div>
-</footer>
