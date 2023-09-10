@@ -1,15 +1,15 @@
 <div *ngIf="!username" class="justify-content-center d-flex position-relative">
     <picture>
-        <source srcset="./assets/app_at_mobilephone.jpg 640w" media="(max-width: 768px)"
-            sizes="(max-width: 448px) 450px, (max-width: 601px) 500px">
-        <source srcset="./assets/app_at_laptop.jpg" media="(min-width: 769px)">
+        <source srcset="./assets/app_at_mobilephone.jpg 640w" media="(max-width: 600px)"
+            sizes="(max-width: 448px) 450px, (max-width: 497px) 500px, (max-width: 601px) 600px">
+        <source srcset="./assets/app_at_laptop.jpg 1000w" media="(min-width: 601px)"
+            sizes="(max-width: 735px) 740px, (max-width: 852px) 850px, (min-width: 853px) 1000px">
         <img src="./assets/app_at_laptop.jpg" alt="Picture of Application on a Laptop" />
     </picture>
-    <div class="position-absolute fst-italic h-100 max-w-txt">
-        <span class="pos-bot-pic-txt-1">Behalte immer einen Überblick über dein Vermögen mit dem <b>Capital
-                Portal</b></span>
-        <p class="pos-bot-pic-txt-2 mb-0"><a routerLink="../registration" class="text-light">Registriere</a> dich und
-            lege direkt los!
-        </p>
+    <div class="pos-bot-pic-txt-1 w-100">Behalte immer einen Überblick über dein Vermögen mit dem <b>Capital
+            Portal</b></div>
+    <div class="pos-bot-pic-txt-2 mb-0 w-100"><a routerLink="../registration" class="text-light">Registriere</a> dich
+        und
+        lege direkt los!
     </div>
 </div>
