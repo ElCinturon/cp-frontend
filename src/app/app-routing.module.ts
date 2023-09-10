@@ -9,6 +9,8 @@ import { RegistrationSuccessComponent } from "./registration-success/registratio
 import { PortfoliosComponent } from "./components/portfolios/portfolios.component";
 import { PortfolioComponent } from "./components/portfolio/portfolio.component";
 import { ProfileComponent } from "./components/profile/profile.component";
+import { ImpressumComponent } from "./components/impressum/impressum.component";
+import { DatenschutzerklaerungComponent } from "./components/datenschutzerklaerung/datenschutzerklaerung.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -23,6 +25,8 @@ const routes: Routes = [
     ]
   },
   { path: "profile", component: ProfileComponent, title: "Profil" },
+  { path: "impressum", component: ImpressumComponent, title: "Impressum" },
+  { path: "datenschutzerklaerung", component: DatenschutzerklaerungComponent, title: "Datenschutzerklärung" },
 ];
 
 @NgModule({

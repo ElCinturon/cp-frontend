@@ -55,7 +55,16 @@
 			<div *ngIf="formInvalid" class="alert alert-danger pt-1 pb-1" role="alert">Bitte überprüfen
 				Sie Ihre Eingaben!</div>
 			<div class="alert alert-danger pt-1 pb-1" role="alert" *ngIf="error?.msg">{{error?.msg}}</div>
-			<button [disabled]="!registerForm.valid" type="submit" class="btn btn-primary">Registrieren</button>
+			<div class="fst-italic">
+				<small>
+					Mit der Erstellung eines Accounts erklären Sie sich mit unserer
+					<a routerLink="../datenschutzerklaerung">Datenschutzerklärung</a>
+					einverstanden.</small>
+			</div>
+			<div class="mt-4">
+				<button [disabled]="!registerForm.valid" type="submit" class="btn btn-primary">Registrieren</button>
+			</div>
+
 		</form>
 	</div>
 </div>

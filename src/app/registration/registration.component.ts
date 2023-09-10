@@ -14,7 +14,7 @@ export class RegistrationComponent {
 
 	constructor(public registerService: RegistrationService, private router: Router, private checkUsernameAvailability: CheckUsernameAvailability) { }
 
-	error: any = null;
+	error: any = { msg: "" };
 
 	registerForm = new FormGroup({
 		username: new FormControl("", { asyncValidators: this.checkUsernameAvailability.validateUsername.bind(this.checkUsernameAvailability), updateOn: "blur" }),
@@ -48,6 +48,7 @@ export class RegistrationComponent {
 
 	registerUser() {
 		if (this.registerForm.valid) {
+			this.error.msg = "";
 			// User registrieren
 			this.registerService.registerUser(this.registerForm.value).subscribe({
 				next: (response) => {

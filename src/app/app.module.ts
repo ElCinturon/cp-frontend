@@ -26,6 +26,8 @@ import { DecimalInputComponent } from "./components/controls/decimal-input/decim
 import { PortfolioTypeSelectComponent } from "./shared/components/portfolio-type-select/portfolio-type-select.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { UnauthorizedInterceptor } from "./interceptors/unauthorized.interceptor";
+import { ImpressumComponent } from "./components/impressum/impressum.component";
+import { DatenschutzerklaerungComponent } from "./components/datenschutzerklaerung/datenschutzerklaerung.component";
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { UnauthorizedInterceptor } from "./interceptors/unauthorized.interceptor
     AddEntryValueComponent,
     DecimalInputComponent,
     PortfolioTypeSelectComponent,
-    ProfileComponent
+    ProfileComponent,
+    ImpressumComponent,
+    DatenschutzerklaerungComponent
   ],
   imports: [
     BrowserModule,
