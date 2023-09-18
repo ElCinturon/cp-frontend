@@ -1,4 +1,6 @@
-import { NgModule } from "@angular/core";
+import { NgModule, LOCALE_ID } from "@angular/core";
+import localeDe from "@angular/common/locales/de";
+import { registerLocaleData } from "@angular/common";
 
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -28,6 +30,9 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { UnauthorizedInterceptor } from "./interceptors/unauthorized.interceptor";
 import { ImpressumComponent } from "./components/impressum/impressum.component";
 import { DatenschutzerklaerungComponent } from "./components/datenschutzerklaerung/datenschutzerklaerung.component";
+
+// Deprecated, aber notwendig um Error NG0701 zu verhindern https://github.com/Digivertaisverkko/UKK-tiketit/commit/e6bf37a348f19c98b8d1cc8b284e2095c8f130f2
+registerLocaleData(localeDe);
 
 @NgModule({
   declarations: [
@@ -59,7 +64,7 @@ import { DatenschutzerklaerungComponent } from "./components/datenschutzerklaeru
     ReactiveFormsModule,
     AngularToastifyModule
   ],
-  providers: [CookieService, ToastService, { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true }],
+  providers: [CookieService, ToastService, { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true }, { provide: LOCALE_ID, useValue: "de-DE" }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
