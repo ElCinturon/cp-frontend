@@ -36,12 +36,12 @@
                                     <form [formGroup]="groups[i]"
                                         class="pointer justify-content-end justify-content-md-start justify-content-sm-center row">
                                         <div
-                                            class="col-10 col-sm-5 col-lg-4 offset-3 max-form-width-xs offset-sm-0 ps-md-2 ps-sm-0 text-sm-end mb-1 mb-sm-0">
+                                            class="col-12 col-sm-5 col-lg-4 offset-3 max-form-width-xs offset-sm-0 ps-md-2 text-sm-end mb-1 mb-sm-0">
                                             <decimal-input [small]="true" required
                                                 formControlName="value"></decimal-input>
                                         </div>
                                         <div
-                                            class="col-10 col-sm-6 col-lg-4 max-form-width-xs offset-3 offset-lg-2 offset-sm-0 ">
+                                            class="col-12 col-sm-7 col-lg-5 max-form-width-xs offset-3 offset-lg-2 offset-sm-0 ps-lg-0">
                                             <input required id="time" maxlength="124" name="time" type="datetime-local"
                                                 class="form-control form-control-sm ms-md-3 ms-lg-0"
                                                 formControlName="time" placeholder="0">
@@ -53,11 +53,7 @@
                                     class="col-6 col-sm-4 col-lg-3 offset-3 offset-sm-0 text-sm-end">{{value.value |
                                     currency:'EUR'}}</div>
 
-                                <div *ngIf="editingEntryValueId !== value.id!"
-                                    class="col-12 col-sm-6 col-lg-7">
-                                    {{value.time |
-                                    date:'dd.MM.Y,
-                                    HH:mm:ss'}} Uhr</div>
+
 
                                 <div
                                     class="col-3 col-sm-2 text-end align-items-start align-items-sm-center order-sm-last d-sm-flex justify-content-end">
@@ -81,6 +77,11 @@
                                             class="fa-regular fa-trash-can fa-lg"></i>
                                     </button>
                                 </div>
+
+                                <div *ngIf="editingEntryValueId !== value.id!" class="col-12 col-sm-6 col-lg-7">
+                                    {{value.time |
+                                    date:'dd.MM.Y,
+                                    HH:mm:ss'}} Uhr</div>
                             </div>
                         </button>
                     </div>
