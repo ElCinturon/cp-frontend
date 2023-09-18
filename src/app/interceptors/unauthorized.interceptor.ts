@@ -8,9 +8,8 @@ import {
 } from "@angular/common/http";
 import { EMPTY, Observable, catchError, throwError } from "rxjs";
 import { Router } from "@angular/router";
-import { PROXY_URL } from "../constants";
-import { CookieService } from 'ngx-cookie-service';
-import { UserInfoService } from './../services/userInfo.service';
+import { CookieService } from "ngx-cookie-service";
+import { UserInfoService } from "./../services/userInfo.service";
 
 @Injectable()
 export class UnauthorizedInterceptor implements HttpInterceptor {
@@ -20,8 +19,8 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     return next.handle(request).pipe(catchError((error: HttpErrorResponse) => {
-      // Bei Response von 401 auf die Login Seite weiterleiten
-      if (error.status === 401 && error.url?.includes(PROXY_URL)) {
+      // Bei Response von 401 auf die Login Seite weiterleiten. Es wird geprüft ob "/api/"-Pfad aufgerufen wird
+      if (error.status === 401 && request.url.match(/^\/api\/.*/g)) {
         this.cookieService.deleteAll();
         // User zurück setzen
         this.userInfoService.send("");
