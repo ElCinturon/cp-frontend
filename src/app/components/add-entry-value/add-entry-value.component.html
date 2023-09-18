@@ -1,0 +1,29 @@
+<div class="row justify-content-center me-0 ms-0">
+    <div class="col-12 col-md-12 col-lg-10 border border-dark p-2">
+        <span class="fs-6 fw-semibold mb-2 d-inline-block">Neuen Wert hinzufügen</span>
+        <form [formGroup]="addValueForm" (ngSubmit)="addValue()">
+            <decimal-input [small]="true" formControlName="value" [placeholder]="'Wert in €'" required></decimal-input>
+                <invalid-input-msg *ngIf="(value?.errors && value?.invalid && value?.touched) || error?.value"
+                    [errorObject]="value?.errors" [errorText]="error?.value"></invalid-input-msg>
+                <div class="mb-3 mt-3">
+                    <input required id="time" maxlength="124" name="time" type="text"
+                        class="form-control form-control-sm" formControlName="time"
+                        onfocus="this.type = 'datetime-local'" placeholder="Wertstellungszeitpunkt">
+                    <invalid-input-msg *ngIf="(time?.errors && time?.invalid && time?.touched) || error?.time"
+                        [errorObject]="time?.errors" [errorText]="error?.time"></invalid-input-msg>
+                </div>
+                <div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 mt-2">
+                    {{error?.msg}}
+                </div>
+                <div *ngIf="successMsg" class="alert alert-success pt-1 pb-1 mt-2">
+                    {{successMsg}}
+                </div>
+                <div class="justify-content-end d-flex mt-3">
+                    <button type="button" (click)="this.closeComponent.emit(true)"
+                        class="btn btn-sm btn-primary me-3">Schließen</button>
+                    <button [disabled]="!addValueForm.valid" type="submit"
+                        class="btn btn-sm btn-primary">Speichern</button>
+                </div>
+        </form>
+    </div>
+</div>

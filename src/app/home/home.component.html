@@ -1,0 +1,36 @@
+<div *ngIf="!username" class="justify-content-center d-flex position-relative">
+    <picture>
+        <source srcset="./assets/app_at_mobilephone.jpg 640w" media="(max-width: 600px)"
+            sizes="(max-width: 448px) 450px, (max-width: 497px) 500px, (max-width: 601px) 600px">
+        <source srcset="./assets/app_at_laptop.jpg 1000w" media="(min-width: 601px)"
+            sizes="(max-width: 735px) 740px, (max-width: 852px) 850px, (min-width: 853px) 1000px">
+        <img src="./assets/app_at_laptop.jpg" alt="Picture of Application on a Laptop" />
+    </picture>
+    <div class="pos-bot-pic-txt-1 w-100">Behalte immer einen Überblick über dein Vermögen mit dem
+        <b>Capital Portal</b>
+    </div>
+    <div class="pos-bot-pic-txt-2 mb-0 w-100">
+        <a routerLink="../registration" class="text-light">Registriere</a>
+        dich und lege direkt los!
+    </div>
+</div>
+<div *ngIf="username">
+    <div class="row mt-5">
+        <div class="col justify-content-center d-flex">
+            <h2>Schön, dass du da bist {{username}}!</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col justify-content-center d-flex">
+            <p class="mt-3 fs-4" *ngIf="amountPortfolios > 0 && mostValuablePortfolio">Du hast bereits
+                <b>{{amountPortfolios}}</b>
+                Portfolio(s) erstellt. Dein aktuell wertvollstes Portfolio ist
+                <b>{{mostValuablePortfolio.description}}</b> mit einem Wert von <b>{{mostValuablePortfolio.totalValue |
+                    currency:'EUR'}}</b>
+            </p>
+            <p class="mt-3 fs-4" *ngIf="amountPortfolios === 0 && !mostValuablePortfolio">Du hast bislang kein Portfolio
+                angelegt.
+                Klicke <a routerLink="../portfolios">hier</a> und lege direkt los!</p>
+        </div>
+    </div>
+</div>

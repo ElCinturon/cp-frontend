@@ -1,0 +1,37 @@
+<div class="row justify-content-center p-3">
+    <div class="col col-md-6 col-xl-5 col-xxl-4 border border-dark p-2">
+        <span class="fs-6 fw-semibold mb-2 d-inline-block">Neues Portfolio erstellen</span>
+        <form [formGroup]="addPortfolioForm" (ngSubmit)="addPortfolio()">
+            <div class="mb-3">
+                <input required id="description" maxlength="32" name="description" type="text"
+                    class="form-control form-control-sm" formControlName="description" placeholder="Bezeichnung">
+                <invalid-input-msg
+                    *ngIf="(description?.errors && description?.invalid && description?.touched) || error?.description"
+                    [errorObject]="description?.errors" [errorText]="error?.description"></invalid-input-msg>
+            </div>
+            <div>
+                <select id="type" class="form-select form-select-sm" required aria-label=" Portfoliotyp auswählen"
+                    formControlName="typeCode">
+                    <option *ngFor="let type of portfolioTypes" [ngClass]="{'fst-italic fw-semibold': type.code === ''}"
+                        [attr.disabled]="type.code ? null : true" value="{{type.code}}">
+                        {{type.description}}</option>
+                </select>
+                <invalid-input-msg
+                    *ngIf="(typeCode?.errors && typeCode?.invalid && typeCode?.touched) || error?.typeCode"
+                    [errorObject]="typeCode?.errors" [errorText]="error?.typeCode"></invalid-input-msg>
+            </div>
+            <div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 mt-2">
+                {{error?.msg}}
+            </div>
+            <div *ngIf="successMsg" class="alert alert-success pt-1 pb-1 mt-2">
+                {{successMsg}}
+            </div>
+            <div class="justify-content-end d-flex mt-3">
+                <button type="button" (click)="this.closeComponent.emit(true)"
+                    class="btn btn-sm btn-primary me-3">Schließen</button>
+                <button [disabled]="!addPortfolioForm.valid" type="submit"
+                    class="btn btn-sm btn-primary">Speichern</button>
+            </div>
+        </form>
+    </div>
+</div>

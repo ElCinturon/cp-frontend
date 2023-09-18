@@ -1,0 +1,67 @@
+<div class="row justify-content-center m-2" *ngIf="portfolioEntries.length === 0 && portfolioEntriesSet">
+    <div class="col">
+        <div class="alert alert-warning text-center pt-1 pb-1"><b>Es wurden noch keine Portfolioeinträge angelegt!</b>
+        </div>
+    </div>
+</div>
+<div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 text-center">
+    {{error?.msg}}
+</div>
+<div class="row justify-content-center mt-2 mb-2 mt-lg-0" *ngFor="let pe of portfolioEntries; let i = index;">
+    <button type="button" (click)="clickEntry($event, pe.id!)"
+        class=" btn btn-sm btn-light col-12 col-sm-12 col-md-12 border border-1 ps-3 pe-3"
+        title="Portfolioeintrag anzeigen" [disabled]="editingEntryId && pe.id !== editingEntryId">
+        <div class="row">
+            <div
+                class="col-8 col-md-4 offset-2 offset-md-0 justify-content-center align-items-md-center col-md-3 text-md-start">
+                <span *ngIf="editingEntryId !== pe.id!" class="mb-1 text-break"><b>{{pe.description}}</b></span>
+
+                <form *ngIf="editingEntryId === pe.id!" [formGroup]="formGroups[i]"
+                    class="pointer justify-content-start">
+                    <input required id="description" maxlength="124" name="description" type="text"
+                        class="form-control form-control-sm pe-0" formControlName="description">
+                </form>
+            </div>
+            <div
+                class="ps-1 pe-0 col-2 col-md-1 d-flex align-items-start align-items-md-center justify-content-end order-md-last">
+                <button *ngIf="editingEntryId === pe.id!" id="saveButton" title="Änderungen speichern"
+                    class="btn btn-sm pointer p-0" (click)="saveEntry(i)"><i
+                        class="fa-regular fa-floppy-disk fa-lg"></i>
+                </button>
+
+                <button *ngIf="editingEntryId === pe.id!" id="leaveButton{{pe.id}}" title="Bearbeitung verlassen"
+                    class="btn btn-sm pointer pt-0 pb-0 ps-2" (click)="leaveEditMode(i, true)"><i
+                        class="fa-solid fa-x text-danger fa-lg"></i>
+                </button>
+
+                <button *ngIf="editingEntryId !== pe.id!" (click)="editingEntryId = pe.id!" title="Eintrag bearbeiten"
+                    id="editButton{{pe.id}}" class="btn btn-sm pointer p-0"><i
+                        class="fa-solid fa-pen-to-square fa-lg"></i>
+                </button>
+
+                <button *ngIf="editingEntryId !== pe.id!" id="deleteButton{{pe.id}}" title="Eintrag entfernen"
+                    class="btn btn-sm pointer pt-0 pb-0 ps-2" (click)="deletePortfolioEntry(pe.id!)"><i
+                        class="fa-regular fa-trash-can fa-lg">
+                    </i></button>
+            </div>
+
+
+
+            <div class="col-12 col-md-3 justify-content-center justify-content-md-end d-flex align-items-md-center">
+                <span *ngIf="pe.latestValue" class="text-break">{{pe.latestValue.value |
+                    currency:'EUR':true:'1.2-2':"de-DE"}}
+                </span>
+                <span *ngIf="!pe.latestValue" class="text-break">{{ 0 |
+                    currency:'EUR':true:'1.2-2':"de-DE"}}
+                </span>
+            </div>
+            <div class="col-12 col-md-4 justify-content-center align-items-md-center d-md-flex">
+                <span *ngIf="pe.latestValue" class="ms-2">{{pe.latestValue.time | date:'dd.MM.Y, HH:mm'}} Uhr</span>
+            </div>
+        </div>
+    </button>
+</div>
+
+<!-- Modal für Eintrag details -->
+<value-modal [portfolioId]="portfolioId" [entryId]="entryId!"
+    (valueChanged)="updatePortfolioEntries(); emitChange();"></value-modal>

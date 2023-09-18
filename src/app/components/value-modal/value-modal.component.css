@@ -1,0 +1,19 @@
+.no-hover,
+.no-hover:hover,
+.no-hover:active {
+    pointer-events: none;
+    background-color: #f8f9fa;
+}
+
+
+
+@media screen and (min-width: 324px) and (max-width: 768px) {
+    .padding-left-xs {
+        padding-left: 30%;
+    }
+
+    .max-form-width-xs {
+        max-width: 250px;
+    }
+
+}

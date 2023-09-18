@@ -1,0 +1,54 @@
+<div class="row justify-content-center m-2" *ngIf="(portfolios.length === 0 && portfoliosSet) || error?.msg">
+    <div class="col-12 col-xxl-8">
+        <div *ngIf="portfolios.length === 0 && portfoliosSet" class="alert alert-warning pb-1 pt-1 text-center"><b>Es
+                wurden noch keine Portfolios angelegt!</b>
+        </div>
+        <div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1 mt-2 text-center">
+            {{error?.msg}}
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-2 mb-2" *ngFor="let p of portfolios; let i = index">
+    <button [disabled]="editingPortfolio && p.id !== editingPortfolio" (click)="clickPortfolio($event, p.id!)"
+        type="button"
+        class="btn btn-sm btn-light col col-md-9 col-lg-11 col-xl-10 max-width-portfolio-btn border border-1 position-relative"
+        title="Portfolio anzeigen">
+        <div class="row">
+            <div class="col-2 col-md-3"></div>
+            <div class="col-8 col-md-6 justify-content-center d-flex">
+                <span *ngIf="editingPortfolio !== p.id" class="mb-1 text-break"><b>{{p.description}}</b></span>
+                <input required *ngIf="editingPortfolio === p.id" [(ngModel)]="editingValues.description" type="text"
+                    class="form-control form-control-sm mb-1">
+            </div>
+
+            <div class="col-2 col-md-3 justify-content-end d-flex align-items-start">
+                <button *ngIf="editingPortfolio !== p.id" id="editButton{{p.id}}" title="Portfolio bearbeiten"
+                    (click)="editPortfolio(p.id, i)" class="btn btn-sm p-0 ps-1 pe-2"><i
+                        class="fa-solid fa-pen-to-square fa-lg">
+                    </i></button>
+                <button *ngIf="editingPortfolio !== p.id" id="deleteButton{{p.id}}" title="Portfolio entfernen"
+                    (click)="deletePortfolio(p.id!)" class="btn btn-sm p-0"><i
+                        class="fa-regular fa-trash-can fa-lg"></i></button>
+                <button *ngIf="editingPortfolio === p.id" id="saveButton{{p.id}}" title="Änderungen speichern"
+                    (click)="savePortfolio(p.id!)" class="btn btn-sm p-0 ps-1 pe-2"><i
+                        class="fa-regular fa-floppy-disk fa-lg"></i></button>
+                <button *ngIf="editingPortfolio === p.id" id="leaveButton{{p.id}}" title="Bearbeitung verlassen"
+                    (click)="editPortfolio()" class="btn btn-sm p-0"><i class="fa-solid fa-x text-danger fa-lg">
+                    </i></button>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <span *ngIf="editingPortfolio !== p.id" class="mb-1 text-break">{{p.portfolioType?.description}}</span>
+                <portfolio-type-select [type]="editingValues.typeCode" *ngIf="editingPortfolio === p.id"
+                    (typeCodeChange)="editingValues.typeCode = $event">
+                </portfolio-type-select>
+            </div>
+        </div>
+
+
+    </button>
+</div>

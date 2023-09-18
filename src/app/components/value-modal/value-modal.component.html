@@ -1,0 +1,94 @@
+<div id="valueModal" class="modal fade" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered">
+        <div *ngIf="entry" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-break">{{entry.description}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 d-flex mb-2 justify-content-md-end">
+                        <button (click)="addValue()"
+                            class="btn btn-sm btn-success flex-grow-1 flex-md-grow-0">Hinzufügen</button>
+                    </div>
+                </div>
+                <div class="mb-2" *ngIf="addValueActive">
+                    <add-entry-value (closeComponent)="addValue()"
+                        (valueAdded)="getEntry(); this.valueChanged.emit(true);" [portfolioId]="portfolioId"
+                        [portfolioEntryId]="entryId"></add-entry-value>
+                </div>
+                <div class="row justify-content-center m-2" *ngIf="entry.portfolioEntryValues.length === 0">
+                    <div class="col">
+                        <div class="alert alert-warning text-center pb-0 pt-0"><b>Es wurden keine Werte angelegt!</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="d-grid col-12 col-lg-10 gap-2 mx-auto">
+                        <div *ngIf="error.msg" class="alert alert-danger pt-1 pb-1 text-center">
+                            {{error.msg}}
+                        </div>
+                        <button type="button" class="btn btn-sm btn-light mb-1 no-hover border border-1"
+                            *ngFor="let value of entry.portfolioEntryValues; let i = index"
+                            [disabled]="editingEntryValueId && value.id !== editingEntryValueId">
+                            <div class="row">
+                                <div class="col-9 col-sm-10" *ngIf="editingEntryValueId === value.id!">
+                                    <form [formGroup]="groups[i]"
+                                        class="pointer justify-content-end justify-content-md-start justify-content-sm-center row">
+                                        <div
+                                            class="col-10 col-sm-5 col-lg-4 offset-3 max-form-width-xs offset-sm-0 ps-md-2 ps-sm-0 text-sm-end mb-1 mb-sm-0">
+                                            <decimal-input [small]="true" required
+                                                formControlName="value"></decimal-input>
+                                        </div>
+                                        <div
+                                            class="col-10 col-sm-6 col-lg-4 max-form-width-xs offset-3 offset-lg-2 offset-sm-0 ">
+                                            <input required id="time" maxlength="124" name="time" type="datetime-local"
+                                                class="form-control form-control-sm ms-md-3 ms-lg-0"
+                                                formControlName="time" placeholder="0">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div *ngIf="editingEntryValueId !== value.id!"
+                                    class="col-6 col-sm-4 col-lg-3 offset-3 offset-sm-0 text-sm-end">{{value.value |
+                                    currency:'EUR'}}</div>
+
+                                <div *ngIf="editingEntryValueId !== value.id!"
+                                    class="col-12 col-sm-6 col-lg-7">
+                                    {{value.time |
+                                    date:'dd.MM.Y,
+                                    HH:mm:ss'}} Uhr</div>
+
+                                <div
+                                    class="col-3 col-sm-2 text-end align-items-start align-items-sm-center order-sm-last d-sm-flex justify-content-end">
+                                    <button *ngIf="editingEntryValueId === value.id!" title="Änderungen speichern"
+                                        class="btn btn-sm pointer p-0" (click)="saveValue(i, value.id)"><i
+                                            class="fa-regular fa-floppy-disk fa-lg"></i>
+                                    </button>
+
+                                    <button *ngIf="editingEntryValueId === value.id!" title="Bearbeitung verlassen"
+                                        class="btn btn-sm pointer p-0 ps-2" (click)="leaveEditMode(i, true)"><i
+                                            class="fa-solid fa-x text-danger fa-lg"></i>
+                                    </button>
+
+                                    <button *ngIf="editingEntryValueId !== value.id!"
+                                        (click)="editingEntryValueId = value.id!" title="Wert bearbeiten"
+                                        class="btn btn-sm pointer p-0"><i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                    </button>
+
+                                    <button *ngIf="editingEntryValueId !== value.id!" title="Wert entfernen"
+                                        class="btn btn-sm pointer p-0 ps-2" (click)="deleteValue(value.id!)"><i
+                                            class="fa-regular fa-trash-can fa-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="this.addValueActive = false" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Schließen</button>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,15 @@
+<div class="row text-center">
+    <div class="col-2 col-lg-4">
+    </div>
+    <div class="col-8 col-lg-4">
+        <h4>Meine Portfolios</h4>
+    </div>
+    <div *ngIf="!error" class="col-12 col-md-2 col-lg-4 justify-content-end d-flex ">
+        <button (click)="setActive()" type="button" class="btn btn-sm btn-success flex-grow-1 flex-md-grow-0">Erstellen
+            <i class="fa-solid fa-plus"></i></button>
+    </div>
+</div>
+<div *ngIf="addActive">
+    <add-portfolio (portfolioAdded)="portfolioList.updatePortfolios()" (closeComponent)="setActive()"></add-portfolio>
+</div>
+<portfolio-list (errorOcurred)="error = true" #portfolioList></portfolio-list>
