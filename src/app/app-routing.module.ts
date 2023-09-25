@@ -11,11 +11,15 @@ import { PortfolioComponent } from "./components/portfolio/portfolio.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { ImpressumComponent } from "./components/impressum/impressum.component";
 import { DatenschutzerklaerungComponent } from "./components/datenschutzerklaerung/datenschutzerklaerung.component";
+import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
+import { ResetPasswordComponent } from "./components/reset-password/reset-password.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "login", component: LoginComponent, title: "Login" },
   { path: "registration", component: RegistrationComponent, title: "Registrierung" },
+  { path: "forgot-password", component: ForgotPasswordComponent, title: "Passwortreset beantragen" },
+  { path: "reset-password", component: ResetPasswordComponent, title: "Passwort zurücksetzen" },
   { path: "home", component: HomeComponent, title: "Home" },
   { path: "registrationSuccess", component: RegistrationSuccessComponent, title: "Registrierung abgeschlossen" },
   {

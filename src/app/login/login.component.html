@@ -12,10 +12,16 @@
 				<input name="password" required type="password" class="form-control" id="password"
 					formControlName="password">
 			</div>
-			<div class="mb-3 form-check">
-				<input name="stayLoggedIn" type="checkbox" class="form-check-input" id="stayLoggedIn"
-					formControlName="stayLoggedIn">
-				<label class="form-check-label" for="stayLoggedIn">Angemeldet bleiben</label>
+			<div class="row m-0 mb-2">
+				<div class="pb-1 form-check col-12 col-sm-7">
+					<input name="stayLoggedIn" type="checkbox" class="form-check-input" id="stayLoggedIn"
+						formControlName="stayLoggedIn">
+					<label class="form-check-label" for="stayLoggedIn">Angemeldet bleiben</label>
+				</div>
+				<div class="col-12 col-sm-5 justify-content-sm-end d-sm-flex ps-0 pe-0 pb-3"><a class="small fst-italic"
+						alt="Password Reset" routerLink="../forgot-password">Passwort
+						vergessen?</a>
+				</div>
 			</div>
 			<div *ngIf="error?.msg" class="alert alert-danger pt-1 pb-1">
 				{{error?.msg}}

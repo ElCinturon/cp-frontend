@@ -30,6 +30,8 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { UnauthorizedInterceptor } from "./interceptors/unauthorized.interceptor";
 import { ImpressumComponent } from "./components/impressum/impressum.component";
 import { DatenschutzerklaerungComponent } from "./components/datenschutzerklaerung/datenschutzerklaerung.component";
+import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
+import { ResetPasswordComponent } from "./components/reset-password/reset-password.component";
 
 // Deprecated, aber notwendig um Error NG0701 zu verhindern https://github.com/Digivertaisverkko/UKK-tiketit/commit/e6bf37a348f19c98b8d1cc8b284e2095c8f130f2
 registerLocaleData(localeDe);
@@ -54,7 +56,9 @@ registerLocaleData(localeDe);
     PortfolioTypeSelectComponent,
     ProfileComponent,
     ImpressumComponent,
-    DatenschutzerklaerungComponent
+    DatenschutzerklaerungComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
