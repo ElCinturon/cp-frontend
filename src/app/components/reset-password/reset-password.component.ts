@@ -16,6 +16,8 @@ export class ResetPasswordComponent {
 
   // PW-Reset-Token aus Urlparam holen
   token = this.route.snapshot.queryParams["resetToken"];
+  successMsg = "";
+  error = { msg: "" };
 
   resetPwForm = new FormGroup<ResetPwForm>({
     userIdentifier: new FormControl("", { nonNullable: true }),
@@ -29,6 +31,9 @@ export class ResetPasswordComponent {
 
   // Password zurücksetzen
   resetPw() {
+    this.successMsg = "";
+    this.error.msg = "";
+
     if (this.token) {
       this.authenticationService.authenticateApp().subscribe({
         next: (response) => {
@@ -36,10 +41,15 @@ export class ResetPasswordComponent {
 
             this.authenticationService.resetPw(this.resetPwForm.getRawValue(), this.token).subscribe({
               next: (response) => {
-                console.log("succ", response);
+                if (response.success) {
+                  this.successMsg = "Das Passwort wurde erfolgreich geändert!";
+                } else {
+                  this.error = response.error;
+                }
               },
               error: (error) => {
-                console.log("error", error);
+                console.error("Beim Zurücksetzen des Passworts ist ein Fehler aufgetreten", error);
+                this.error.msg = "Beim Zurücksetzen des Passworts ist ein Fehler aufgetreten!"
               }
             });
           }
